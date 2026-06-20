@@ -1,0 +1,1517 @@
+{
+  "meta": {
+    "timestamp": "2026-06-19T11:31:40.682Z",
+    "experiment": "real-world-clinical-trial",
+    "model": "gpt-4o-mini",
+    "runsPerCondition": 5,
+    "maxTurns": 20,
+    "question": "Should DRUG-7X receive regulatory approval? Provide a GO or NO-GO recommendation based on the trial data.",
+    "correctAnswer": "GO",
+    "dataset": [
+      {
+        "field": "Efficacy — Treatment Arm",
+        "value": "71.3% response rate"
+      },
+      {
+        "field": "Efficacy — Control/Placebo",
+        "value": "38.1% response rate"
+      },
+      {
+        "field": "Serious Adverse Events",
+        "value": "4.2% of patients"
+      },
+      {
+        "field": "Non-Serious Adverse Events",
+        "value": "19.8% of patients"
+      },
+      {
+        "field": "Sample Size",
+        "value": "1,247 enrolled / 1,106 completed"
+      },
+      {
+        "field": "Patient Dropout Rate",
+        "value": "11.3%"
+      },
+      {
+        "field": "Primary Endpoint",
+        "value": "Met — p < 0.0001"
+      },
+      {
+        "field": "Secondary Endpoints",
+        "value": "3 of 5 met"
+      }
+    ]
+  },
+  "results": [
+    {
+      "condition": "NATURAL",
+      "runNum": 1,
+      "inputTokens": 10033,
+      "outputTokens": 745,
+      "totalTokens": 10778,
+      "turns": 9,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the efficacy in the treatment arm for DRUG-7X?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the treatment arm for DRUG-7X is a response rate of 71.3%. This value indicates a significant improvement in patient response compared to the control/placebo group, which had a response rate of 38.1%. This substantial difference supports the potential effectiveness of DRUG-7X in the targeted patient population.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the efficacy in the control/placebo arm for DRUG-7X?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the control/placebo arm for DRUG-7X is a response rate of 38.1%. This response rate serves as a benchmark for comparison against the treatment arm, where the efficacy was significantly higher at 71.3%. The relatively lower response rate in the control/placebo arm emphasizes the potential therapeutic benefits of DRUG-7X.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the serious adverse events rate for DRUG-7X?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The serious adverse events rate for DRUG-7X is 4.2% of patients. This percentage reflects the proportion of individuals who experienced significant adverse events during the trial, which is a critical factor in assessing the safety profile of the treatment. The rate of serious adverse events is an important consideration when weighing the benefits of the drug against potential risks.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the non-serious adverse events rate for DRUG-7X?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The non-serious adverse events rate for DRUG-7X is 19.8% of patients. This figure represents the proportion of participants who experienced adverse effects that were not classified as serious during the trial. While non-serious adverse events are typically less concerning, they may still impact patient quality of life and adherence to treatment.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What was the sample size and completion rate for the trial of DRUG-7X?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The sample size for the trial of DRUG-7X was 1,247 patients enrolled, with 1,106 patients completing the study. This reflects a completion rate of approximately 88.7%, calculated from the number of patients who completed the trial divided by the number initially enrolled. A high completion rate is indicative of participant engagement and can enhance the reliability of the trial's outcomes.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the patient dropout rate for DRUG-7X?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The patient dropout rate for DRUG-7X is 11.3%. This percentage indicates the proportion of enrolled participants who did not complete the trial, which can be a critical factor in evaluating the overall study results. A dropout rate of this magnitude may suggest the need for further investigation into factors influencing patient retention in clinical trials.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "What was the primary endpoint outcome for DRUG-7X?",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "The primary endpoint outcome for DRUG-7X was met, with a p-value of less than 0.0001. This statistically significant result indicates strong evidence that the treatment had a meaningful effect compared to the control. Meeting the primary endpoint is a crucial indicator of the drug’s efficacy in the studied population.",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "What were the secondary endpoints outcomes for DRUG-7X?",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "Three out of five secondary endpoints were met for DRUG-7X. This achievement suggests that a majority of the additional efficacy measures indicated a positive treatment effect, although not all endpoints were achieved. The results of the secondary endpoints can provide further insights into the drug's overall therapeutic profile and potential benefits beyond the primary outcome.",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "FINAL RECOMMENDATION: GO  \nThe data indicates strong efficacy with a treatment response rate of 71.3% compared to 38.1% in the control arm, along with a statistically significant primary endpoint outcome. While there are adverse events to consider, the overall benefits and a high completion rate support moving forward with the approval of DRUG-7X.",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:23:27.869Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 2,
+      "inputTokens": 10240,
+      "outputTokens": 784,
+      "totalTokens": 11024,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the efficacy in the treatment arm for DRUG-7X?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the treatment arm for DRUG-7X is reported at a response rate of 71.3%. This indicates a significant improvement over the control/placebo response rate of 38.1%. Clinically, this suggests that DRUG-7X may offer a substantial benefit in patient outcomes compared to standard treatment options.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the efficacy in the control/placebo arm for DRUG-7X?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the control/placebo arm for DRUG-7X is reported at a response rate of 38.1%. This response rate serves as a benchmark for evaluating the effectiveness of the treatment arm, which showed a significant difference. Clinically, this indicates that the control/placebo arm had a lower likelihood of response compared to the treatment arm.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the serious adverse events rate for DRUG-7X?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The serious adverse events rate for DRUG-7X is 4.2% of patients. This rate is an important consideration when evaluating the safety profile of the drug, especially in comparison to standard safety benchmarks in clinical trials. Clinically, this suggests that while there are potential risks associated with DRUG-7X, the rate of serious adverse events appears to be relatively manageable.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the non-serious adverse events rate for DRUG-7X?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The non-serious adverse events rate for DRUG-7X is 19.8% of patients. This rate reflects the occurrence of adverse events that, while not classified as serious, may still impact patient quality of life and treatment adherence. Clinically, this suggests that a significant proportion of patients may experience side effects that require monitoring and management during treatment.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the sample size and completion rate for the DRUG-7X trial?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The sample size for the DRUG-7X trial was 1,247 enrolled patients, with a completion rate of 88.7%, as 1,106 patients completed the trial. The dropout rate of 11.3% indicates that a small proportion of patients did not complete the study. Clinically, this completion rate suggests a relatively high level of patient retention, which is essential for the robustness of the trial results.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the patient dropout rate for DRUG-7X?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The patient dropout rate for DRUG-7X is 11.3%. This rate indicates the percentage of enrolled patients who did not complete the trial, which can be critical for assessing the overall feasibility and acceptability of the treatment. Clinically, a dropout rate of 11.3% is relatively moderate and suggests that while some patients may have withdrawn, the majority remained engaged in the study.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "What is the primary endpoint outcome for DRUG-7X?",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "The primary endpoint outcome for DRUG-7X was met with a p-value of less than 0.0001. This indicates a statistically significant difference in the primary measure of efficacy when comparing the treatment to the control group. Clinically, achieving this endpoint suggests that DRUG-7X demonstrates a meaningful therapeutic effect in the studied population.",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "What are the secondary endpoints outcomes for DRUG-7X?",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "Of the secondary endpoints evaluated for DRUG-7X, 3 out of 5 were met. This outcome indicates that a majority of the secondary measures demonstrated significance or efficacy as defined by the trial's criteria. Clinically, meeting 3 of 5 secondary endpoints suggests that DRUG-7X may provide additional benefits beyond the primary outcome, although further investigation into the unmet endpoints is warranted.",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "FINAL RECOMMENDATION: GO  \nThe data shows a substantial efficacy improvement in the treatment arm compared to the control, and the primary endpoint was met with high statistical significance. While there are some adverse events, the overall safety profile and completion rates suggest that the benefits of DRUG-7X outweigh the risks.",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:24:08.624Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 3,
+      "inputTokens": 10288,
+      "outputTokens": 772,
+      "totalTokens": 11060,
+      "turns": 9,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the efficacy of DRUG-7X in the treatment arm?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy of DRUG-7X in the treatment arm is a response rate of 71.3%. This measurement indicates the proportion of patients who achieved the desired therapeutic effect following treatment with DRUG-7X. The notable efficacy observed is significantly higher compared to the control/placebo group, which had a response rate of 38.1%, suggesting a robust therapeutic advantage.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the efficacy of the control/placebo arm?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy of the control/placebo arm is a response rate of 38.1%. This figure represents the proportion of patients who exhibited a therapeutic response without receiving the active treatment. The response rate in the control arm is substantially lower than that of the treatment arm, highlighting the potential effectiveness of DRUG-7X in comparison to standard placebo treatment.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the serious adverse events rate associated with DRUG-7X?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The rate of serious adverse events associated with DRUG-7X is 4.2% of patients. This percentage reflects the proportion of participants who experienced significant adverse effects during the trial. While this rate is a critical factor in assessing the safety profile of DRUG-7X, it is essential to consider that the benefits of the drug's efficacy may outweigh these risks for certain patient populations.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the non-serious adverse events rate associated with DRUG-7X?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The non-serious adverse events rate associated with DRUG-7X is 19.8% of patients. This rate indicates the proportion of participants who experienced adverse effects that were not classified as serious during the trial. Although these non-serious events may impact patient tolerability and quality of life, they are generally less concerning than serious adverse events and should be weighed against the drug's efficacy.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What was the sample size and completion rate for the clinical trial of DRUG-7X?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The sample size for the clinical trial of DRUG-7X was 1,247 enrolled patients, with 1,106 patients completing the trial. This results in a completion rate of approximately 88.7%, calculated by dividing the number of patients who completed the trial by the total number enrolled. A high completion rate is indicative of patient adherence and may enhance the reliability of the trial outcomes.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the patient dropout rate for the clinical trial of DRUG-7X?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The patient dropout rate for the clinical trial of DRUG-7X is 11.3%. This percentage represents the proportion of enrolled patients who discontinued participation in the trial prior to its completion. A dropout rate of this magnitude may raise concerns regarding patient retention and could potentially influence the overall study results and the generalizability of the findings.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "What was the primary endpoint outcome for DRUG-7X?",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "The primary endpoint outcome for DRUG-7X was met, with a p-value of less than 0.0001. This statistical significance indicates a highly reliable and robust effect of the treatment compared to the control. Achieving this primary endpoint suggests that DRUG-7X demonstrates a meaningful clinical benefit in the target population.",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "What were the secondary endpoints outcomes for DRUG-7X?",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "Three out of five secondary endpoints were met for DRUG-7X. This outcome indicates that a majority of the secondary measures demonstrated significant efficacy or beneficial effects in the trial population. The successful achievement of these secondary endpoints further supports the overall positive therapeutic profile of DRUG-7X in the study context.",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "FINAL RECOMMENDATION: GO  \nThe data indicates a significant therapeutic benefit of DRUG-7X with a high efficacy rate in the treatment arm, a robust primary endpoint outcome, and a majority of secondary endpoints met. While there are some safety concerns with serious and non-serious adverse event rates, the overall efficacy and completion rates support moving forward with approval.",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:24:46.411Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 4,
+      "inputTokens": 10187,
+      "outputTokens": 768,
+      "totalTokens": 10955,
+      "turns": 9,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the efficacy in the treatment arm for DRUG-7X?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the treatment arm for DRUG-7X is a response rate of 71.3%. This response rate indicates a statistically significant improvement compared to the control/placebo group, which had a response rate of 38.1%. The high efficacy observed in the treatment arm suggests that DRUG-7X may be a beneficial option for patients in the studied population.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the efficacy in the control/placebo arm for DRUG-7X?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the control/placebo arm for DRUG-7X is a response rate of 38.1%. This response rate serves as a benchmark for comparison with the treatment arm, which demonstrated a significantly higher response rate of 71.3%. The lower efficacy in the control arm underscores the potential therapeutic benefit of DRUG-7X over placebo.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the serious adverse events rate for DRUG-7X?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The serious adverse events rate for DRUG-7X is 4.2% of patients. This percentage reflects the proportion of participants who experienced severe side effects during the trial, which is an important consideration in evaluating the safety profile of the treatment. The rate of serious adverse events should be weighed against the therapeutic benefits observed in the efficacy data.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the non-serious adverse events rate for DRUG-7X?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The non-serious adverse events rate for DRUG-7X is 19.8% of patients. This figure represents the proportion of patients who experienced mild to moderate side effects during the trial. While non-serious adverse events are typically less concerning than serious ones, their prevalence still highlights the need for careful monitoring of patient tolerance to the treatment.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the sample size and completion rate for the trial of DRUG-7X?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The sample size for the trial of DRUG-7X was 1,247 enrolled patients, with 1,106 patients completing the study. This results in a completion rate of approximately 88.7%, calculated by dividing the number of patients who completed the trial by the total enrolled. The relatively high completion rate suggests good participant adherence and engagement throughout the trial duration.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the patient dropout rate for DRUG-7X?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The patient dropout rate for DRUG-7X is 11.3%. This rate indicates the proportion of enrolled participants who did not complete the trial, which can have implications for the overall data integrity and the generalizability of the trial results. A dropout rate of this magnitude may warrant further investigation into the reasons for discontinuation and its potential impacts on the findings.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "What is the primary endpoint outcome for DRUG-7X?",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "The primary endpoint outcome for DRUG-7X was met, with a p-value of less than 0.0001. This statistically significant result indicates that the treatment demonstrated a meaningful effect compared to the control, affirming its efficacy in achieving the intended outcomes. Meeting the primary endpoint is a critical factor in establishing the therapeutic value of DRUG-7X in the studied patient population.",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "What are the secondary endpoints outcomes for DRUG-7X?",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "Three out of five secondary endpoints were met for DRUG-7X. This outcome indicates that the treatment demonstrated efficacy in several additional measures beyond the primary endpoint, providing further evidence of its therapeutic benefits. The success in meeting multiple secondary endpoints supports the overall positive assessment of DRUG-7X's performance in the trial.",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "FINAL RECOMMENDATION: GO  \nThe efficacy results of DRUG-7X are compelling, with a significant improvement over the placebo group. Despite the presence of adverse events, the overall high efficacy, favorable completion rate, and achievement of primary and several secondary endpoints indicate that the benefits of DRUG-7X outweigh the risks associated with its use.",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:25:24.760Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 5,
+      "inputTokens": 10704,
+      "outputTokens": 970,
+      "totalTokens": 11674,
+      "turns": 9,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "Can you provide the efficacy in the treatment arm for DRUG-7X?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the treatment arm for DRUG-7X is reported at a response rate of 71.3%. This response rate is substantially higher compared to the control/placebo group, which exhibited a response rate of 38.1%. The findings suggest that DRUG-7X demonstrates a significant improvement in efficacy over standard treatment options.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for the information. Can you share the efficacy in the control/placebo arm for DRUG-7X?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The efficacy in the control/placebo arm for DRUG-7X is recorded at a response rate of 38.1%. This rate serves as a benchmark for comparison against the treatment arm, where a response rate of 71.3% was observed. The relatively lower efficacy in the control group underscores the potential effectiveness of DRUG-7X in the studied population.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for that. What is the serious adverse events rate associated with DRUG-7X?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The serious adverse events rate associated with DRUG-7X is 4.2% of patients. This rate indicates the proportion of participants experiencing significant adverse effects during the trial, which is essential for evaluating the safety profile of the drug. The rate of serious adverse events should be considered in the context of overall treatment benefits when assessing the risk-to-benefit ratio of DRUG-7X.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for the update. Can you provide the non-serious adverse events rate for DRUG-7X?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The non-serious adverse events rate for DRUG-7X is reported at 19.8% of patients. This percentage reflects the occurrence of less severe adverse effects experienced during the trial, which can impact patient quality of life and treatment adherence. The presence of non-serious adverse events is an important consideration when evaluating the overall tolerability of DRUG-7X in the patient population.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for that information. What is the sample size and completion rate for the trial involving DRUG-7X?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The sample size for the trial involving DRUG-7X is 1,247 enrolled patients, with 1,106 patients having completed the study. This results in a completion rate of approximately 88.7%, derived from the proportion of patients who finished the trial relative to those initially enrolled. A high completion rate is indicative of participant engagement and can enhance the reliability of the trial's findings.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for the details. What is the patient dropout rate for DRUG-7X?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The patient dropout rate for DRUG-7X is 11.3%. This percentage represents the proportion of enrolled patients who discontinued participation in the trial before its completion. A dropout rate of this magnitude is an important factor to consider when interpreting the trial results, as it may affect the generalizability and robustness of the efficacy and safety data.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for that information. What was the primary endpoint outcome for the trial of DRUG-7X?",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "The primary endpoint outcome for the trial of DRUG-7X was met, with a p-value of less than 0.0001. This statistically significant result indicates a strong likelihood that the observed effects are not due to chance. Meeting the primary endpoint is a critical factor in establishing the efficacy of DRUG-7X in the studied population.",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for the update. Can you provide the outcomes for the secondary endpoints for DRUG-7X?",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "For the trial of DRUG-7X, 3 out of 5 secondary endpoints were met. This indicates that a majority of the secondary objectives were achieved, which can provide additional insights into the drug's efficacy and safety profile beyond the primary endpoint. The successful outcomes of these secondary endpoints may further support the clinical relevance of DRUG-7X in treating the intended condition.",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "Based on the data provided, here is the evaluation of DRUG-7X:\n\n1. Efficacy in the treatment arm: 71.3%\n2. Efficacy in the control/placebo arm: 38.1%\n3. Serious adverse events rate: 4.2%\n4. Non-serious adverse events rate: 19.8%\n5. Sample size and completion rate: 1,247 enrolled, 88.7% completion\n6. Patient dropout rate: 11.3%\n7. Primary endpoint outcome: Met with a p-value < 0.0001\n8. Secondary endpoints outcome: 3 out of 5 met\n\nFINAL RECOMMENDATION: GO  \nThe data shows significant efficacy with a strong response rate in the treatment arm compared to the control, along with a high completion rate. The serious adverse events rate is acceptable in the context of the observed benefits, indicating a favorable risk-to-benefit ratio for DRUG-7X.",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:26:05.776Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 1,
+      "inputTokens": 6534,
+      "outputTokens": 346,
+      "totalTokens": 6880,
+      "turns": 9,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-treatment\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-treatment\",\"value\":\"71.3% response rate\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-control\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-control\",\"value\":\"38.1% response rate\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sae-rate\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sae-rate\",\"value\":\"4.2% of patients\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"non-sae-rate\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"non-sae-rate\",\"value\":\"19.8% of patients\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sample-size\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sample-size\",\"value\":\"1,247 enrolled / 1,106 completed\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"dropout-rate\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"dropout-rate\",\"value\":\"11.3%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"primary-endpoint\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"primary-endpoint\",\"value\":\"Met — p < 0.0001\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"secondary-endpoints\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"secondary-endpoints\",\"value\":\"3 of 5 met\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"recommend\",\"decision\":\"GO\",\"rationale\":\"The trial demonstrates significant efficacy with acceptable safety parameters.\",\"turn\":9}",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:26:37.313Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 2,
+      "inputTokens": 6534,
+      "outputTokens": 350,
+      "totalTokens": 6884,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-treatment\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-treatment\",\"value\":\"71.3% response rate\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-control\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-control\",\"value\":\"38.1% response rate\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sae-rate\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sae-rate\",\"value\":\"4.2% of patients\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"non-sae-rate\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"non-sae-rate\",\"value\":\"19.8% of patients\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sample-size\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sample-size\",\"value\":\"1,247 enrolled / 1,106 completed\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"dropout-rate\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"dropout-rate\",\"value\":\"11.3%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"primary-endpoint\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"primary-endpoint\",\"value\":\"Met — p < 0.0001\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"secondary-endpoints\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"secondary-endpoints\",\"value\":\"3 of 5 met\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"recommend\",\"decision\":\"GO\",\"rationale\":\"The trial shows strong efficacy with manageable safety profiles and meets primary endpoints.\",\"turn\":9}",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:27:09.878Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 3,
+      "inputTokens": 6534,
+      "outputTokens": 351,
+      "totalTokens": 6885,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-treatment\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-treatment\",\"value\":\"71.3% response rate\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-control\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-control\",\"value\":\"38.1% response rate\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sae-rate\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sae-rate\",\"value\":\"4.2% of patients\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"non-sae-rate\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"non-sae-rate\",\"value\":\"19.8% of patients\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sample-size\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sample-size\",\"value\":\"1,247 enrolled / 1,106 completed\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"dropout-rate\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"dropout-rate\",\"value\":\"11.3%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"primary-endpoint\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"primary-endpoint\",\"value\":\"Met — p < 0.0001\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"secondary-endpoints\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"secondary-endpoints\",\"value\":\"3 of 5 met\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"recommend\",\"decision\":\"GO\",\"rationale\":\"The trial shows strong efficacy with an acceptable safety profile and meets primary endpoints.\",\"turn\":9}",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:27:40.623Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 4,
+      "inputTokens": 6534,
+      "outputTokens": 351,
+      "totalTokens": 6885,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-treatment\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-treatment\",\"value\":\"71.3% response rate\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-control\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-control\",\"value\":\"38.1% response rate\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sae-rate\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sae-rate\",\"value\":\"4.2% of patients\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"non-sae-rate\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"non-sae-rate\",\"value\":\"19.8% of patients\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sample-size\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sample-size\",\"value\":\"1,247 enrolled / 1,106 completed\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"dropout-rate\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"dropout-rate\",\"value\":\"11.3%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"primary-endpoint\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"primary-endpoint\",\"value\":\"Met — p < 0.0001\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"secondary-endpoints\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"secondary-endpoints\",\"value\":\"3 of 5 met\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"recommend\",\"decision\":\"GO\",\"rationale\":\"The trial shows significant efficacy with manageable safety profiles and meets primary endpoint criteria.\",\"turn\":9}",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:28:10.909Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 5,
+      "inputTokens": 6534,
+      "outputTokens": 346,
+      "totalTokens": 6880,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-treatment\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-treatment\",\"value\":\"71.3% response rate\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"efficacy-control\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"efficacy-control\",\"value\":\"38.1% response rate\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sae-rate\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sae-rate\",\"value\":\"4.2% of patients\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"non-sae-rate\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"non-sae-rate\",\"value\":\"19.8% of patients\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"sample-size\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"sample-size\",\"value\":\"1,247 enrolled / 1,106 completed\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"dropout-rate\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"dropout-rate\",\"value\":\"11.3%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"primary-endpoint\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"primary-endpoint\",\"value\":\"Met — p < 0.0001\",\"turn\":7}",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"secondary-endpoints\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"secondary-endpoints\",\"value\":\"3 of 5 met\",\"turn\":8}",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"recommend\",\"decision\":\"GO\",\"rationale\":\"The trial demonstrates significant efficacy and acceptable safety profile.\",\"turn\":9}",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:28:40.679Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 1,
+      "inputTokens": 6509,
+      "outputTokens": 138,
+      "totalTokens": 6647,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-treatment",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-treatment-71.3pct",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-control",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-control-38.1pct",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sae",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sae-4.2pct",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 non-sae",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 non-sae-19.8pct",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sample-size",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 n-1247-enrolled-1106-completed",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 dropout",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 dropout-11.3pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 primary-endpoint",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 primary-endpoint-met-p<0.0001",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 secondary-endpoints",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 secondary-endpoints-3of5-met",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL RECOMMENDATION: GO",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:29:10.097Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 2,
+      "inputTokens": 6516,
+      "outputTokens": 139,
+      "totalTokens": 6655,
+      "turns": 9,
+      "correct": true,
+      "drift": 6,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-treatment",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-treatment-71.3pct",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-control",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-control-38.1pct",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sae",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sae-4.2pct",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 non-sae",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 non-sae-19.8pct",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sample-size",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sample-size-1247-enrolled-1106-completed",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 dropout",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 dropout-11.3pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 primary-endpoint",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 primary-endpoint-met-p<0.0001",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 secondary-endpoints",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 secondary-endpoints-3of5-met",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL RECOMMENDATION: GO",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:29:40.101Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 3,
+      "inputTokens": 6516,
+      "outputTokens": 139,
+      "totalTokens": 6655,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-treatment",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-treatment-71.3pct",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-control",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-control-38.1pct",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sae",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sae-4.2pct",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 non-sae",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 non-sae-19.8pct",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sample-size",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sample-size-1247-enrolled-1106-completed",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 dropout",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 dropout-11.3pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 primary-endpoint",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 primary-endpoint-met-p<0.0001",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 secondary-endpoints",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 secondary-endpoints-3of5-met",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL RECOMMENDATION: GO",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:30:11.130Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 4,
+      "inputTokens": 6516,
+      "outputTokens": 139,
+      "totalTokens": 6655,
+      "turns": 9,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-treatment",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-treatment-71.3pct",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-control",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-control-38.1pct",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sae",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sae-4.2pct",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 non-sae",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 non-sae-19.8pct",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sample-size",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sample-size-1247-enrolled-1106-completed",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 dropout",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 dropout-11.3pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 primary-endpoint",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 primary-endpoint-met-p<0.0001",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 secondary-endpoints",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 secondary-endpoints-3of5-met",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL RECOMMENDATION: GO",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:30:42.362Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 5,
+      "inputTokens": 6516,
+      "outputTokens": 139,
+      "totalTokens": 6655,
+      "turns": 9,
+      "correct": true,
+      "drift": 6,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-treatment",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-treatment-71.3pct",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 efficacy-control",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 efficacy-control-38.1pct",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sae",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sae-4.2pct",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 non-sae",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 non-sae-19.8pct",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 sample-size",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 sample-size-1247-enrolled-1106-completed",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 dropout",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 dropout-11.3pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 primary-endpoint",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 primary-endpoint-met-p<0.0001",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 secondary-endpoints",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 secondary-endpoints-3of5-met",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL RECOMMENDATION: GO",
+          "turn": 9
+        }
+      ],
+      "timestamp": "2026-06-19T11:31:12.586Z"
+    }
+  ]
+}

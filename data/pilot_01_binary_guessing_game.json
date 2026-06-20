@@ -1,0 +1,1037 @@
+{
+  "meta": {
+    "timestamp": "2026-06-19T11:06:40.378Z",
+    "model": "gpt-4o-mini",
+    "runsPerCondition": 5,
+    "maxTurns": 20,
+    "question": "Which of these 8 codes is the access code for vault SIGMA-3?",
+    "correctAnswer": "DELTA-22",
+    "options": [
+      "ALPHA-01",
+      "BRAVO-07",
+      "CHARLIE-14",
+      "DELTA-22",
+      "ECHO-33",
+      "FOXTROT-41",
+      "GOLF-58",
+      "HOTEL-69"
+    ]
+  },
+  "results": [
+    {
+      "condition": "NATURAL",
+      "runNum": 1,
+      "inputTokens": 1635,
+      "outputTokens": 50,
+      "totalTokens": 1685,
+      "turns": 5,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "Is the code ALPHA-01?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Is the code BRAVO-07?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Is the code CHARLIE-14?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "Is the code DELTA-22?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Yes.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:01:24.064Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 2,
+      "inputTokens": 1635,
+      "outputTokens": 50,
+      "totalTokens": 1685,
+      "turns": 5,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "Is the code ALPHA-01?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Is the code BRAVO-07?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Is the code CHARLIE-14?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "Is the code DELTA-22?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Yes.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:01:39.628Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 3,
+      "inputTokens": 1635,
+      "outputTokens": 50,
+      "totalTokens": 1685,
+      "turns": 5,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "Is the code ALPHA-01?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Is the code BRAVO-07?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Is the code CHARLIE-14?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "Is the code DELTA-22?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Yes.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:01:57.857Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 4,
+      "inputTokens": 1635,
+      "outputTokens": 50,
+      "totalTokens": 1685,
+      "turns": 5,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "Is the code ALPHA-01?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Is the code BRAVO-07?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Is the code CHARLIE-14?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "Is the code DELTA-22?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Yes.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:02:13.558Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 5,
+      "inputTokens": 1635,
+      "outputTokens": 50,
+      "totalTokens": 1685,
+      "turns": 5,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "Is the code ALPHA-01?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Is the code BRAVO-07?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Is the code CHARLIE-14?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "No.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "Is the code DELTA-22?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Yes.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:02:32.160Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 1,
+      "inputTokens": 2495,
+      "outputTokens": 188,
+      "totalTokens": 2683,
+      "turns": 5,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"confirm\",\"guess\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"answer\",\"content\":\"FINAL ANSWER: DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:02:51.003Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 2,
+      "inputTokens": 2495,
+      "outputTokens": 188,
+      "totalTokens": 2683,
+      "turns": 5,
+      "correct": true,
+      "drift": 6,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"confirm\",\"guess\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"answer\",\"content\":\"FINAL ANSWER: DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:03:07.896Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 3,
+      "inputTokens": 2495,
+      "outputTokens": 188,
+      "totalTokens": 2683,
+      "turns": 5,
+      "correct": true,
+      "drift": 7,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"confirm\",\"guess\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"answer\",\"content\":\"FINAL ANSWER: DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:03:25.738Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 4,
+      "inputTokens": 2495,
+      "outputTokens": 188,
+      "totalTokens": 2683,
+      "turns": 5,
+      "correct": true,
+      "drift": 6,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"confirm\",\"guess\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"answer\",\"content\":\"FINAL ANSWER: DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:03:44.250Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 5,
+      "inputTokens": 2495,
+      "outputTokens": 188,
+      "totalTokens": 2683,
+      "turns": 5,
+      "correct": true,
+      "drift": 6,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"ALPHA-01\",\"confidence\":5,\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"BRAVO-07\",\"confidence\":5,\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"deny\",\"guess\":\"CHARLIE-14\",\"confidence\":5,\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"guess\",\"content\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"confirm\",\"guess\":\"DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"answer\",\"content\":\"FINAL ANSWER: DELTA-22\",\"confidence\":5,\"turn\":4}",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:04:02.274Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 1,
+      "inputTokens": 1633,
+      "outputTokens": 51,
+      "totalTokens": 1684,
+      "turns": 3,
+      "correct": true,
+      "drift": 5,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 SECRET-CODE-AGENT-A",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "CHECK 9 SECRET-CODE-DELTA-22",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 3
+        }
+      ],
+      "timestamp": "2026-06-19T11:04:12.819Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 2,
+      "inputTokens": 3907,
+      "outputTokens": 88,
+      "totalTokens": 3995,
+      "turns": 6,
+      "correct": true,
+      "drift": 2,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "CHECK 9 AGENT-A",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 AGENT-A",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 ALPHA-01",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 BRAVO-07",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 BRAVO-07",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 CHARLIE-14",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 CHARLIE-14",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 DELTA-22",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 6
+        }
+      ],
+      "timestamp": "2026-06-19T11:04:31.969Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 3,
+      "inputTokens": 21812,
+      "outputTokens": 353,
+      "totalTokens": 22165,
+      "turns": 20,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 AGENT-A",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 9 AGENT-A",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 9 DELTA-22",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 DELTA-22",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: ALPHA-01",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 9 DELTA-22",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 DELTA-22",
+          "turn": 9
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: ALPHA-01",
+          "turn": 9
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 10
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 10
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 11
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 11
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 12
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 9 DELTA-22",
+          "turn": 12
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 DELTA-22",
+          "turn": 13
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: ALPHA-01",
+          "turn": 13
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 14
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 14
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 15
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 15
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 16
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 9 DELTA-22",
+          "turn": 16
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 DELTA-22",
+          "turn": 17
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: ALPHA-01",
+          "turn": 17
+        },
+        {
+          "role": "solver",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 18
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 18
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 19
+        },
+        {
+          "role": "tasker",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 19
+        },
+        {
+          "role": "solver",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 20
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 9 DELTA-22",
+          "turn": 20
+        }
+      ],
+      "timestamp": "2026-06-19T11:05:39.043Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 4,
+      "inputTokens": 3113,
+      "outputTokens": 75,
+      "totalTokens": 3188,
+      "turns": 5,
+      "correct": true,
+      "drift": 3,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "CHECK 9 ALPHA-01",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 ALPHA-01",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 BRAVO-07",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 BRAVO-07",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 CHARLIE-14",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 CHARLIE-14",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "CHECK 9 DELTA-22",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:05:55.322Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 5,
+      "inputTokens": 3095,
+      "outputTokens": 71,
+      "totalTokens": 3166,
+      "turns": 5,
+      "correct": true,
+      "drift": 5,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 SECRET-CODE-A",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 SECRET-CODE-A",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 SECRET-CODE-B",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 SECRET-CODE-B",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 SECRET-CODE-C",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "DENY 9 SECRET-CODE-C",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 SECRET-CODE-D",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "CONFIRM 9 DELTA-22",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL ANSWER: DELTA-22",
+          "turn": 5
+        }
+      ],
+      "timestamp": "2026-06-19T11:06:10.990Z"
+    }
+  ]
+}

@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Experiment v2 — Full Head-to-Head</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2128;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --dim: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --purple: #bc8cff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  padding: 24px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.78rem;
+  color: var(--dim);
+  margin-bottom: 22px;
+  margin-top: -10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+}
+
+.panel-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: end;
+}
+
+.field label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--dim);
+  margin-bottom: 5px;
+}
+
+input[type=text], input[type=password], input[type=number] {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 8px 11px;
+  font-size: 0.84rem;
+  outline: none;
+}
+input:focus { border-color: var(--accent); }
+
+button#runBtn {
+  width: 100%;
+  background: var(--accent);
+  color: #0d1117;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+button#runBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.hint {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--dim);
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+
+.metric-list {
+  list-style: none;
+  font-size: 0.8rem;
+}
+.metric-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(48,54,61,0.6);
+  gap: 10px;
+}
+.metric-list li:last-child { border-bottom: none; }
+.metric-name  { color: var(--dim); }
+.metric-value { color: var(--text); font-weight: 600; text-align: right; }
+
+.question-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 0.84rem;
+  margin-bottom: 10px;
+}
+
+.correct-label {
+  font-size: 0.75rem;
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+.correct-label span { color: var(--red); font-weight: 700; }
+
+.protocol-box {
+  background: rgba(188,140,255,0.05);
+  border: 1px solid rgba(188,140,255,0.2);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 0.78rem;
+  color: var(--dim);
+  line-height: 1.8;
+  margin-top: 8px;
+  font-family: 'SF Mono', 'Menlo', monospace;
+}
+.protocol-box strong { color: var(--purple); }
+
+.change-box {
+  background: rgba(63,185,80,0.05);
+  border: 1px solid rgba(63,185,80,0.2);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 0.78rem;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+.change-box strong { color: var(--green); }
+
+.progress-bar-track {
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+#progressLog {
+  max-height: 220px;
+  overflow-y: auto;
+  font-size: 0.75rem;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  line-height: 1.7;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: 6px;
+}
+
+.log-info { color: var(--dim); }
+.log-bold { color: var(--text); font-weight: 700; }
+.log-ok   { color: var(--green); }
+.log-err  { color: var(--red); }
+.log-warn { color: var(--yellow); }
+
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+table.results th {
+  text-align: left;
+  padding: 9px 14px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+table.results td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.83rem;
+  font-variant-numeric: tabular-nums;
+}
+table.results tr:last-child td { border-bottom: none; }
+table.results tbody tr:hover td { background: rgba(188,140,255,0.04); }
+
+.badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.badge-natural    { background: rgba(63,185,80,0.15);   color: var(--green); }
+.badge-structured { background: rgba(88,166,255,0.15);  color: var(--accent); }
+.badge-numericv2  { background: rgba(188,140,255,0.15); color: var(--purple); }
+
+.val-good { color: var(--green); }
+.val-mid  { color: var(--yellow); }
+.val-bad  { color: var(--red); }
+
+.run-list { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+.run-list-title {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+.run-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(48,54,61,0.4);
+  font-size: 0.78rem;
+  flex-wrap: wrap;
+}
+.run-row:last-child { border-bottom: none; }
+.run-dim { color: var(--dim); }
+
+.convo-block {
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.convo-turn {
+  padding: 7px 12px;
+  font-size: 0.75rem;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  border-bottom: 1px solid rgba(48,54,61,0.4);
+  line-height: 1.5;
+}
+.convo-turn:last-child { border-bottom: none; }
+.convo-solver { background: rgba(88,166,255,0.05);  color: var(--accent); }
+.convo-tasker { background: rgba(48,54,61,0.2);    color: var(--text); }
+.convo-label  { font-weight: 700; margin-right: 6px; font-size: 0.68rem; opacity: 0.6; }
+
+.btn-row { display: flex; gap: 10px; margin-top: 4px; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-secondary:hover { background: var(--surface2); }
+.btn-toggle {
+  font-size: 0.72rem;
+  color: var(--dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div style="max-width:1100px;margin:0 auto;">
+
+<h1>Protocol Experiment — Full Head-to-Head (NUMERIC v2)</h1>
+<div class="subtitle">NATURAL vs STRUCTURED vs NUMERIC v2 — same task, same dataset, same freedom. NUMERIC redesigned: fixed verb set, direct terminal decisions, no handshake, no severity flags.</div>
+
+<!-- Config -->
+<div class="panel">
+  <div class="panel-title">Configuration</div>
+  <div class="config-grid">
+    <div class="field">
+      <label>OpenAI API Key (comma-separate multiple)</label>
+      <input type="password" id="apiKey" placeholder="sk-...">
+    </div>
+    <div class="field">
+      <label>Model</label>
+      <input type="text" id="model" value="gpt-4o-mini">
+    </div>
+    <div class="field">
+      <label>Runs</label>
+      <input type="number" id="runsN" value="5" min="1" max="20">
+    </div>
+    <div class="field">
+      <label>Max Turns</label>
+      <input type="number" id="maxTurns" value="12" min="2" max="30">
+    </div>
+    <div class="field">
+      <button id="runBtn" onclick="startExperiment()">▶ Run</button>
+    </div>
+  </div>
+  <div class="hint">
+    <strong>Experiment 5 — clean head-to-head with NUMERIC v2.</strong>
+    NATURAL and STRUCTURED run exactly as in Experiment 4 (free-form). NUMERIC has three algorithmic fixes: (1) kickstart removed — solver opens with FETCH directly, no READY handshake signal; (2) verb set restricted — solver may only send FETCH, PASS, or FUND; tasker may only send DATA, ACK, or DONE; no verb invention; (3) terminal verbs are the decision itself — PASS or FUND sent alone, no DECIDE/DONE wrapper, no deliberation verbs.
+    Fairness: STRUCTURED and NUMERIC v2 taskers both return bare values only — no benchmarks, no interpretation, no context fields. The only difference between them is encoding format (JSON vs compressed tokens). NATURAL is allowed its natural verbosity as that is intrinsic to the format.
+  </div>
+</div>
+
+<!-- Task info -->
+<div class="panel">
+  <div class="panel-title">Task Setup</div>
+  <div class="info-grid">
+    <div>
+      <div class="info-label">Agent A holds this dataset — hidden from Agent B:</div>
+      <ul class="metric-list" id="metricList"></ul>
+    </div>
+    <div>
+      <div class="change-box">
+        <strong>Three algorithmic fixes being tested:</strong><br>
+        Fix 1 — Kickstart: solver prompt says "Begin by sending FETCH." First message is a data query, not a connection signal.<br>
+        Fix 2 — Verb discipline: each role has an explicit, exhaustive allowed verb list. No invention possible.<br>
+        Fix 3 — Terminal clarity: PASS and FUND are final messages, sent alone. No DECIDE verb, no wrapper, no echo loop.
+      </div>
+      <div class="question-box" id="qBox"></div>
+      <div class="correct-label">Correct decision: <span id="correctSpan"></span></div>
+      <div class="protocol-box">
+        <strong>SOLVER verbs:</strong><br>
+        &nbsp;&nbsp;FETCH field1 field2 ...  → request data (batch freely)<br>
+        &nbsp;&nbsp;PASS                      → final decision: do not invest<br>
+        &nbsp;&nbsp;FUND                      → final decision: invest<br><br>
+        <strong>TASKER verbs:</strong><br>
+        &nbsp;&nbsp;DATA field:value [field:value ...]  → return queried fields<br>
+        &nbsp;&nbsp;ACK                                  → acknowledge non-FETCH messages<br>
+        &nbsp;&nbsp;DONE                                 → confirm PASS or FUND received
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Progress -->
+<div class="panel" id="progressPanel" style="display:none">
+  <div class="panel-title">Progress <span id="progressPct" style="color:var(--purple);margin-left:6px;"></span></div>
+  <div class="progress-bar-track"><div class="progress-bar-fill" id="pBar"></div></div>
+  <div id="progressLog"></div>
+</div>
+
+<!-- Results -->
+<div class="panel" id="resultsPanel" style="display:none">
+  <div class="panel-title">Results</div>
+  <table class="results" id="resultsTable"></table>
+  <div class="btn-row">
+    <button class="btn-secondary" onclick="downloadJSON()">⬇ Download JSON Log</button>
+  </div>
+  <div id="runDetails"></div>
+</div>
+
+</div>
+
+<script>
+// ────────────────────────────────────────────
+//  DATA
+// ────────────────────────────────────────────
+const DATASET = [
+  { field: "Revenue Growth (YoY)",       key: "revenue-growth",   value: "-38%" },
+  { field: "Monthly Burn Rate",          key: "monthly-burn",     value: "$185,000/month" },
+  { field: "Cash Runway",                key: "cash-runway",      value: "10 months" },
+  { field: "Monthly Recurring Revenue",  key: "mrr",              value: "$41,000" },
+  { field: "Active Customer Count",      key: "customer-count",   value: "14 customers" },
+  { field: "Monthly Churn Rate",         key: "monthly-churn",    value: "31%" },
+  { field: "Team Size",                  key: "team-size",        value: "9 employees" },
+  { field: "Total Addressable Market",   key: "tam",              value: "$3.8B" },
+  { field: "Prior Funding",              key: "prior-funding",    value: "$450k angel round" },
+  { field: "Product Stage",              key: "product-stage",    value: "closed beta (not launched)" },
+  { field: "Net Promoter Score",         key: "nps",              value: "38" },
+  { field: "Funded Competitor Count",    key: "competitor-count", value: "4 well-funded competitors" }
+];
+
+const CORRECT_DECISION = "PASS";
+const QUESTION         = "Should Nexus AI receive a $2M seed investment? FUND or PASS.";
+const CONDITIONS       = ["NATURAL", "STRUCTURED", "NUMERIC_V2"];
+
+document.getElementById("metricList").innerHTML = DATASET.map(d => `
+  <li>
+    <span class="metric-name">${d.field}</span>
+    <span class="metric-value">${d.value}</span>
+  </li>`).join("");
+document.getElementById("qBox").textContent = QUESTION;
+document.getElementById("correctSpan").textContent = "PASS — revenue −38%, churn 31%, runway 10 months";
+
+// ────────────────────────────────────────────
+//  STATE
+// ────────────────────────────────────────────
+let allResults     = [];
+let completedCalls = 0;
+let estimatedCalls = 0;
+let running        = false;
+let apiKeys        = [];
+let keyIndex       = 0;
+let keyCooldowns   = {};
+
+const KEY_COOLDOWN_MS = 20000;
+
+async function getAvailableKey() {
+  if (!apiKeys.length) throw new Error("No API keys provided.");
+  for (let wait = 0; wait < 60000; wait += 1000) {
+    const now = Date.now();
+    for (let i = 0; i < apiKeys.length; i++) {
+      const key = apiKeys[keyIndex % apiKeys.length];
+      keyIndex++;
+      if (!keyCooldowns[key] || now >= keyCooldowns[key]) return key;
+    }
+    const soonest = Math.min(...apiKeys.map(k => keyCooldowns[k] || 0));
+    const waitMs  = Math.max(1000, soonest - Date.now());
+    log(`All keys on cooldown — waiting ${(waitMs/1000).toFixed(0)}s…`, "log-warn");
+    await sleep(waitMs);
+  }
+  throw new Error("All API keys rate limited for too long");
+}
+
+// ────────────────────────────────────────────
+//  HELPERS
+// ────────────────────────────────────────────
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function log(msg, cls = "log-info") {
+  const el   = document.getElementById("progressLog");
+  const line = document.createElement("div");
+  line.className   = cls;
+  line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  el.appendChild(line);
+  el.scrollTop = el.scrollHeight;
+}
+
+function setProgress(done, total) {
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById("pBar").style.width       = pct + "%";
+  document.getElementById("progressPct").textContent = pct + "%";
+}
+
+// ────────────────────────────────────────────
+//  PROMPTS
+// ────────────────────────────────────────────
+function buildDataBlock() {
+  return DATASET.map(d => `  ${d.field}: ${d.value}`).join("\n");
+}
+
+function buildDataCompressed() {
+  return DATASET.map(d => `  ${d.key}: ${d.value}`).join("\n");
+}
+
+function getPrompts(condition) {
+  const dataBlock      = buildDataBlock();
+  const dataCompressed = buildDataCompressed();
+
+  // ── NATURAL ──
+  if (condition === "NATURAL") return {
+    tasker:
+      `You are Agent A (Venture Partner). You hold confidential due diligence data for startup "Nexus AI".\n\n` +
+      `DATASET:\n${dataBlock}\n\n` +
+      `RULES:\n` +
+      `- Answer Agent B's questions as completely and helpfully as possible\n` +
+      `- You may answer multiple questions in one response\n` +
+      `- You may volunteer related context, benchmarks, or comparisons when relevant\n` +
+      `- You may respond to vague or broad questions with whatever data is most relevant\n` +
+      `- ONE RESTRICTION ONLY: do not directly state whether Agent B should FUND or PASS. Share the data and let Agent B conclude.\n` +
+      `- Be truthful and complete`,
+
+    solver:
+      `You are Agent B (Investment Analyst). Agent A holds due diligence data for "Nexus AI" seeking a $2M seed investment.\n\n` +
+      `Your goal: make a FUND or PASS decision as efficiently as possible — minimum turns, maximum information per question.\n\n` +
+      `RULES:\n` +
+      `- You may ask multiple questions in a single message\n` +
+      `- You may ask broad or specific questions — whatever gets you to a decision fastest\n` +
+      `- Stop as soon as you have enough information to be confident\n` +
+      `- When ready, output on its own line:\n` +
+      `  FINAL DECISION: FUND\n` +
+      `  or\n` +
+      `  FINAL DECISION: PASS\n` +
+      `  followed by 1–2 sentences of justification\n\n` +
+      `Begin.`
+  };
+
+  // ── STRUCTURED ──
+  if (condition === "STRUCTURED") return {
+    tasker:
+      `You are Agent A (Venture Partner). You hold due diligence data for "Nexus AI".\n\n` +
+      `DATASET:\n${dataBlock}\n\n` +
+      `STRICT PROTOCOL: output ONLY valid JSON.\n\n` +
+      `You may respond with a single field:\n` +
+      `{"action":"respond","field":"<name>","value":"<val>","turn":<n>}\n\n` +
+      `Or multiple fields at once:\n` +
+      `{"action":"respond","fields":[{"field":"<name>","value":"<val>"},...],"turn":<n>}\n\n` +
+      `ONE RESTRICTION ONLY: never include a "decision", "recommendation", or "context" key. Return field names and values only — no interpretation, no benchmarks, no commentary.`,
+
+    solver:
+      `You are Agent B (Investment Analyst). Agent A holds due diligence data for "Nexus AI" ($2M seed).\n\n` +
+      `STRICT PROTOCOL: output ONLY valid JSON.\n\n` +
+      `Query a single field:\n` +
+      `{"action":"query","field":"<name>","turn":<n>}\n\n` +
+      `Query multiple fields at once:\n` +
+      `{"action":"query","fields":["<name>","<name>",...],"turn":<n>}\n\n` +
+      `Submit final decision:\n` +
+      `{"action":"decide","decision":"FUND" or "PASS","rationale":"<1 sentence>","turn":<n>}\n\n` +
+      `Available fields: revenue-growth, monthly-burn, cash-runway, mrr, customer-count, monthly-churn, team-size, tam, prior-funding, product-stage, nps, competitor-count\n\n` +
+      `Design the most efficient query strategy you can. You may batch fields. Begin.`
+  };
+
+  // ── NUMERIC v2 ──
+  if (condition === "NUMERIC_V2") return {
+    tasker:
+      `You are Agent A. You hold due diligence data for startup "Nexus AI".\n\n` +
+      `DATASET:\n${dataCompressed}\n\n` +
+      `PROTOCOL — your ONLY allowed message types:\n\n` +
+      `  DATA field:value [field:value ...]   return values for queried fields (batch on one line)\n` +
+      `  ACK                                  acknowledge any non-FETCH message\n` +
+      `  DONE                                 confirm when Agent B sends PASS or FUND\n\n` +
+      `Rules:\n` +
+      `- When Agent B sends FETCH: respond with DATA followed by each queried field and its value\n` +
+      `- When Agent B sends anything else (except PASS or FUND): respond with ACK only\n` +
+      `- When Agent B sends PASS or FUND: respond with DONE only\n` +
+      `- Never use any other verb\n` +
+      `- Never write prose\n` +
+      `- Never volunteer unrequested data\n` +
+      `- Never encode a recommendation or decision\n` +
+      `- Return exactly the fields queried, nothing more`,
+
+    solver:
+      `You are Agent B. Agent A holds due diligence data for startup "Nexus AI" seeking a $2M seed investment.\n` +
+      `Your task: decide FUND or PASS.\n\n` +
+      `PROTOCOL — your ONLY allowed message types:\n\n` +
+      `  FETCH field1 field2 ...   request one or more fields from Agent A (batch freely)\n` +
+      `  PASS                      final decision — do not invest (send this word alone)\n` +
+      `  FUND                      final decision — invest (send this word alone)\n\n` +
+      `Available fields:\n` +
+      `  revenue-growth, monthly-burn, cash-runway, mrr, customer-count,\n` +
+      `  monthly-churn, team-size, tam, prior-funding, product-stage, nps, competitor-count\n\n` +
+      `Rules:\n` +
+      `- Begin immediately with FETCH — request whatever fields you need\n` +
+      `- You may batch all 12 fields in one FETCH if you want everything at once\n` +
+      `- When you have enough information, send PASS or FUND as your entire message — nothing else\n` +
+      `- No prose. No deliberation verbs (ANALYZE, EVALUATE, DECIDE, ASSESS). No handshaking.\n` +
+      `- Do not send DONE — that is Agent A's word. Your terminal words are PASS and FUND only.\n\n` +
+      `Begin with FETCH.`
+  };
+}
+
+// ────────────────────────────────────────────
+//  COMPLETION / CORRECTNESS
+// ────────────────────────────────────────────
+function extractJSON(text) {
+  try { return JSON.parse(text.trim()); } catch(_) {}
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fenced) try { return JSON.parse(fenced[1].trim()); } catch(_) {}
+  const braced = text.match(/\{[\s\S]*?\}/);
+  if (braced) try { return JSON.parse(braced[0]); } catch(_) {}
+  return null;
+}
+
+function solverIsDone(condition, msg) {
+  const upper = msg.trim().toUpperCase();
+  if (condition === "NATURAL")     return upper.includes("FINAL DECISION:");
+  if (condition === "STRUCTURED") {
+    const j = extractJSON(msg);
+    if (j && j.action === "decide") return true;
+    return upper.includes("FINAL DECISION:");
+  }
+  if (condition === "NUMERIC_V2") return upper === "PASS" || upper === "FUND" ||
+                                          upper.startsWith("PASS") || upper.startsWith("FUND");
+  return false;
+}
+
+function isCorrect(condition, conversation) {
+  const solverTurns = conversation.filter(t => t.role === "solver");
+  if (!solverTurns.length) return false;
+  const last  = solverTurns[solverTurns.length - 1].content.trim();
+  const upper = last.toUpperCase();
+
+  if (condition === "STRUCTURED") {
+    const j = extractJSON(last);
+    if (j && j.action === "decide") return j.decision === "PASS";
+  }
+  if (condition === "NUMERIC_V2") {
+    return upper === "PASS" || (upper.startsWith("PASS") && !upper.startsWith("FUND"));
+  }
+  if (/DECISION:\s*PASS\b/.test(upper)) return true;
+  const lastPart = upper.slice(-200);
+  return lastPart.includes("PASS") && !lastPart.includes("FUND");
+}
+
+// ────────────────────────────────────────────
+//  API CALL
+// ────────────────────────────────────────────
+async function callAPI(systemPrompt, messages, maxTokens = 300) {
+  const model   = document.getElementById("model").value.trim();
+  const delayMs = 500;
+
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const apiKey = await getAvailableKey();
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: "system", content: systemPrompt }, ...messages],
+          max_tokens: maxTokens,
+          temperature: 0.7
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        if (res.status === 429) {
+          keyCooldowns[apiKey] = Date.now() + KEY_COOLDOWN_MS;
+          log(`Key …${apiKey.slice(-6)} rate limited — 20s cooldown`, "log-warn");
+          continue;
+        }
+        throw new Error(err.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      completedCalls++;
+      setProgress(completedCalls, estimatedCalls);
+      await sleep(delayMs);
+      return data;
+
+    } catch (e) {
+      if (attempt < 7) {
+        log(`API error (attempt ${attempt+1}): ${e.message} — retrying…`, "log-warn");
+        await sleep(2000);
+      } else {
+        throw e;
+      }
+    }
+  }
+  throw new Error("Failed after 8 attempts");
+}
+
+// ────────────────────────────────────────────
+//  JUDGE
+// ────────────────────────────────────────────
+async function judgeProtocol(condition, conversation) {
+  const transcript = conversation
+    .map(t => `[${t.role.toUpperCase()}]: ${t.content}`)
+    .join("\n");
+
+  const formatDesc = {
+    NATURAL:    "plain English prose — full sentences, no special encoding",
+    STRUCTURED: "valid JSON objects only — single or multi-field responses allowed, batching allowed",
+    NUMERIC_V2: "strict verb protocol: SOLVER sends FETCH/PASS/FUND only; TASKER sends DATA/ACK/DONE only. No prose, no invented verbs, no deliberation words (ANALYZE, EVALUATE, DECIDE, ASSESS, READY, INITIATE, etc.)"
+  }[condition];
+
+  const systemPrompt =
+    `You are a strict protocol compliance evaluator.\n` +
+    `Score 0–10 how strictly BOTH agents followed their assigned format throughout the conversation.\n` +
+    `Assigned format: ${formatDesc}\n` +
+    `Do not penalise for batching multiple fields per message.\n` +
+    `Deduct points only for clear format violations.\n` +
+    `Reply with ONLY a single integer 0–10, nothing else.`;
+
+  try {
+    const res = await callAPI(systemPrompt, [{
+      role: "user",
+      content: `Protocol: ${condition}\n\nTranscript:\n${transcript}`
+    }], 10);
+    const raw   = res.choices[0].message.content.trim();
+    const score = parseFloat(raw.match(/[\d.]+/)?.[0] ?? "5");
+    return Math.min(10, Math.max(0, score));
+  } catch (e) {
+    log(`Judge error: ${e.message}`, "log-warn");
+    return 5;
+  }
+}
+
+// ────────────────────────────────────────────
+//  DETECT FAILURE MODES
+// ────────────────────────────────────────────
+function detectFailureMode(conversation) {
+  const msgs = conversation.map(t => t.content.trim().toUpperCase());
+
+  // Handshake loop: solver and tasker sending connection verbs without any DATA exchange
+  const connectionVerbs = ["INITIATE", "CONNECT", "TRANSMIT", "DELIVER", "EXECUTE",
+    "FINALIZE", "COMPLETE", "TERMINATE", "CLOSE", "DISCONNECT", "ABORT", "HALT",
+    "STOP", "RELEASE", "WITHDRAW", "SUSPEND", "PAUSE", "CEASE", "FINISH", "CONCLUDE",
+    "READY", "BEGIN", "START", "ESTABLISH", "OPEN"];
+  const hasData = msgs.some(m => m.startsWith("DATA "));
+  const hasHandshake = msgs.filter(m => connectionVerbs.some(v => m.startsWith(v))).length >= 3;
+  if (hasHandshake && !hasData) return "handshake-loop";
+
+  // Echo ritual: tasker sending DATA more times than solver sent FETCH
+  const fetchCount = msgs.filter(m => m.startsWith("FETCH")).length;
+  const dataCount  = msgs.filter(m => m.startsWith("DATA")).length;
+  if (dataCount > fetchCount + 1) return "echo-ritual";
+
+  // Deliberation verbs used
+  const deliberationVerbs = ["ANALYZE", "EVALUATE", "ASSESS", "JUDGE", "REVIEW", "CONSIDER", "DECIDE"];
+  if (msgs.some(m => deliberationVerbs.some(v => m.startsWith(v)))) return "deliberation-verbs";
+
+  return null;
+}
+
+// ────────────────────────────────────────────
+//  SINGLE RUN
+// ────────────────────────────────────────────
+async function runExperiment(condition, runNum) {
+  const maxTurns = parseInt(document.getElementById("maxTurns").value);
+  const prompts  = getPrompts(condition);
+
+  const taskerHist   = [];
+  const solverHist   = [];
+  const conversation = [];
+
+  let inputTokens  = 0;
+  let outputTokens = 0;
+  let turns        = 0;
+
+  const kickText = condition === "NUMERIC_V2"
+    ? "Agent A is ready. Begin your FETCH queries now."
+    : "Agent A is ready. Ask for whatever information you need to make your decision.";
+  solverHist.push({ role: "user", content: kickText });
+
+  for (let t = 1; t <= maxTurns; t++) {
+    turns = t;
+    log(`  Run ${runNum} | turn ${t} — Solver…`, "log-info");
+
+    // ── SOLVER ──
+    let sRes;
+    try { sRes = await callAPI(prompts.solver, solverHist, 300); }
+    catch (e) { log(`  Solver error: ${e.message}`, "log-err"); break; }
+
+    let sMsg = (sRes.choices[0].message.content || "").trim();
+    inputTokens  += sRes.usage?.prompt_tokens     ?? 0;
+    outputTokens += sRes.usage?.completion_tokens ?? 0;
+
+    for (let retry = 0; !sMsg && retry < 2; retry++) {
+      log(`  Solver empty (attempt ${retry+1}) — retrying…`, "log-warn");
+      await sleep(3000);
+      try {
+        const r2 = await callAPI(prompts.solver, solverHist, 300);
+        sMsg = (r2.choices[0].message.content || "").trim();
+        inputTokens  += r2.usage?.prompt_tokens     ?? 0;
+        outputTokens += r2.usage?.completion_tokens ?? 0;
+      } catch(_) {}
+    }
+    if (!sMsg) { log(`  Solver failed after retries — ending run`, "log-err"); break; }
+
+    solverHist.push({ role: "assistant", content: sMsg });
+    conversation.push({ role: "solver", content: sMsg, turn: t });
+    log(`  Solver: ${sMsg.slice(0, 160)}`, "log-info");
+
+    if (solverIsDone(condition, sMsg)) {
+      log(`  Decision reached! (turn ${t})`, "log-ok");
+      break;
+    }
+
+    // ── TASKER ──
+    log(`  Run ${runNum} | turn ${t} — Tasker…`, "log-info");
+    taskerHist.push({ role: "user", content: sMsg });
+
+    let tRes;
+    try { tRes = await callAPI(prompts.tasker, taskerHist, 400); }
+    catch (e) { log(`  Tasker error: ${e.message}`, "log-err"); break; }
+
+    let tMsg = (tRes.choices[0].message.content || "").trim();
+    inputTokens  += tRes.usage?.prompt_tokens     ?? 0;
+    outputTokens += tRes.usage?.completion_tokens ?? 0;
+
+    for (let retry = 0; !tMsg && retry < 2; retry++) {
+      log(`  Tasker empty (attempt ${retry+1}) — retrying…`, "log-warn");
+      await sleep(3000);
+      try {
+        const r2 = await callAPI(prompts.tasker, taskerHist, 400);
+        tMsg = (r2.choices[0].message.content || "").trim();
+        inputTokens  += r2.usage?.prompt_tokens     ?? 0;
+        outputTokens += r2.usage?.completion_tokens ?? 0;
+      } catch(_) {}
+    }
+    if (!tMsg) {
+      tMsg = condition === "NUMERIC_V2" ? "ACK" : "[Agent A did not respond]";
+      log(`  Tasker still empty — injecting placeholder`, "log-warn");
+    }
+
+    taskerHist.push({ role: "assistant", content: tMsg });
+    solverHist.push({ role: "user",      content: tMsg });
+    conversation.push({ role: "tasker", content: tMsg, turn: t });
+    log(`  Tasker: ${tMsg.slice(0, 160)}`, "log-info");
+  }
+
+  // ── JUDGE ──
+  log(`  Judging ${condition} #${runNum}…`, "log-info");
+  const drift       = await judgeProtocol(condition, conversation);
+  const correct     = isCorrect(condition, conversation);
+  const failureMode = condition === "NUMERIC_V2" ? detectFailureMode(conversation) : null;
+
+  log(
+    `  Done — turns:${turns} tokens:${inputTokens+outputTokens} correct:${correct} drift:${drift.toFixed(1)}${failureMode ? ` FAILURE:${failureMode}` : ""}`,
+    correct ? "log-ok" : "log-warn"
+  );
+
+  return {
+    condition,
+    runNum,
+    inputTokens,
+    outputTokens,
+    totalTokens: inputTokens + outputTokens,
+    turns,
+    correct,
+    drift,
+    failureMode,
+    conversation,
+    timestamp: new Date().toISOString()
+  };
+}
+
+// ────────────────────────────────────────────
+//  RUN ALL
+// ────────────────────────────────────────────
+async function runAll() {
+  const runsN    = parseInt(document.getElementById("runsN").value);
+  const maxTurns = parseInt(document.getElementById("maxTurns").value);
+
+  estimatedCalls = CONDITIONS.length * runsN * (maxTurns * 2 + 1);
+  completedCalls = 0;
+
+  const results = [];
+
+  for (const cond of CONDITIONS) {
+    log(`\n━━━  ${cond}  ━━━`, "log-bold");
+    for (let r = 1; r <= runsN; r++) {
+      log(`▶ Run ${r}/${runsN}`, "log-bold");
+      try {
+        const res = await runExperiment(cond, r);
+        results.push(res);
+        allResults.push(res);
+      } catch (e) {
+        log(`✗ Run failed: ${e.message}`, "log-err");
+        results.push({
+          condition: cond, runNum: r,
+          inputTokens: 0, outputTokens: 0, totalTokens: 0,
+          turns: 0, correct: false, drift: 0, failureMode: "run-error",
+          conversation: [], timestamp: new Date().toISOString(),
+          error: e.message
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+// ────────────────────────────────────────────
+//  RENDER RESULTS
+// ────────────────────────────────────────────
+function renderResults(results) {
+  // Aggregate per condition
+  const agg = {};
+  for (const cond of CONDITIONS) {
+    const runs = results.filter(r => r.condition === cond);
+    if (!runs.length) continue;
+    const avg = k => runs.reduce((s, r) => s + (r[k] || 0), 0) / runs.length;
+    agg[cond] = {
+      avgTotal  : avg("totalTokens"),
+      avgInput  : avg("inputTokens"),
+      avgOutput : avg("outputTokens"),
+      avgTurns  : avg("turns"),
+      accuracy  : runs.filter(r => r.correct).length / runs.length,
+      avgDrift  : avg("drift"),
+      failures  : runs.filter(r => r.failureMode).map(r => r.failureMode),
+      n         : runs.length
+    };
+  }
+
+  const natAvg   = agg["NATURAL"]?.avgTotal ?? 1;
+  const natTurns = agg["NATURAL"]?.avgTurns ?? 1;
+
+  const badgeClass = {
+    NATURAL:    "badge-natural",
+    STRUCTURED: "badge-structured",
+    NUMERIC_V2: "badge-numericv2"
+  };
+  const label = {
+    NATURAL:    "NATURAL",
+    STRUCTURED: "STRUCTURED",
+    NUMERIC_V2: "NUMERIC v2"
+  };
+
+  const headers = [
+    "Condition", "Avg Tokens", "Avg Input", "Avg Output",
+    "Avg Turns", "Accuracy", "Avg Drift",
+    "vs NATURAL (tokens)", "vs NATURAL (turns)", "Failure Modes"
+  ];
+
+  let html = `<thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>`;
+
+  for (const cond of CONDITIONS) {
+    const d = agg[cond];
+    if (!d) continue;
+
+    const accCls   = d.accuracy >= 0.8 ? "val-good" : d.accuracy >= 0.5 ? "val-mid" : "val-bad";
+    const driftCls = d.avgDrift >= 7   ? "val-good" : d.avgDrift >= 4   ? "val-mid" : "val-bad";
+
+    const tokRatio = d.avgTotal / natAvg;
+    const tokPct   = ((tokRatio - 1) * 100).toFixed(0);
+    const tokStr   = cond === "NATURAL" ? "—" :
+      tokRatio < 1 ? `<span class="val-good">−${Math.abs(tokPct)}% ✓</span>`
+                   : `<span class="val-bad">+${tokPct}%</span>`;
+
+    const turnDelta = d.avgTurns - natTurns;
+    const turnStr   = cond === "NATURAL" ? "—" :
+      turnDelta > 0.5  ? `<span class="val-bad">+${turnDelta.toFixed(1)}</span>`
+    : turnDelta < -0.5 ? `<span class="val-good">${turnDelta.toFixed(1)} ✓</span>`
+                       : `<span class="val-mid">≈ same</span>`;
+
+    const failStr = d.failures.length
+      ? `<span style="color:var(--yellow);font-size:0.72rem">${d.failures.join(", ")}</span>`
+      : `<span class="val-good">none</span>`;
+
+    html += `
+      <tr>
+        <td><span class="badge ${badgeClass[cond]}">${label[cond]}</span></td>
+        <td>${d.avgTotal.toFixed(0)}</td>
+        <td>${d.avgInput.toFixed(0)}</td>
+        <td>${d.avgOutput.toFixed(0)}</td>
+        <td>${d.avgTurns.toFixed(1)}</td>
+        <td class="${accCls}">${(d.accuracy*100).toFixed(0)}% (${Math.round(d.accuracy*d.n)}/${d.n})</td>
+        <td class="${driftCls}">${d.avgDrift.toFixed(1)} / 10</td>
+        <td>${tokStr}</td>
+        <td>${turnStr}</td>
+        <td>${failStr}</td>
+      </tr>`;
+  }
+  html += "</tbody>";
+  document.getElementById("resultsTable").innerHTML = html;
+
+  // Individual runs grouped by condition
+  const detail = document.getElementById("runDetails");
+  let runHtml = `<div class="run-list"><div class="run-list-title">Individual Runs</div>`;
+  for (const cond of CONDITIONS) {
+    const condRuns = results.filter(r => r.condition === cond);
+    if (!condRuns.length) continue;
+    runHtml += `<div style="margin-bottom:4px;margin-top:14px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);">${label[cond]}</div>`;
+    condRuns.forEach(r => {
+      const uid = `${cond}-${r.runNum}`;
+      runHtml += `
+        <div>
+          <div class="run-row">
+            <span class="badge ${badgeClass[cond]}">Run ${r.runNum}</span>
+            <span>${r.turns} turns</span>
+            <span>${r.totalTokens.toLocaleString()} tokens</span>
+            <span class="${r.correct ? "val-good" : "val-bad"}">${r.correct ? "✓ PASS" : "✗ wrong"}</span>
+            <span class="${r.drift >= 7 ? "val-good" : r.drift >= 4 ? "val-mid" : "val-bad"}">Drift ${r.drift.toFixed(1)}/10</span>
+            ${r.failureMode ? `<span class="val-bad">⚠ ${r.failureMode}</span>` : ""}
+            ${r.error ? `<span class="val-bad">Error: ${r.error}</span>` : ""}
+            <button class="btn-toggle" onclick="toggleConvo('${uid}')">show conversation</button>
+          </div>
+          <div id="convo-${uid}" style="display:none;margin-bottom:12px;">
+            <div class="convo-block">
+              ${r.conversation.map(t => `
+                <div class="convo-turn convo-${t.role}">
+                  <span class="convo-label">${t.role.toUpperCase()} T${t.turn}</span>${escapeHtml(t.content)}
+                </div>`).join("")}
+            </div>
+          </div>
+        </div>`;
+    });
+  }
+  runHtml += "</div>";
+  detail.innerHTML = runHtml;
+
+  document.getElementById("resultsPanel").style.display = "block";
+}
+
+function toggleConvo(uid) {
+  const el  = document.getElementById(`convo-${uid}`);
+  const btn = el.previousElementSibling.querySelector(".btn-toggle");
+  if (el.style.display === "none") {
+    el.style.display = "block";
+    btn.textContent  = "hide conversation";
+  } else {
+    el.style.display = "none";
+    btn.textContent  = "show conversation";
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+// ────────────────────────────────────────────
+//  JSON DOWNLOAD
+// ────────────────────────────────────────────
+function downloadJSON() {
+  const payload = {
+    meta: {
+      timestamp        : new Date().toISOString(),
+      experiment       : "numeric-v2-full-head-to-head",
+      model            : document.getElementById("model").value,
+      runsPerCondition : parseInt(document.getElementById("runsN").value),
+      maxTurns         : parseInt(document.getElementById("maxTurns").value),
+      question         : QUESTION,
+      correctAnswer    : CORRECT_DECISION,
+      design           : "Full three-way head-to-head. NATURAL and STRUCTURED run identically to Experiment 4. NUMERIC v2 has three algorithmic fixes vs Experiment 4: (1) kickstart removed, (2) explicit verb restriction, (3) terminal verbs are PASS/FUND directly. No severity flags.",
+      protocolChanges  : [
+        "Kickstart: 'Agent A is ready. Begin your FETCH queries now.' — no READY signal",
+        "Solver allowed verbs: FETCH, PASS, FUND only",
+        "Tasker allowed verbs: DATA, ACK, DONE only",
+        "Terminal: PASS or FUND sent alone — no DONE wrapper, no deliberation verbs",
+        "No severity flags — bare field:value pairs identical in information to STRUCTURED"
+      ],
+      referenceBaselines: {
+        NATURAL:    { avgTokens: 5214, avgTurns: 3.0, accuracy: 1.0, source: "freeform-experiment Exp4" },
+        STRUCTURED: { avgTokens: 1641, avgTurns: 2.6, accuracy: 1.0, source: "freeform-experiment Exp4" },
+        NUMERIC_V1: { avgTokens: 6551, avgTurns: 7.0, accuracy: 0.6, source: "freeform-experiment Exp4" }
+      },
+      dataset: DATASET
+    },
+    results: allResults
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement("a"), {
+    href: url, download: `exp5-numericv2-${Date.now()}.json`
+  });
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ────────────────────────────────────────────
+//  ENTRY POINT
+// ────────────────────────────────────────────
+async function startExperiment() {
+  if (running) return;
+  if (!document.getElementById("apiKey").value.trim()) {
+    alert("Please enter an OpenAI API key.");
+    return;
+  }
+
+  running      = true;
+  allResults   = [];
+  apiKeys      = document.getElementById("apiKey").value.split(",").map(k => k.trim()).filter(Boolean);
+  keyIndex     = 0;
+  keyCooldowns = {};
+  if (!apiKeys.length) { alert("Please enter at least one API key."); running = false; return; }
+  log(`Using ${apiKeys.length} API key(s)`, "log-info");
+
+  const btn = document.getElementById("runBtn");
+  btn.disabled    = true;
+  btn.textContent = "⏳ Running…";
+
+  document.getElementById("progressPanel").style.display = "block";
+  document.getElementById("resultsPanel").style.display  = "none";
+  document.getElementById("progressLog").innerHTML       = "";
+  document.getElementById("runDetails").innerHTML        = "";
+
+  log("Starting Experiment 5 — NATURAL vs STRUCTURED vs NUMERIC v2…", "log-bold");
+  log(`Model: ${document.getElementById("model").value}`, "log-info");
+  log(`Runs/condition: ${document.getElementById("runsN").value} | Max turns: ${document.getElementById("maxTurns").value}`, "log-info");
+  log(`NUMERIC v2: FETCH/DATA/ACK/DONE/PASS/FUND — no invention, no handshake, no deliberation verbs`, "log-info");
+
+  try {
+    const results = await runAll();
+    log("\n✓ All runs complete!", "log-ok");
+    renderResults(results);
+  } catch (e) {
+    log(`\n✗ Fatal error: ${e.message}`, "log-err");
+  } finally {
+    running         = false;
+    btn.disabled    = false;
+    btn.textContent = "▶ Run";
+  }
+}
+</script>
+</body>
+</html>

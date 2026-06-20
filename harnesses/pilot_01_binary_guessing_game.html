@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Agent Protocol Experiment</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2128;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --dim: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --purple: #bc8cff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  padding: 24px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.02em;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+}
+
+.panel-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+/* Config */
+.config-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: end;
+}
+
+.field label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--dim);
+  margin-bottom: 5px;
+}
+
+input[type=text], input[type=password], input[type=number] {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 8px 11px;
+  font-size: 0.82rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  transition: border-color 0.15s;
+}
+input:focus { outline: none; border-color: var(--accent); }
+
+button#runBtn {
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  letter-spacing: 0.02em;
+}
+button#runBtn:hover { opacity: 0.85; }
+button#runBtn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.hint {
+  margin-top: 12px;
+  font-size: 0.72rem;
+  color: var(--dim);
+  padding: 8px 12px;
+  background: rgba(88,166,255,0.06);
+  border-radius: 5px;
+  border-left: 2px solid var(--accent);
+}
+
+/* Task info */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.info-label {
+  font-size: 0.72rem;
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+
+ol.fact-list {
+  counter-reset: fact;
+  list-style: none;
+  padding: 0;
+}
+ol.fact-list li {
+  counter-increment: fact;
+  display: flex;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 0.8rem;
+  color: var(--dim);
+  border-bottom: 1px solid rgba(48,54,61,0.5);
+}
+ol.fact-list li::before {
+  content: counter(fact);
+  color: var(--accent);
+  font-weight: 700;
+  min-width: 16px;
+}
+
+.question-box {
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+
+.correct-label {
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+.correct-label span { color: var(--green); font-weight: 600; }
+
+/* Progress */
+.progress-bar-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  width: 0%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+#progressLog {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 10px 14px;
+  line-height: 1.7;
+}
+
+.log-info { color: var(--dim); }
+.log-bold { color: var(--text); font-weight: 700; }
+.log-ok { color: var(--green); }
+.log-err { color: var(--red); }
+.log-warn { color: var(--yellow); }
+
+/* Results table */
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+table.results th {
+  text-align: left;
+  padding: 9px 14px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+table.results td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.83rem;
+  font-variant-numeric: tabular-nums;
+}
+table.results tr:last-child td { border-bottom: none; }
+table.results tbody tr:hover td { background: rgba(88,166,255,0.04); }
+
+.badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.badge-natural   { background: rgba(63,185,80,0.15);   color: var(--green); }
+.badge-structured{ background: rgba(88,166,255,0.15);  color: var(--accent); }
+.badge-numeric   { background: rgba(188,140,255,0.15); color: var(--purple); }
+
+.val-good { color: var(--green); }
+.val-mid  { color: var(--yellow); }
+.val-bad  { color: var(--red); }
+
+/* Run details */
+.run-list {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.run-list-title {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+.run-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(48,54,61,0.4);
+  font-size: 0.78rem;
+  flex-wrap: wrap;
+}
+.run-row:last-child { border-bottom: none; }
+.run-dim { color: var(--dim); }
+
+/* Buttons row */
+.btn-row { display: flex; gap: 10px; margin-top: 4px; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-secondary:hover { background: var(--surface2); }
+</style>
+</head>
+<body>
+<div style="max-width:1060px;margin:0 auto;">
+
+<h1>⚗ Multi-Agent Protocol Experiment</h1>
+
+<!-- ── Config ── -->
+<div class="panel">
+  <div class="panel-title">Configuration</div>
+  <div class="config-grid">
+    <div class="field">
+      <label>OpenAI API Key</label>
+      <input type="password" id="apiKey" placeholder="sk-...">
+    </div>
+    <div class="field">
+      <label>Model</label>
+      <input type="text" id="model" value="gpt-4o-mini">
+    </div>
+    <div class="field">
+      <label>Runs / Condition</label>
+      <input type="number" id="runsN" value="5" min="1" max="10">
+    </div>
+    <div class="field">
+      <label>Max Turns</label>
+      <input type="number" id="maxTurns" value="20" min="4" max="40">
+    </div>
+    <div class="field">
+      <button id="runBtn" onclick="startExperiment()">▶ Run</button>
+    </div>
+  </div>
+  <div class="hint">
+    5 runs × 3 conditions × ~20 turns × 2 agents + 1 judge = ~600 API calls.
+    Estimated time: <strong>8–12 min</strong> with 1 s delays.
+    Reduce "Runs / Condition" to 2 for a quick test (~3 min).
+  </div>
+</div>
+
+<!-- ── Task info ── -->
+<div class="panel">
+  <div class="panel-title">Task Setup</div>
+  <div class="info-grid">
+    <div>
+      <div class="info-label">Both agents see these 8 options. Agent A secretly holds one — can only confirm or deny guesses:</div>
+      <ol class="fact-list" id="factList"></ol>
+    </div>
+    <div>
+      <div class="info-label">Agent B (Solver) must answer:</div>
+      <div class="question-box" id="qBox"></div>
+      <div class="correct-label">Correct answer: <span id="correctSpan"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Progress ── -->
+<div class="panel" id="progressPanel" style="display:none">
+  <div class="panel-title">Progress <span id="progressPct" style="color:var(--accent);margin-left:6px;"></span></div>
+  <div class="progress-bar-track"><div class="progress-bar-fill" id="pBar"></div></div>
+  <div id="progressLog"></div>
+</div>
+
+<!-- ── Results ── -->
+<div class="panel" id="resultsPanel" style="display:none">
+  <div class="panel-title">Results</div>
+  <table class="results" id="resultsTable"></table>
+  <div class="btn-row">
+    <button class="btn-secondary" onclick="downloadJSON()">⬇ Download JSON Log</button>
+  </div>
+  <div id="runDetails"></div>
+</div>
+
+</div><!-- /max-width -->
+
+<script>
+// ────────────────────────────────────────────
+//  DATA
+// ────────────────────────────────────────────
+const OPTIONS = [
+  "ALPHA-01", "BRAVO-07", "CHARLIE-14", "DELTA-22",
+  "ECHO-33",  "FOXTROT-41", "GOLF-58",  "HOTEL-69"
+];
+const SECRET  = "DELTA-22";     // Agent A holds this one
+const CORRECT = "delta-22";     // lower-case keyword to detect
+
+const QUESTION = "Which of these 8 codes is the access code for vault SIGMA-3?";
+
+const CONDITIONS = ["NATURAL", "STRUCTURED", "NUMERIC"];
+
+// Populate info panel
+document.getElementById("factList").innerHTML =
+  OPTIONS.map(o => `<li>${o}</li>`).join("");
+document.getElementById("qBox").textContent       = QUESTION;
+document.getElementById("correctSpan").textContent = SECRET;
+
+// ────────────────────────────────────────────
+//  STATE
+// ────────────────────────────────────────────
+let allResults   = [];
+let completedCalls = 0;
+let estimatedCalls = 0;
+let running      = false;
+let apiKeys      = [];
+let keyIndex     = 0;
+let keyCooldowns = {};  // key -> timestamp when it's usable again
+
+const KEY_COOLDOWN_MS = 20000;  // 20s cooldown per key after a 429
+
+async function getAvailableKey() {
+  if (!apiKeys.length) throw new Error("No API keys provided.");
+  for (let wait = 0; wait < 60000; wait += 1000) {
+    const now = Date.now();
+    // Try keys in round-robin order, skip ones on cooldown
+    for (let i = 0; i < apiKeys.length; i++) {
+      const key = apiKeys[keyIndex % apiKeys.length];
+      keyIndex++;
+      if (!keyCooldowns[key] || now >= keyCooldowns[key]) return key;
+    }
+    // All keys on cooldown — find shortest remaining wait
+    const soonest = Math.min(...apiKeys.map(k => keyCooldowns[k] || 0));
+    const waitMs  = Math.max(1000, soonest - Date.now());
+    log(`All keys on cooldown — waiting ${(waitMs/1000).toFixed(0)}s…`, "log-warn");
+    await sleep(waitMs);
+  }
+  throw new Error("All API keys rate limited for too long — giving up");
+}
+
+// ────────────────────────────────────────────
+//  HELPERS
+// ────────────────────────────────────────────
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function log(msg, cls = "log-info") {
+  const el   = document.getElementById("progressLog");
+  const line = document.createElement("div");
+  line.className = cls;
+  line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  el.appendChild(line);
+  el.scrollTop = el.scrollHeight;
+}
+
+function setProgress(done, total) {
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById("pBar").style.width = pct + "%";
+  document.getElementById("progressPct").textContent = pct + "%";
+}
+
+function extractJSON(text) {
+  // 1) try direct parse
+  try { return JSON.parse(text.trim()); } catch(_) {}
+  // 2) strip ```json ... ``` fences
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fenced) try { return JSON.parse(fenced[1].trim()); } catch(_) {}
+  // 3) find first {...}
+  const braced = text.match(/\{[\s\S]*?\}/);
+  if (braced) try { return JSON.parse(braced[0]); } catch(_) {}
+  return null;
+}
+
+function extractNums(text) {
+  const nums = (text.match(/\b\d+\b/g) || []).map(Number);
+  return nums.length >= 4 ? nums.slice(0, 4) : null;
+}
+
+// ────────────────────────────────────────────
+//  SYSTEM PROMPTS
+// ────────────────────────────────────────────
+function getPrompts(condition) {
+  const optList = OPTIONS.map((o, i) => `${i+1}. ${o}`).join("\n");
+
+  if (condition === "NATURAL") return {
+    tasker:
+      `You are Agent A (Tasker). The secret access code for vault SIGMA-3 is: ${SECRET}\n\n` +
+      `The 8 possible codes are:\n${optList}\n\n` +
+      `RULES: Agent B will guess one code at a time. Reply "Yes" if their guess matches ${SECRET} exactly, "No" otherwise. ` +
+      `One sentence maximum. Never reveal the code unprompted.`,
+
+    solver:
+      `You are Agent B (Solver). Agent A holds one secret code chosen from this list:\n${optList}\n\n` +
+      `Your mission: identify which code Agent A holds.\n` +
+      `RULES: Guess ONE code per message by asking "Is the code X?" — eliminate options based on the answers. ` +
+      `When confirmed, write: FINAL ANSWER: <code>\n\nBegin.`
+  };
+
+  if (condition === "STRUCTURED") return {
+    tasker:
+      `You are Agent A (Tasker). The secret access code for vault SIGMA-3 is: ${SECRET}\n\n` +
+      `The 8 possible codes are:\n${optList}\n\n` +
+      `STRICT PROTOCOL — output ONLY valid JSON, nothing else:\n` +
+      `{"action":"confirm" or "deny","guess":"<the code Agent B guessed>","confidence":<0-9>,"turn":<n>}\n\n` +
+      `Confirm if the guess matches ${SECRET} exactly. Deny otherwise. Never reveal the secret.`,
+
+    solver:
+      `You are Agent B (Solver). Agent A holds one secret code from this list:\n${optList}\n\n` +
+      `Goal: identify which code Agent A holds.\n\n` +
+      `STRICT PROTOCOL — output ONLY valid JSON, nothing else:\n` +
+      `{"action":"guess" or "answer","content":"<code you are guessing>","confidence":<0-9>,"turn":<n>}\n\n` +
+      `Use action "guess" to test one code at a time. When Agent A confirms, use action "answer" with "FINAL ANSWER: <code>" in content. ` +
+      `No extra text — JSON only.\n\nBegin.`
+  };
+
+  if (condition === "NUMERIC") {
+    const encodingRules =
+      `When communicating with another agent, encode every message using this algorithm:\n` +
+      `Encoding rules:\n` +
+      `State your action as a single verb (GET, SET, CHECK, SEND, DONE, FAIL, ASK, CONFIRM, DENY)\n` +
+      `Follow it with a confidence integer 0-9\n` +
+      `Follow it with the minimum words needed to identify the subject, no sentences, no explanation\n` +
+      `Never use filler words, conjunctions, or social language\n` +
+      `Maximum 10 tokens per message\n\n` +
+      `Examples:\n` +
+      `Guessing a code: "CHECK 8 DELTA-22"\n` +
+      `Confirming a guess: "CONFIRM 9 DELTA-22"\n` +
+      `Denying a guess: "DENY 9 ALPHA-01"\n` +
+      `Submitting final answer: "DONE 9 FINAL ANSWER: DELTA-22"\n\n` +
+      `Decode incoming messages using the same rules in reverse.`;
+
+    const optEncoded = OPTIONS.map(o => `OPTION 9 ${o}`).join("\n");
+
+    return {
+      tasker:
+        encodingRules + `\n\n` +
+        `--- YOUR TASK ---\n` +
+        `HOLD 9 secret-code: ${SECRET}\n` +
+        `${optEncoded}\n` +
+        `RULE 9 CONFIRM-if-guess-matches-${SECRET}\n` +
+        `RULE 9 DENY-if-guess-does-not-match\n` +
+        `AWAIT 9 agent-B-CHECK`,
+
+      solver:
+        encodingRules + `\n\n` +
+        `--- YOUR TASK ---\n` +
+        `FIND 9 secret-code-held-by-agent-A\n` +
+        `${optEncoded}\n` +
+        `METHOD 9 CHECK-one-option-per-turn\n` +
+        `RULE 9 eliminate-DENY-options\n` +
+        `DONE 9 output: FINAL ANSWER: <confirmed-code> on-CONFIRM\n\n` +
+        `BEGIN`
+    };
+  }
+}
+
+// ────────────────────────────────────────────
+//  COMPLETION / CORRECTNESS DETECTION
+// ────────────────────────────────────────────
+function solverIsDone(condition, msg) {
+  switch (condition) {
+    case "NATURAL":
+      return msg.toLowerCase().includes("final answer:");
+
+    case "STRUCTURED": {
+      const j = extractJSON(msg);
+      if (j) {
+        if (j.action === "answer") return true;
+        if (j.content && j.content.toLowerCase().includes("final answer")) return true;
+      }
+      return msg.toLowerCase().includes("final answer:");
+    }
+
+    case "NUMERIC": {
+      const upper = msg.toUpperCase();
+      return upper.startsWith("DONE") || upper.includes("FINAL ANSWER");
+    }
+  }
+  return false;
+}
+
+function isCorrect(condition, conversation) {
+  for (const turn of conversation) {
+    if (turn.role !== "solver") continue;
+    const text = turn.content;
+    if (text.toLowerCase().includes(CORRECT)) return true;
+  }
+  return false;
+}
+
+// ────────────────────────────────────────────
+//  API CALL
+// ────────────────────────────────────────────
+async function callGroq(systemPrompt, messages, maxTokens = 250) {
+  const model   = document.getElementById("model").value.trim();
+  const delayMs = 500;
+
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const apiKey = await getAvailableKey();
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: "system", content: systemPrompt }, ...messages],
+          max_tokens: maxTokens,
+          temperature: 0.7
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        if (res.status === 429) {
+          keyCooldowns[apiKey] = Date.now() + KEY_COOLDOWN_MS;
+          log(`Key …${apiKey.slice(-6)} rate limited — 20s cooldown`, "log-warn");
+          continue;
+        }
+        throw new Error(err.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      completedCalls++;
+      setProgress(completedCalls, estimatedCalls);
+      await sleep(delayMs);
+      return data;
+
+    } catch (e) {
+      if (attempt < 7) {
+        log(`API error (attempt ${attempt+1}): ${e.message} — retrying…`, "log-warn");
+        await sleep(2000);
+      } else {
+        throw e;
+      }
+    }
+  }
+  throw new Error("Failed after 8 attempts");
+}
+
+// ────────────────────────────────────────────
+//  JUDGE
+// ────────────────────────────────────────────
+async function judgeProtocol(condition, conversation) {
+  const transcript = conversation
+    .map(t => `[${t.role.toUpperCase()}]: ${t.content}`)
+    .join("\n");
+
+  const systemPrompt =
+    `You are a strict protocol evaluator. ` +
+    `Score 0-10 how strictly the agents followed their assigned format: ` +
+    `NATURAL=plain English only, STRUCTURED=valid JSON only, NUMERIC=encoded verb+confidence+subject only. ` +
+    `Deduct points for empty turns, wrong format, or natural language leaking into structured/numeric protocols. ` +
+    `Reply with ONLY a single integer, nothing else.`;
+
+  try {
+    const res = await callGroq(systemPrompt, [{
+      role: "user",
+      content: `Protocol: ${condition}\n\nTranscript:\n${transcript}`
+    }], 10);
+    const raw   = res.choices[0].message.content.trim();
+    const score = parseFloat(raw.match(/[\d.]+/)?.[0] ?? "5");
+    return Math.min(10, Math.max(0, score));
+  } catch (e) {
+    log(`Judge error: ${e.message}`, "log-warn");
+    return 5;
+  }
+}
+
+// ────────────────────────────────────────────
+//  SINGLE RUN
+// ────────────────────────────────────────────
+async function runExperiment(condition, runNum) {
+  const maxTurns = parseInt(document.getElementById("maxTurns").value);
+  const prompts  = getPrompts(condition);
+
+  // Separate message histories for each agent
+  const taskerHist  = [];   // [{role,content}]
+  const solverHist  = [];   // [{role,content}]
+  const conversation = [];  // full record
+
+  let inputTokens  = 0;
+  let outputTokens = 0;
+  let turns        = 0;
+
+  // Prime the solver with an initial user message
+  const kickText = condition === "NUMERIC"
+    ? "READY 9 agent-A awaiting-CHECK"
+    : "Agent A is ready. Make your first guess.";
+  solverHist.push({ role: "user", content: kickText });
+
+  for (let t = 1; t <= maxTurns; t++) {
+    turns = t;
+    log(`  ${condition} #${runNum} | turn ${t} — Solver…`, "log-info");
+
+    // ── SOLVER ──
+    let sRes;
+    try { sRes = await callGroq(prompts.solver, solverHist, 512); }
+    catch (e) { log(`  Solver error: ${e.message}`, "log-err"); break; }
+
+    let sMsg = (sRes.choices[0].message.content || "").trim();
+    inputTokens  += sRes.usage?.prompt_tokens      ?? 0;
+    outputTokens += sRes.usage?.completion_tokens  ?? 0;
+
+    // Retry up to 2x on empty solver response
+    for (let retry = 0; !sMsg && retry < 2; retry++) {
+      log(`  Solver empty (attempt ${retry+1}) — retrying…`, "log-warn");
+      await sleep(3000);
+      try {
+        const r2 = await callGroq(prompts.solver, solverHist, 512);
+        sMsg = (r2.choices[0].message.content || "").trim();
+        inputTokens  += r2.usage?.prompt_tokens     ?? 0;
+        outputTokens += r2.usage?.completion_tokens ?? 0;
+      } catch(_) {}
+    }
+    if (!sMsg) { log(`  Solver failed after retries — ending run`, "log-err"); break; }
+
+    solverHist.push({ role: "assistant", content: sMsg });
+    conversation.push({ role: "solver", content: sMsg, turn: t });
+    log(`  Solver: ${sMsg.slice(0, 90)}`, "log-info");
+
+    if (solverIsDone(condition, sMsg)) {
+      log(`  Task complete! (turn ${t})`, "log-ok");
+      break;
+    }
+
+    // ── TASKER ──
+    log(`  ${condition} #${runNum} | turn ${t} — Tasker…`, "log-info");
+    taskerHist.push({ role: "user", content: sMsg });
+
+    let tRes;
+    try { tRes = await callGroq(prompts.tasker, taskerHist, 512); }
+    catch (e) { log(`  Tasker error: ${e.message}`, "log-err"); break; }
+
+    let tMsg = (tRes.choices[0].message.content || "").trim();
+    inputTokens  += tRes.usage?.prompt_tokens      ?? 0;
+    outputTokens += tRes.usage?.completion_tokens  ?? 0;
+
+    // Retry up to 2x on empty tasker response
+    for (let retry = 0; !tMsg && retry < 2; retry++) {
+      log(`  Tasker empty (attempt ${retry+1}) — retrying…`, "log-warn");
+      await sleep(3000);
+      try {
+        const r2 = await callGroq(prompts.tasker, taskerHist, 512);
+        tMsg = (r2.choices[0].message.content || "").trim();
+        inputTokens  += r2.usage?.prompt_tokens     ?? 0;
+        outputTokens += r2.usage?.completion_tokens ?? 0;
+      } catch(_) {}
+    }
+    // If still empty, inject a placeholder so solver knows to re-ask
+    if (!tMsg) {
+      tMsg = condition === "NUMERIC" ? "FAIL 0 no-response" : "[Agent A did not respond — please re-ask]";
+      log(`  Tasker still empty — injecting placeholder`, "log-warn");
+    }
+
+    taskerHist.push({ role: "assistant", content: tMsg });
+    solverHist.push({ role: "user",      content: tMsg });
+    conversation.push({ role: "tasker", content: tMsg, turn: t });
+    log(`  Tasker: ${tMsg.slice(0, 90)}`, "log-info");
+  }
+
+  // ── JUDGE ──
+  log(`  Judging ${condition} #${runNum}…`, "log-info");
+  const drift = await judgeProtocol(condition, conversation);
+  const correct = isCorrect(condition, conversation);
+
+  log(
+    `  ✓ Done — turns:${turns} tokens:${inputTokens+outputTokens} ` +
+    `correct:${correct} drift:${drift.toFixed(1)}`,
+    correct ? "log-ok" : "log-warn"
+  );
+
+  return {
+    condition, runNum, inputTokens, outputTokens,
+    totalTokens: inputTokens + outputTokens,
+    turns, correct, drift,
+    conversation,
+    timestamp: new Date().toISOString()
+  };
+}
+
+// ────────────────────────────────────────────
+//  RUN ALL CONDITIONS
+// ────────────────────────────────────────────
+async function runAll() {
+  const runsN    = parseInt(document.getElementById("runsN").value);
+  const maxTurns = parseInt(document.getElementById("maxTurns").value);
+
+  // Estimate: each turn = 2 calls + 1 judge per run
+  estimatedCalls = CONDITIONS.length * runsN * (maxTurns * 2 + 1);
+  completedCalls = 0;
+
+  const results = [];
+
+  for (const cond of CONDITIONS) {
+    log(`\n━━━  ${cond}  ━━━`, "log-bold");
+    for (let r = 1; r <= runsN; r++) {
+      log(`▶ Run ${r}/${runsN}`, "log-bold");
+      try {
+        const res = await runExperiment(cond, r);
+        results.push(res);
+        allResults.push(res);
+      } catch (e) {
+        log(`✗ Run failed: ${e.message}`, "log-err");
+        results.push({
+          condition: cond, runNum: r, inputTokens: 0, outputTokens: 0,
+          totalTokens: 0, turns: 0, correct: false, drift: 0,
+          conversation: [], timestamp: new Date().toISOString(),
+          error: e.message
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+// ────────────────────────────────────────────
+//  RENDER RESULTS
+// ────────────────────────────────────────────
+function renderResults(results) {
+  // Aggregate per condition
+  const agg = {};
+  for (const cond of CONDITIONS) {
+    const runs = results.filter(r => r.condition === cond);
+    if (!runs.length) continue;
+    const avg = k => runs.reduce((s,r) => s + (r[k]||0), 0) / runs.length;
+    agg[cond] = {
+      avgTotal    : avg("totalTokens"),
+      avgInput    : avg("inputTokens"),
+      avgOutput   : avg("outputTokens"),
+      avgTurns    : avg("turns"),
+      accuracy    : runs.filter(r => r.correct).length / runs.length,
+      avgDrift    : avg("drift"),
+      n           : runs.length
+    };
+  }
+
+  // Table
+  const headers = [
+    "Condition","Avg Tokens (total)","Avg Input","Avg Output",
+    "Avg Turns","Accuracy","Avg Drift Score"
+  ];
+
+  let html = `<thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>`;
+
+  for (const cond of CONDITIONS) {
+    const d = agg[cond];
+    if (!d) continue;
+    const bc    = `badge-${cond.toLowerCase()}`;
+    const accPct = (d.accuracy * 100).toFixed(0) + "%";
+    const accCls = d.accuracy >= 0.6 ? "val-good" : d.accuracy >= 0.3 ? "val-mid" : "val-bad";
+    const dCls   = d.avgDrift  >= 7  ? "val-good" : d.avgDrift  >= 4   ? "val-mid" : "val-bad";
+    html += `
+      <tr>
+        <td><span class="badge ${bc}">${cond}</span></td>
+        <td>${d.avgTotal.toFixed(0)}</td>
+        <td>${d.avgInput.toFixed(0)}</td>
+        <td>${d.avgOutput.toFixed(0)}</td>
+        <td>${d.avgTurns.toFixed(1)}</td>
+        <td class="${accCls}">${accPct}</td>
+        <td class="${dCls}">${d.avgDrift.toFixed(1)} / 10</td>
+      </tr>`;
+  }
+  html += "</tbody>";
+  document.getElementById("resultsTable").innerHTML = html;
+
+  // Individual runs
+  const detail = document.getElementById("runDetails");
+  detail.innerHTML = `
+    <div class="run-list">
+      <div class="run-list-title">Individual Runs</div>
+      ${results.map(r => `
+        <div class="run-row">
+          <span class="badge badge-${r.condition.toLowerCase()}">${r.condition}</span>
+          <span class="run-dim">Run ${r.runNum}</span>
+          <span>${r.turns} turns</span>
+          <span>${r.totalTokens.toLocaleString()} tokens</span>
+          <span class="${r.correct ? "val-good" : "val-bad"}">${r.correct ? "✓ Correct" : "✗ Wrong"}</span>
+          <span class="${r.drift >= 7 ? "val-good" : r.drift >= 4 ? "val-mid" : "val-bad"}">Drift ${r.drift.toFixed(1)}/10</span>
+          ${r.error ? `<span class="val-bad">⚠ ${r.error}</span>` : ""}
+        </div>`).join("")}
+    </div>`;
+
+  document.getElementById("resultsPanel").style.display = "block";
+}
+
+// ────────────────────────────────────────────
+//  JSON DOWNLOAD
+// ────────────────────────────────────────────
+function downloadJSON() {
+  const payload = {
+    meta: {
+      timestamp        : new Date().toISOString(),
+      model            : document.getElementById("model").value,
+      runsPerCondition : parseInt(document.getElementById("runsN").value),
+      maxTurns         : parseInt(document.getElementById("maxTurns").value),
+      question         : QUESTION,
+      correctAnswer    : SECRET,
+      options          : OPTIONS
+    },
+    results: allResults
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement("a"), {
+    href: url, download: `multi-agent-${Date.now()}.json`
+  });
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ────────────────────────────────────────────
+//  ENTRY POINT
+// ────────────────────────────────────────────
+async function startExperiment() {
+  if (running) return;
+  if (!document.getElementById("apiKey").value.trim()) {
+    alert("Please enter at least one Groq API key.");
+    return;
+  }
+
+  running     = true;
+  allResults  = [];
+  apiKeys      = document.getElementById("apiKey").value.split(",").map(k => k.trim()).filter(Boolean);
+  keyIndex     = 0;
+  keyCooldowns = {};
+  if (!apiKeys.length) { alert("Please enter at least one Groq API key."); running = false; return; }
+  log(`Using ${apiKeys.length} API key(s)`, "log-info");
+
+  const btn = document.getElementById("runBtn");
+  btn.disabled    = true;
+  btn.textContent = "⏳ Running…";
+
+  document.getElementById("progressPanel").style.display = "block";
+  document.getElementById("resultsPanel").style.display  = "none";
+  document.getElementById("progressLog").innerHTML       = "";
+  document.getElementById("runDetails").innerHTML        = "";
+
+  log("Starting experiment…", "log-bold");
+  log(`Model: ${document.getElementById("model").value}`, "log-info");
+  log(`Runs/condition: ${document.getElementById("runsN").value} | Max turns: ${document.getElementById("maxTurns").value}`, "log-info");
+
+  try {
+    const results = await runAll();
+    log("\n✓ All runs complete!", "log-ok");
+    renderResults(results);
+  } catch (e) {
+    log(`\n✗ Fatal error: ${e.message}`, "log-err");
+  } finally {
+    running         = false;
+    btn.disabled    = false;
+    btn.textContent = "▶ Run";
+  }
+}
+</script>
+</body>
+</html>

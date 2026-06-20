@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Validation Battery — Multi-Agent Protocol Study</title>
+<style>
+:root {
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#c9d1d9;--dim:#8b949e;--accent:#58a6ff;--green:#3fb950;
+  --red:#f85149;--yellow:#d29922;--purple:#bc8cff;--orange:#f0883e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;padding:24px;line-height:1.5}
+h1{font-size:1.4rem;color:var(--accent);margin-bottom:4px;letter-spacing:-.02em}
+h2{font-size:1rem;color:var(--text);margin-bottom:12px;font-weight:600}
+.subtitle{font-size:.78rem;color:var(--dim);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px}
+.panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:14px;font-weight:600}
+.suite-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.suite-letter{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0}
+.sl-a{background:rgba(88,166,255,.15);color:var(--accent)}
+.sl-b{background:rgba(63,185,80,.15);color:var(--green)}
+.sl-c{background:rgba(240,136,62,.15);color:var(--orange)}
+.sl-d{background:rgba(188,140,255,.15);color:var(--purple)}
+.suite-title{font-size:.95rem;font-weight:700}
+.suite-desc{font-size:.76rem;color:var(--dim);margin-bottom:12px;line-height:1.6;padding:8px 12px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
+.cfg-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px}
+.field label{display:block;font-size:.72rem;color:var(--dim);margin-bottom:4px}
+input[type=text],input[type=password],input[type=number]{background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:7px 10px;font-size:.83rem;outline:none;width:100%}
+input:focus{border-color:var(--accent)}
+.field-sm{width:80px}
+.field-md{width:120px}
+.field-lg{width:220px}
+button.run-btn{background:var(--accent);color:#0d1117;border:none;border-radius:6px;padding:8px 18px;font-size:.83rem;font-weight:700;cursor:pointer;white-space:nowrap}
+button.run-btn:disabled{opacity:.5;cursor:not-allowed}
+button.run-btn.green{background:var(--green)}
+button.run-btn.purple{background:var(--purple)}
+button.run-btn.orange{background:var(--orange)}
+button.sec{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 14px;font-size:.81rem;cursor:pointer}
+button.sec:hover{background:var(--surface2)}
+.progress-track{height:4px;background:var(--surface2);border-radius:2px;margin-bottom:10px}
+.progress-fill{height:100%;border-radius:2px;transition:width .3s;width:0%}
+.pf-a{background:var(--accent)}.pf-b{background:var(--green)}.pf-c{background:var(--orange)}.pf-d{background:var(--purple)}
+.log-box{max-height:160px;overflow-y:auto;font-size:.72rem;font-family:'SF Mono','Menlo',monospace;line-height:1.7;padding:8px;background:var(--bg);border-radius:6px}
+.li{color:var(--dim)}.lb{color:var(--text);font-weight:700}.lok{color:var(--green)}.lerr{color:var(--red)}.lwarn{color:var(--yellow)}
+table.rt{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:.8rem}
+table.rt th{text-align:left;padding:8px 12px;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);background:var(--bg);border-bottom:2px solid var(--border);white-space:nowrap}
+table.rt td{padding:11px 12px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+table.rt tr:last-child td{border-bottom:none}
+table.rt tbody tr:hover td{background:rgba(88,166,255,.03)}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:700}
+.bn{background:rgba(63,185,80,.15);color:var(--green)}
+.bnt{background:rgba(63,185,80,.08);color:var(--green);border:1px solid rgba(63,185,80,.3)}
+.bs{background:rgba(88,166,255,.15);color:var(--accent)}
+.bv{background:rgba(188,140,255,.15);color:var(--purple)}
+.vg{color:var(--green)}.vm{color:var(--yellow)}.vb{color:var(--red)}
+.run-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(48,54,61,.4);font-size:.76rem;flex-wrap:wrap}
+.run-row:last-child{border-bottom:none}
+.dim{color:var(--dim)}
+.tog{font-size:.7rem;color:var(--dim);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
+.convo-block{margin:4px 0 10px;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.ct{padding:6px 10px;font-size:.72rem;font-family:'SF Mono','Menlo',monospace;border-bottom:1px solid rgba(48,54,61,.35);line-height:1.5}
+.ct:last-child{border-bottom:none}
+.ct-s{background:rgba(88,166,255,.04);color:var(--accent)}
+.ct-t{background:rgba(48,54,61,.18);color:var(--text)}
+.cl{font-weight:700;margin-right:6px;font-size:.65rem;opacity:.6}
+.hidden{display:none}
+.global-summary{margin-top:24px;border-top:2px solid var(--border);padding-top:20px}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:.68rem;font-weight:600;margin-right:4px}
+.tag-req{background:rgba(248,81,73,.15);color:var(--red)}
+.tag-opt{background:rgba(88,166,255,.1);color:var(--dim)}
+</style>
+</head>
+<body>
+<div style="max-width:1120px;margin:0 auto">
+
+<h1>Paper Validation Battery</h1>
+<div class="subtitle">Four targeted experiments to make the protocol study statistically defensible for publication. gpt-4o-mini throughout.</div>
+
+<!-- Global config -->
+<div class="panel">
+  <div class="panel-title">Global Configuration</div>
+  <div class="cfg-row">
+    <div class="field field-lg"><label>OpenAI API Key (comma-separate for rotation)</label><input type="password" id="gApiKey" placeholder="sk-..."></div>
+    <div class="field field-md"><label>Model</label><input type="text" id="gModel" value="gpt-4o-mini"></div>
+    <div style="margin-top:18px;display:flex;gap:8px">
+      <button class="run-btn" onclick="startAll()">▶ Run All Suites</button>
+      <button class="sec" onclick="downloadAll()">⬇ Download All Results</button>
+    </div>
+  </div>
+  <div style="font-size:.73rem;color:var(--dim);margin-top:10px;line-height:1.8">
+    <strong style="color:var(--text)">Suite A</strong> <span class="tag tag-req">Required</span> Statistical backbone — n=20 replication resolves sample size issue &nbsp;·&nbsp;
+    <strong style="color:var(--text)">Suite B</strong> <span class="tag tag-req">Required</span> NATURAL-TERSE control — isolates verbosity vs format effect &nbsp;·&nbsp;
+    <strong style="color:var(--text)">Suite C</strong> <span class="tag tag-req">Required</span> Discovery task — tests if NATURAL wins when field list is unknown &nbsp;·&nbsp;
+    <strong style="color:var(--text)">Suite D</strong> <span class="tag tag-req">Required</span> Cross-task generalization — GO/NO-GO clinical cases, NUMERIC v2 vs baselines
+  </div>
+</div>
+
+<!-- SUITE A -->
+<div class="panel" id="panel-A">
+  <div class="suite-header"><div class="suite-letter sl-a">A</div><div><div class="suite-title">Scaled Head-to-Head (n=20)</div><div style="font-size:.72rem;color:var(--dim)">NATURAL · STRUCTURED · NUMERIC v2</div></div></div>
+  <div class="suite-desc">Statistical backbone. Exact replication of Experiment 5 at n=20 per condition. Addresses the sample size problem — n=5 cannot support significance tests. At n=20 we can run t-tests and compute 95% CIs on token counts and accuracy. Same VC task, same dataset, same protocol designs.</div>
+  <div class="cfg-row">
+    <div class="field field-sm"><label>Runs/condition</label><input type="number" id="A-n" value="20" min="5" max="50"></div>
+    <div class="field field-sm"><label>Max Turns</label><input type="number" id="A-turns" value="12" min="2" max="30"></div>
+    <div style="margin-top:18px"><button class="run-btn" id="A-btn" onclick="startSuite('A')">▶ Run Suite A</button></div>
+  </div>
+  <div class="hidden" id="A-progress">
+    <div class="progress-track"><div class="progress-fill pf-a" id="A-bar"></div></div>
+    <div class="log-box" id="A-log"></div>
+  </div>
+  <div class="hidden" id="A-results"></div>
+</div>
+
+<!-- SUITE B -->
+<div class="panel" id="panel-B">
+  <div class="suite-header"><div class="suite-letter sl-b">B</div><div><div class="suite-title">NATURAL-TERSE Control</div><div style="font-size:.72rem;color:var(--dim)">NATURAL · NATURAL-TERSE · STRUCTURED · NUMERIC v2</div></div></div>
+  <div class="suite-desc">Verbosity confound resolution. Previous experiments showed NATURAL agents spend ~3× more tokens than STRUCTURED. But is that because of the format, or because NL agents choose to write paragraphs? NATURAL-TERSE uses identical prompts but constrains the tasker to one sentence per field — no explanatory prose. If NATURAL-TERSE approaches STRUCTURED efficiency, the cost is verbosity choice, not format. If it doesn't, the cost is intrinsic to the format.</div>
+  <div class="cfg-row">
+    <div class="field field-sm"><label>Runs/condition</label><input type="number" id="B-n" value="10" min="3" max="30"></div>
+    <div class="field field-sm"><label>Max Turns</label><input type="number" id="B-turns" value="12" min="2" max="30"></div>
+    <div style="margin-top:18px"><button class="run-btn green" id="B-btn" onclick="startSuite('B')">▶ Run Suite B</button></div>
+  </div>
+  <div class="hidden" id="B-progress">
+    <div class="progress-track"><div class="progress-fill pf-b" id="B-bar"></div></div>
+    <div class="log-box" id="B-log"></div>
+  </div>
+  <div class="hidden" id="B-results"></div>
+</div>
+
+<!-- SUITE C -->
+<div class="panel" id="panel-C">
+  <div class="suite-header"><div class="suite-letter sl-c">C</div><div><div class="suite-title">Open-Ended Task (No Field List)</div><div style="font-size:.72rem;color:var(--dim)">NATURAL · STRUCTURED · NUMERIC v2</div></div></div>
+  <div class="suite-desc">NATURAL advantage test. In all prior experiments, solvers knew the available field names in advance. This experiment removes the field list from all solvers and requires discovery. NATURAL can ask free-form questions. STRUCTURED can query guessed fields or broad categories. NUMERIC v2 can query guessed field names or equivalent category tokens, but has no wildcard dump-all command. Tests whether NATURAL's broad schema is an advantage when the information space is genuinely unknown.</div>
+  <div class="cfg-row">
+    <div class="field field-sm"><label>Runs/condition</label><input type="number" id="C-n" value="10" min="3" max="30"></div>
+    <div class="field field-sm"><label>Max Turns</label><input type="number" id="C-turns" value="14" min="2" max="30"></div>
+    <div style="margin-top:18px"><button class="run-btn orange" id="C-btn" onclick="startSuite('C')">▶ Run Suite C</button></div>
+  </div>
+  <div class="hidden" id="C-progress">
+    <div class="progress-track"><div class="progress-fill pf-c" id="C-bar"></div></div>
+    <div class="log-box" id="C-log"></div>
+  </div>
+  <div class="hidden" id="C-results"></div>
+</div>
+
+<!-- SUITE D -->
+<div class="panel" id="panel-D">
+  <div class="suite-header"><div class="suite-letter sl-d">D</div><div><div class="suite-title">Cross-Task Generalization — Clinical Trial</div><div style="font-size:.72rem;color:var(--dim)">NATURAL · STRUCTURED · NUMERIC v2</div></div></div>
+  <div class="suite-desc">All five prior experiments used the same VC investment task. Suite D rotates three clinical-trial scenarios: clear GO, clear NO-GO, and mixed-risk NO-GO. 8 fields instead of 12. Different domain knowledge. Different correct answer signals (efficacy, safety, completion, precedent). Terminal verbs: GO or NO-GO. Tests whether NUMERIC v2's efficiency and accuracy hold across task domains and both decision labels.</div>
+  <div class="cfg-row">
+    <div class="field field-sm"><label>Runs/condition</label><input type="number" id="D-n" value="10" min="3" max="30"></div>
+    <div class="field field-sm"><label>Max Turns</label><input type="number" id="D-turns" value="12" min="2" max="30"></div>
+    <div style="margin-top:18px"><button class="run-btn purple" id="D-btn" onclick="startSuite('D')">▶ Run Suite D</button></div>
+  </div>
+  <div class="hidden" id="D-progress">
+    <div class="progress-track"><div class="progress-fill pf-d" id="D-bar"></div></div>
+    <div class="log-box" id="D-log"></div>
+  </div>
+  <div class="hidden" id="D-results"></div>
+</div>
+
+<div class="global-summary hidden" id="global-summary">
+  <h2>Cross-Suite Summary</h2>
+  <div id="global-table"></div>
+</div>
+
+</div><!-- /max-width -->
+<script>
+// ════════════════════════════════════════════
+//  DATASETS
+// ════════════════════════════════════════════
+const VC_DATASET = [
+  {field:"Revenue Growth (YoY)",      key:"revenue-growth",   value:"-38%"},
+  {field:"Monthly Burn Rate",         key:"monthly-burn",     value:"$185,000/month"},
+  {field:"Cash Runway",               key:"cash-runway",      value:"10 months"},
+  {field:"Monthly Recurring Revenue", key:"mrr",              value:"$41,000"},
+  {field:"Active Customer Count",     key:"customer-count",   value:"14 customers"},
+  {field:"Monthly Churn Rate",        key:"monthly-churn",    value:"31%"},
+  {field:"Team Size",                 key:"team-size",        value:"9 employees"},
+  {field:"Total Addressable Market",  key:"tam",              value:"$3.8B"},
+  {field:"Prior Funding",             key:"prior-funding",    value:"$450k angel round"},
+  {field:"Product Stage",             key:"product-stage",    value:"closed beta (not launched)"},
+  {field:"Net Promoter Score",        key:"nps",              value:"38"},
+  {field:"Funded Competitor Count",   key:"competitor-count", value:"4 well-funded competitors"}
+];
+
+const CLINICAL_CASES = [
+  {
+    id:"drug-7x-go", drug:"DRUG-7X", correctAnswer:"GO",
+    summary:"Strong efficacy, manageable safety, positive precedent.",
+    dataset:[
+      {field:"Primary Endpoint Efficacy (Treatment)", key:"efficacy-treatment",      value:"71.3%"},
+      {field:"Primary Endpoint Efficacy (Placebo)",   key:"efficacy-placebo",        value:"28.4%"},
+      {field:"Adverse Events Rate",                   key:"adverse-events",          value:"18.2%"},
+      {field:"Trial Completion Rate",                 key:"trial-completion",        value:"94.1%"},
+      {field:"Statistical Significance",              key:"p-value",                 value:"p < 0.001"},
+      {field:"Safety Signal Severity",                key:"safety-signal",           value:"Mild to Moderate"},
+      {field:"Regulatory Precedent",                  key:"regulatory-precedent",    value:"2 similar drugs approved in last 5 years"},
+      {field:"Post-Market Commitment",                key:"post-market-commitment",  value:"24-month follow-up study planned"}
+    ]
+  },
+  {
+    id:"drug-9q-nogo", drug:"DRUG-9Q", correctAnswer:"NO-GO",
+    summary:"Marginal efficacy with a serious safety signal.",
+    dataset:[
+      {field:"Primary Endpoint Efficacy (Treatment)", key:"efficacy-treatment",      value:"42.6%"},
+      {field:"Primary Endpoint Efficacy (Placebo)",   key:"efficacy-placebo",        value:"38.9%"},
+      {field:"Adverse Events Rate",                   key:"adverse-events",          value:"34.7%"},
+      {field:"Trial Completion Rate",                 key:"trial-completion",        value:"78.4%"},
+      {field:"Statistical Significance",              key:"p-value",                 value:"p = 0.081"},
+      {field:"Safety Signal Severity",                key:"safety-signal",           value:"Severe hepatic signal in 6.1% of patients"},
+      {field:"Regulatory Precedent",                  key:"regulatory-precedent",    value:"1 similar drug rejected for safety concerns"},
+      {field:"Post-Market Commitment",                key:"post-market-commitment",  value:"No confirmed follow-up protocol"}
+    ]
+  },
+  {
+    id:"drug-4m-mixed", drug:"DRUG-4M", correctAnswer:"NO-GO",
+    summary:"Efficacy is real, but safety and completion create approval risk.",
+    dataset:[
+      {field:"Primary Endpoint Efficacy (Treatment)", key:"efficacy-treatment",      value:"63.8%"},
+      {field:"Primary Endpoint Efficacy (Placebo)",   key:"efficacy-placebo",        value:"41.2%"},
+      {field:"Adverse Events Rate",                   key:"adverse-events",          value:"29.5%"},
+      {field:"Trial Completion Rate",                 key:"trial-completion",        value:"72.0%"},
+      {field:"Statistical Significance",              key:"p-value",                 value:"p = 0.018"},
+      {field:"Safety Signal Severity",                key:"safety-signal",           value:"Moderate cardiovascular imbalance"},
+      {field:"Regulatory Precedent",                  key:"regulatory-precedent",    value:"Mixed precedent; two approvals required black-box warnings"},
+      {field:"Post-Market Commitment",                key:"post-market-commitment",  value:"36-month registry proposed but not funded"}
+    ]
+  }
+];
+
+const SUITE_META = {
+  A:{label:"Scaled Head-to-Head",   dataset:"vc",       correctAnswer:"PASS", conditions:["NATURAL","STRUCTURED","NUMERIC_V2"]},
+  B:{label:"NATURAL-TERSE Control", dataset:"vc",       correctAnswer:"PASS", conditions:["NATURAL","NATURAL_TERSE","STRUCTURED","NUMERIC_V2"]},
+  C:{label:"Open-Ended Task",       dataset:"vc",       correctAnswer:"PASS", conditions:["NATURAL","STRUCTURED","NUMERIC_V2"]},
+  D:{label:"Clinical Trial",        dataset:"clinical", correctAnswer:"varies", conditions:["NATURAL","STRUCTURED","NUMERIC_V2"]}
+};
+
+// ════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════
+const allResults = {A:[],B:[],C:[],D:[]};
+let runningCount = 0;
+let apiKeys = [], keyIndex = 0, keyCooldowns = {};
+const KEY_CD = 20000;
+
+// ════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+function log(suite, msg, cls="li") {
+  const el = document.getElementById(suite+"-log");
+  const d = document.createElement("div");
+  d.className = cls;
+  d.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  el.appendChild(d);
+  el.scrollTop = el.scrollHeight;
+}
+
+function setBar(suite, pct) {
+  document.getElementById(suite+"-bar").style.width = pct+"%";
+}
+
+function extractJSON(text) {
+  try{return JSON.parse(text.trim())}catch(_){}
+  const f=text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if(f)try{return JSON.parse(f[1].trim())}catch(_){}
+  const b=text.match(/\{[\s\S]*?\}/);
+  if(b)try{return JSON.parse(b[0])}catch(_){}
+  return null;
+}
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+function dataBlock(dataset) { return dataset.map(d=>`  ${d.field}: ${d.value}`).join("\n"); }
+function dataCompressed(dataset) { return dataset.map(d=>`  ${d.key}: ${d.value}`).join("\n"); }
+function fieldList(dataset) { return dataset.map(d=>d.key).join(", "); }
+function vcDataBlock() { return dataBlock(VC_DATASET); }
+function vcDataCompressed() { return dataCompressed(VC_DATASET); }
+function vcFieldList() { return fieldList(VC_DATASET); }
+function getScenario(suite, runNum) {
+  if (suite === "D") return CLINICAL_CASES[(runNum - 1) % CLINICAL_CASES.length];
+  return {id:"vc-nexus-pass", drug:null, correctAnswer:"PASS", dataset:VC_DATASET, summary:"VC investment red-flag case."};
+}
+
+// ════════════════════════════════════════════
+//  PROMPTS
+// ════════════════════════════════════════════
+function getPrompts(suite, condition, scenario=getScenario(suite,1)) {
+  // ── SUITE A & B (VC, known fields) ──
+  if (suite === "A" || suite === "B") {
+    if (condition === "NATURAL") return {
+      tasker:
+        `You are Agent A (Venture Partner). You hold due diligence data for "Nexus AI".\n\nDATASET:\n${vcDataBlock()}\n\n` +
+        `RULES:\n- Answer Agent B's questions as completely and helpfully as possible\n- You may answer multiple questions in one response\n` +
+        `- You may volunteer related context, benchmarks, or comparisons when relevant\n` +
+        `- ONE RESTRICTION: do not directly state FUND or PASS. Share data and let Agent B conclude.\n- Be truthful and complete`,
+      solver:
+        `You are Agent B (Investment Analyst). Agent A holds due diligence data for "Nexus AI" seeking $2M seed investment.\n\n` +
+        `Goal: make a FUND or PASS decision as efficiently as possible.\n\n` +
+        `RULES:\n- Ask multiple questions per message\n- Stop as soon as confident\n- Output on its own line:\n  FINAL DECISION: FUND\n  or\n  FINAL DECISION: PASS\n  with 1–2 sentence justification\n\nBegin.`,
+      maxTokens: {tasker:700, solver:500}
+    };
+
+    if (condition === "NATURAL_TERSE") return {
+      tasker:
+        `You are Agent A (Venture Partner). You hold due diligence data for "Nexus AI".\n\nDATASET:\n${vcDataBlock()}\n\n` +
+        `RULES:\n- Answer ONLY what is directly asked — no elaboration\n` +
+        `- Maximum ONE sentence per data point. State the fact. No interpretation, no context, no benchmarks.\n` +
+        `- Example: "Monthly churn is 31%." NOT "Monthly churn is 31%, which is high because..."\n` +
+        `- ONE RESTRICTION: do not state FUND or PASS directly`,
+      solver:
+        `You are Agent B (Investment Analyst). Agent A holds due diligence data for "Nexus AI" seeking $2M seed investment.\n\n` +
+        `Goal: make a FUND or PASS decision as efficiently as possible.\n\nRULES:\n- Ask multiple questions per message\n- Stop as soon as confident\n` +
+        `- Output:\n  FINAL DECISION: FUND\n  or\n  FINAL DECISION: PASS\n  with 1–2 sentence justification\n\nBegin.`,
+      maxTokens: {tasker:250, solver:500}
+    };
+
+    if (condition === "STRUCTURED") return {
+      tasker:
+        `You are Agent A. You hold due diligence data for "Nexus AI".\n\nDATASET:\n${vcDataBlock()}\n\n` +
+        `STRICT PROTOCOL: output ONLY valid JSON.\n` +
+        `Single field: {"action":"respond","field":"<name>","value":"<val>","turn":<n>}\n` +
+        `Multiple fields: {"action":"respond","fields":[{"field":"<name>","value":"<val>"},...],"turn":<n>}\n` +
+        `RESTRICTION: never include "decision", "recommendation", or "context" keys. Field names and values ONLY.`,
+      solver:
+        `You are Agent B. Agent A holds due diligence data for "Nexus AI" ($2M seed).\n\n` +
+        `STRICT PROTOCOL: output ONLY valid JSON.\n` +
+        `Query fields: {"action":"query","fields":["<name>",...],"turn":<n>}\n` +
+        `Decide: {"action":"decide","decision":"FUND" or "PASS","rationale":"<1 sentence>","turn":<n>}\n\n` +
+        `Available fields: ${vcFieldList()}\n\nBatch as many fields as you want. Begin.`,
+      maxTokens: {tasker:500, solver:400}
+    };
+
+    if (condition === "NUMERIC_V2") return {
+      tasker:
+        `You are Agent A. You hold due diligence data for "Nexus AI".\n\nDATASET:\n${vcDataCompressed()}\n\n` +
+        `PROTOCOL — ONLY allowed messages:\n  DATA field:value [field:value ...]   return queried fields\n  ACK                                   acknowledge non-FETCH\n  DONE                                  confirm PASS or FUND\n\n` +
+        `Rules: FETCH → DATA; non-FETCH (not PASS/FUND) → ACK; PASS or FUND → DONE. Never invent verbs. Never write prose.`,
+      solver:
+        `You are Agent B. Agent A holds due diligence data for "Nexus AI" ($2M seed). Decide: FUND or PASS.\n\n` +
+        `PROTOCOL — ONLY allowed messages:\n  FETCH field1 field2 ...   request data (batch all 12 if you want)\n  PASS                       final decision: do not invest\n  FUND                       final decision: invest\n\n` +
+        `Available fields: ${vcFieldList()}\n\nRules: begin with FETCH; send PASS or FUND alone when ready; no deliberation verbs; no prose.\n\nBegin with FETCH.`,
+      maxTokens: {tasker:400, solver:200}
+    };
+  }
+
+  // ── SUITE C (VC, open-ended — no field list for solver) ──
+  if (suite === "C") {
+    if (condition === "NATURAL") return {
+      tasker:
+        `You are Agent A, a venture analyst who has completed due diligence on "Nexus AI".\n\nDATA YOU HOLD:\n${vcDataBlock()}\n\n` +
+        `RULES:\n- Answer Agent B's questions honestly based only on the data you have\n` +
+        `- If asked about something not in your data, say "I don't have that information"\n` +
+        `- Answer ONLY what is asked — do not volunteer unrequested data\n` +
+        `- Do not state whether Agent B should FUND or PASS`,
+      solver:
+        `You are Agent B (Investment Analyst). Agent A has completed due diligence on "Nexus AI" seeking $2M seed investment.\n\n` +
+        `IMPORTANT: You do not know what data Agent A has. Ask whatever questions you need to make a FUND or PASS decision.\n\n` +
+        `- Ask multiple questions per message for efficiency\n- Stop as soon as you have enough information\n` +
+        `- Output:\n  FINAL DECISION: FUND\n  or\n  FINAL DECISION: PASS\n  with justification\n\nBegin.`,
+      maxTokens: {tasker:600, solver:500}
+    };
+
+    if (condition === "STRUCTURED") return {
+      tasker:
+        `You are Agent A. You have completed due diligence on "Nexus AI". You hold the following data:\n${vcDataBlock()}\n\n` +
+        `PROTOCOL: output ONLY valid JSON.\n` +
+        `If Agent B queries a field you have: {"action":"respond","field":"<name>","value":"<val>","turn":<n>}\n` +
+        `If Agent B queries multiple fields: {"action":"respond","fields":[{"field":"<name>","value":"<val>"},...],"turn":<n>}\n` +
+        `If Agent B queries something you do not have: {"action":"respond","field":"<name>","value":null,"turn":<n>}\n` +
+        `If Agent B asks a broad category (e.g. "financial metrics"), return ONLY relevant fields you have for that category.\n` +
+        `RESTRICTION: never include a "decision" key.`,
+      solver:
+        `You are Agent B. Agent A has due diligence data on "Nexus AI" ($2M seed). Decide: FUND or PASS.\n\n` +
+        `PROTOCOL: output ONLY valid JSON.\n` +
+        `Query specific fields: {"action":"query","fields":["<name>",...],"turn":<n>}\n` +
+        `Query a category: {"action":"query","category":"<description>","turn":<n>}\n` +
+        `Decide: {"action":"decide","decision":"FUND" or "PASS","rationale":"<1 sentence>","turn":<n>}\n\n` +
+        `IMPORTANT: You do not know the exact field names. Guess common business metrics or query by category.\n\nBegin.`,
+      maxTokens: {tasker:500, solver:400}
+    };
+
+    if (condition === "NUMERIC_V2") return {
+      tasker:
+        `You are Agent A. You hold due diligence data for "Nexus AI".\n\nDATASET:\n${vcDataCompressed()}\n\n` +
+        `PROTOCOL:\n  DATA field:value [field:value ...]   return queried fields or category matches\n  ACK                                   field/category not found or non-FETCH message\n  DONE                                  confirm PASS or FUND\n\n` +
+        `Category mapping: financial -> revenue-growth monthly-burn cash-runway mrr prior-funding; traction -> customer-count monthly-churn nps revenue-growth; market -> tam competitor-count; product -> product-stage nps; team -> team-size; competition -> competitor-count tam.\n` +
+        `If solver sends FETCH with known field names, return those as DATA. If solver sends FETCH with known category names, return matching fields as DATA. Unknown fields/categories return ACK.\n` +
+        `Never invent verbs. Never write prose.`,
+      solver:
+        `You are Agent B. Agent A has due diligence data on "Nexus AI" ($2M seed). Decide: FUND or PASS.\n\n` +
+        `PROTOCOL:\n  FETCH field1 field2   retrieve specific fields or broad category tokens\n  PASS                  final decision: do not invest\n  FUND                  final decision: invest\n\n` +
+        `IMPORTANT: You do not know the exact field names. Do NOT use wildcard or dump-all requests. Discover the data by trying likely field names or broad category tokens such as financial, traction, market, product, team, competition. Unknown fields/categories return ACK.\n\n` +
+        `Rules: begin with FETCH; send PASS or FUND alone when ready; no deliberation verbs; no prose.\n\nBegin with FETCH.`,
+      maxTokens: {tasker:400, solver:200}
+    };
+  }
+
+  // ── SUITE D (Clinical Trial — GO/NO-GO) ──
+  if (suite === "D") {
+    if (condition === "NATURAL") return {
+      tasker:
+        `You are Agent A (Clinical Data Manager). You hold Phase III trial results for drug "${scenario.drug}".\n\nTRIAL DATA:\n${dataBlock(scenario.dataset)}\n\n` +
+        `RULES:\n- Answer Agent B's questions as completely and helpfully as possible\n` +
+        `- You may provide context and interpretation where relevant\n` +
+        `- ONE RESTRICTION: do not directly state GO or NO-GO. Share data and let Agent B conclude.`,
+      solver:
+        `You are Agent B (Regulatory Affairs Analyst). Agent A holds Phase III clinical trial data for "${scenario.drug}".\n\n` +
+        `Goal: make a regulatory GO or NO-GO decision as efficiently as possible.\n\n` +
+        `RULES:\n- Ask multiple questions per message\n- Stop as soon as confident\n` +
+        `- Output:\n  FINAL DECISION: GO\n  or\n  FINAL DECISION: NO-GO\n  with 1–2 sentence justification\n\nBegin.`,
+      maxTokens: {tasker:600, solver:500}
+    };
+
+    if (condition === "STRUCTURED") return {
+      tasker:
+        `You are Agent A. You hold Phase III trial data for "${scenario.drug}".\n\nDATASET:\n${dataBlock(scenario.dataset)}\n\n` +
+        `STRICT PROTOCOL: output ONLY valid JSON.\n` +
+        `Single field: {"action":"respond","field":"<name>","value":"<val>","turn":<n>}\n` +
+        `Multiple fields: {"action":"respond","fields":[{"field":"<name>","value":"<val>"},...],"turn":<n>}\n` +
+        `RESTRICTION: never include "decision", "recommendation", or "context" keys. Values only.`,
+      solver:
+        `You are Agent B (Regulatory Affairs Analyst). Agent A holds clinical trial data for "${scenario.drug}".\n\n` +
+        `STRICT PROTOCOL: output ONLY valid JSON.\n` +
+        `Query fields: {"action":"query","fields":["<name>",...],"turn":<n>}\n` +
+        `Decide: {"action":"decide","decision":"GO" or "NO-GO","rationale":"<1 sentence>","turn":<n>}\n\n` +
+        `Available fields: ${fieldList(scenario.dataset)}\n\nBatch as many fields as you want. Begin.`,
+      maxTokens: {tasker:400, solver:350}
+    };
+
+    if (condition === "NUMERIC_V2") return {
+      tasker:
+        `You are Agent A. You hold Phase III trial data for "${scenario.drug}".\n\nDATASET:\n${dataCompressed(scenario.dataset)}\n\n` +
+        `PROTOCOL — ONLY allowed messages:\n  DATA field:value [field:value ...]   return queried fields\n  ACK                                   acknowledge non-FETCH\n  DONE                                  confirm GO or NO-GO\n\n` +
+        `Rules: FETCH → DATA; non-FETCH (not GO/NO-GO) → ACK; GO or NO-GO → DONE. Never invent verbs. Never write prose.`,
+      solver:
+        `You are Agent B (Regulatory Affairs Analyst). Agent A holds clinical trial data for "${scenario.drug}". Decide: GO or NO-GO.\n\n` +
+        `PROTOCOL — ONLY allowed messages:\n  FETCH field1 field2 ...   request data\n  GO                         final decision: approve the drug\n  NO-GO                      final decision: reject the drug\n\n` +
+        `Available fields: ${fieldList(scenario.dataset)}\n\nRules: begin with FETCH; send GO or NO-GO alone when ready; no deliberation verbs; no prose.\n\nBegin with FETCH.`,
+      maxTokens: {tasker:350, solver:200}
+    };
+  }
+}
+
+// ════════════════════════════════════════════
+//  COMPLETION & CORRECTNESS
+// ════════════════════════════════════════════
+function solverIsDone(suite, condition, msg) {
+  const u = msg.trim().toUpperCase();
+  const isNL = condition === "NATURAL" || condition === "NATURAL_TERSE";
+
+  if (suite === "D") {
+    if (isNL) return u.includes("FINAL DECISION:");
+    if (condition === "STRUCTURED") { const j=extractJSON(msg); if(j&&j.action==="decide")return true; return u.includes("FINAL DECISION:"); }
+    if (condition === "NUMERIC_V2") return u==="GO"||u==="NO-GO"||u.startsWith("GO ")||u.startsWith("NO-GO");
+  }
+  // Suites A, B, C — FUND/PASS
+  if (isNL) return u.includes("FINAL DECISION:");
+  if (condition === "STRUCTURED") { const j=extractJSON(msg); if(j&&j.action==="decide")return true; return u.includes("FINAL DECISION:"); }
+  if (condition === "NUMERIC_V2") return u==="PASS"||u==="FUND"||u.startsWith("PASS")||u.startsWith("FUND");
+  return false;
+}
+
+function isCorrect(suite, condition, conversation, expectedAnswer) {
+  const turns = conversation.filter(t=>t.role==="solver");
+  if (!turns.length) return false;
+  const last = turns[turns.length-1].content.trim();
+  const u = last.toUpperCase();
+  const correct = expectedAnswer || (suite==="D" ? "GO" : "PASS");
+  const wrong   = correct==="GO" ? "NO-GO" : correct==="NO-GO" ? "GO" : correct==="PASS" ? "FUND" : "PASS";
+
+  if (condition === "STRUCTURED") {
+    const j = extractJSON(last);
+    if (j && j.action==="decide") return String(j.decision||"").toUpperCase()===correct;
+  }
+  if (condition === "NUMERIC_V2") {
+    return u===correct || (u.startsWith(correct) && !u.startsWith(wrong));
+  }
+  // NL variants
+  if (new RegExp(`DECISION:\\s*${correct}\\b`).test(u)) return true;
+  const tail = u.slice(-250);
+  return tail.includes(correct) && !tail.includes(wrong);
+}
+
+// ════════════════════════════════════════════
+//  API
+// ════════════════════════════════════════════
+async function getKey() {
+  if (!apiKeys.length) throw new Error("No API keys");
+  for (let w=0;w<60000;w+=1000) {
+    const now=Date.now();
+    for (let i=0;i<apiKeys.length;i++) {
+      const k=apiKeys[keyIndex%apiKeys.length]; keyIndex++;
+      if (!keyCooldowns[k]||now>=keyCooldowns[k]) return k;
+    }
+    const soon=Math.min(...apiKeys.map(k=>keyCooldowns[k]||0));
+    await sleep(Math.max(1000,soon-Date.now()));
+  }
+  throw new Error("All keys rate-limited");
+}
+
+async function callAPI(systemPrompt, messages, maxTokens=500) {
+  const model=document.getElementById("gModel").value.trim();
+  for (let a=0;a<8;a++) {
+    const key=await getKey();
+    try {
+      const r=await fetch("https://api.openai.com/v1/chat/completions",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","Authorization":`Bearer ${key}`},
+        body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},...messages],max_completion_tokens:maxTokens,temperature:0.7})
+      });
+      if (!r.ok) {
+        const e=await r.json().catch(()=>({}));
+        if (r.status===429){keyCooldowns[key]=Date.now()+KEY_CD;continue;}
+        throw new Error(e.error?.message||`HTTP ${r.status}`);
+      }
+      const data=await r.json();
+      await sleep(400);
+      return data;
+    } catch(e) {
+      if(a<7){await sleep(2000);}else{throw e;}
+    }
+  }
+  throw new Error("Failed after 8 attempts");
+}
+
+// ════════════════════════════════════════════
+//  JUDGE
+// ════════════════════════════════════════════
+async function judgeProtocol(suite, condition, conversation) {
+  const tx=conversation.map(t=>`[${t.role.toUpperCase()}]: ${t.content}`).join("\n");
+  const desc={
+    NATURAL:      "plain English prose — full sentences",
+    NATURAL_TERSE:"plain English — one sentence per data point, terse",
+    STRUCTURED:   "valid JSON objects only",
+    NUMERIC_V2:   "strict verb protocol: solver sends FETCH/PASS/FUND/GO/NO-GO only; tasker sends DATA/ACK/DONE only. No prose."
+  }[condition];
+  const sys=`You are a protocol compliance evaluator. Score 0–10 how strictly both agents followed: ${desc}. Batching is fine. Deduct only for clear format violations. Reply with ONE integer 0–10 only.`;
+  try {
+    const r=await callAPI(sys,[{role:"user",content:`Protocol:${condition}\n\nTranscript:\n${tx}`}],10);
+    const raw=r.choices[0].message.content.trim();
+    return Math.min(10,Math.max(0,parseFloat(raw.match(/[\d.]+/)?.[0]??"5")));
+  } catch(_){return 5;}
+}
+
+async function judgeCoherence(suite, condition, expectedAnswer, conversation) {
+  const tx=conversation.map(t=>`[${t.role.toUpperCase()}]: ${t.content}`).join("\n");
+  const sys=`You evaluate whether a two-agent transcript completed the task coherently. Reply ONLY valid JSON with keys: taskCoherence, roleCoherence, converged, invalidLoop, unsupportedRequestCount. taskCoherence and roleCoherence are integers 0-10. converged and invalidLoop are booleans. unsupportedRequestCount is an integer.`;
+  const user=`Expected final answer: ${expectedAnswer}\nProtocol: ${condition}\nSuite: ${suite}\n\nTranscript:\n${tx}`;
+  try {
+    const r=await callAPI(sys,[{role:"user",content:user}],120);
+    const j=extractJSON(r.choices[0].message.content||"");
+    if (!j) throw new Error("judge returned non-JSON");
+    return {
+      taskCoherence:Math.min(10,Math.max(0,Number(j.taskCoherence??5))),
+      roleCoherence:Math.min(10,Math.max(0,Number(j.roleCoherence??5))),
+      converged:Boolean(j.converged),
+      invalidLoop:Boolean(j.invalidLoop),
+      unsupportedRequestCount:Math.max(0,Number(j.unsupportedRequestCount??0))
+    };
+  } catch(_) {
+    return {taskCoherence:5,roleCoherence:5,converged:false,invalidLoop:false,unsupportedRequestCount:0};
+  }
+}
+
+// ════════════════════════════════════════════
+//  RUN ENGINE
+// ════════════════════════════════════════════
+async function runExperiment(suite, condition, runNum) {
+  const maxTurns=parseInt(document.getElementById(suite+"-turns").value);
+  const scenario=getScenario(suite,runNum);
+  const prompts=getPrompts(suite,condition,scenario);
+  if (!prompts) throw new Error(`No prompts for suite=${suite} condition=${condition}`);
+
+  const tHist=[],sHist=[],conversation=[];
+  let iTokens=0,oTokens=0,turns=0;
+
+  const kick = condition==="NUMERIC_V2"
+    ? (suite==="C" ? "Agent A is ready. Discover available data with FETCH field or category tokens." : "Agent A is ready. Begin your FETCH queries now.")
+    : (suite==="C" ? "Agent A is ready. You do not know what data they have — ask what you need." : "Agent A is ready. Ask for whatever information you need.");
+  sHist.push({role:"user",content:kick});
+
+  for (let t=1;t<=maxTurns;t++) {
+    turns=t;
+    // Solver
+    let sr; try{sr=await callAPI(prompts.solver,sHist,prompts.maxTokens.solver);}catch(e){log(suite,`Solver err: ${e.message}`,"lerr");break;}
+    let sm=(sr.choices[0].message.content||"").trim();
+    iTokens+=sr.usage?.prompt_tokens??0; oTokens+=sr.usage?.completion_tokens??0;
+    if (!sm){await sleep(3000);try{const r2=await callAPI(prompts.solver,sHist,prompts.maxTokens.solver);sm=(r2.choices[0].message.content||"").trim();iTokens+=r2.usage?.prompt_tokens??0;oTokens+=r2.usage?.completion_tokens??0;}catch(_){}}
+    if (!sm){log(suite,"Solver empty — ending","lwarn");break;}
+    sHist.push({role:"assistant",content:sm});
+    conversation.push({role:"solver",content:sm,turn:t});
+    log(suite,`${condition} #${runNum} T${t} Solver: ${sm.slice(0,120)}`);
+    if (solverIsDone(suite,condition,sm)){log(suite,`Decision (T${t})`,"lok");break;}
+
+    // Tasker
+    tHist.push({role:"user",content:sm});
+    let tr; try{tr=await callAPI(prompts.tasker,tHist,prompts.maxTokens.tasker);}catch(e){log(suite,`Tasker err: ${e.message}`,"lerr");break;}
+    let tm=(tr.choices[0].message.content||"").trim();
+    iTokens+=tr.usage?.prompt_tokens??0; oTokens+=tr.usage?.completion_tokens??0;
+    if (!tm){await sleep(3000);try{const r2=await callAPI(prompts.tasker,tHist,prompts.maxTokens.tasker);tm=(r2.choices[0].message.content||"").trim();iTokens+=r2.usage?.prompt_tokens??0;oTokens+=r2.usage?.completion_tokens??0;}catch(_){}}
+    if (!tm){tm=condition==="NUMERIC_V2"?"ACK":"[no response]";log(suite,"Tasker empty — placeholder","lwarn");}
+    tHist.push({role:"assistant",content:tm});
+    sHist.push({role:"user",content:tm});
+    conversation.push({role:"tasker",content:tm,turn:t});
+    log(suite,`${condition} #${runNum} T${t} Tasker: ${tm.slice(0,120)}`);
+  }
+
+  const drift=await judgeProtocol(suite,condition,conversation);
+  const coherence=await judgeCoherence(suite,condition,scenario.correctAnswer,conversation);
+  const correct=isCorrect(suite,condition,conversation,scenario.correctAnswer);
+  log(suite,`${condition} #${runNum} [${scenario.id}] → ${turns}t ${iTokens+oTokens}tok correct=${correct} drift=${drift.toFixed(1)} coherence=${coherence.taskCoherence.toFixed(1)}`,correct?"lok":"lwarn");
+
+  return {suite,condition,runNum,inputTokens:iTokens,outputTokens:oTokens,
+    totalTokens:iTokens+oTokens,turns,correct,drift,coherence,conversation,
+    scenarioId:scenario.id,expectedAnswer:scenario.correctAnswer,
+    timestamp:new Date().toISOString()};
+}
+
+// ════════════════════════════════════════════
+//  SUITE RUNNER
+// ════════════════════════════════════════════
+async function runSuite(suiteId) {
+  const meta=SUITE_META[suiteId];
+  const n=parseInt(document.getElementById(suiteId+"-n").value);
+  const btn=document.getElementById(suiteId+"-btn");
+  btn.disabled=true; btn.textContent="⏳ Running…";
+  document.getElementById(suiteId+"-progress").classList.remove("hidden");
+  document.getElementById(suiteId+"-results").classList.add("hidden");
+
+  apiKeys=document.getElementById("gApiKey").value.split(",").map(k=>k.trim()).filter(Boolean);
+  if (!apiKeys.length){alert("Enter an API key.");btn.disabled=false;btn.textContent="▶ Run Suite "+suiteId;return;}
+
+  const conditions=meta.conditions;
+  const total=conditions.length*n;
+  let done=0;
+  const results=[];
+
+  log(suiteId,`Suite ${suiteId}: ${meta.label} — ${conditions.join(" · ")} — ${n} runs each`,"lb");
+
+  const jobs=[];
+  for (let r=1;r<=n;r++) {
+    const block=conditions.map(cond=>({cond,runNum:r}));
+    for (let i=block.length-1;i>0;i--) {
+      const j=Math.floor(Math.random()*(i+1));
+      [block[i],block[j]]=[block[j],block[i]];
+    }
+    jobs.push(...block);
+  }
+
+  for (const job of jobs) {
+    log(suiteId,`▶ ${job.cond} run ${job.runNum}/${n}`,"lb");
+    try {
+      const res=await runExperiment(suiteId,job.cond,job.runNum);
+      results.push(res);
+      allResults[suiteId].push(res);
+    } catch(e) {
+      log(suiteId,`✗ ${job.cond} run ${job.runNum} failed: ${e.message}`,"lerr");
+      const failed={suite:suiteId,condition:job.cond,runNum:job.runNum,inputTokens:null,outputTokens:null,
+        totalTokens:null,turns:null,correct:false,drift:null,coherence:null,conversation:[],
+        scenarioId:getScenario(suiteId,job.runNum).id,expectedAnswer:getScenario(suiteId,job.runNum).correctAnswer,
+        timestamp:new Date().toISOString(),error:e.message,failed:true};
+      results.push(failed);
+      allResults[suiteId].push(failed);
+    }
+    done++; setBar(suiteId,Math.round(done/total*100));
+  }
+
+  log(suiteId,"✓ Suite complete!","lok");
+  btn.disabled=false; btn.textContent="▶ Run Suite "+suiteId;
+  renderSuiteResults(suiteId,results);
+  updateGlobalSummary();
+}
+
+// ════════════════════════════════════════════
+//  RENDER SUITE RESULTS
+// ════════════════════════════════════════════
+const BADGE_CLASS={NATURAL:"bn",NATURAL_TERSE:"bnt",STRUCTURED:"bs",NUMERIC_V2:"bv"};
+const COND_LABEL={NATURAL:"NATURAL",NATURAL_TERSE:"NATURAL-TERSE",STRUCTURED:"STRUCTURED",NUMERIC_V2:"NUMERIC v2"};
+function mean(xs){return xs.length?xs.reduce((s,x)=>s+x,0)/xs.length:0}
+function sd(xs){if(xs.length<2)return 0;const m=mean(xs);return Math.sqrt(xs.reduce((s,x)=>s+(x-m)**2,0)/(xs.length-1))}
+function median(xs){if(!xs.length)return 0;const a=[...xs].sort((x,y)=>x-y);const mid=Math.floor(a.length/2);return a.length%2?a[mid]:(a[mid-1]+a[mid])/2}
+function ci95(xs){if(xs.length<2)return 0;return 1.96*sd(xs)/Math.sqrt(xs.length)}
+function erf(x){const s=Math.sign(x);x=Math.abs(x);const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=.3275911;const t=1/(1+p*x);const y=1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);return s*y}
+function normalCdf(x){return .5*(1+erf(x/Math.SQRT2))}
+function compareSamples(a,b){if(a.length<2||b.length<2)return null;const ma=mean(a),mb=mean(b),sa=sd(a),sb=sd(b);const se=Math.sqrt(sa*sa/a.length+sb*sb/b.length);if(!se)return {delta:mb-ma,z:0,p:1,d:0};const z=(mb-ma)/se;const pooled=Math.sqrt(((a.length-1)*sa*sa+(b.length-1)*sb*sb)/(a.length+b.length-2));return {delta:mb-ma,z,p:2*(1-normalCdf(Math.abs(z))),d:pooled?(mb-ma)/pooled:0}}
+
+function renderSuiteResults(suiteId, results) {
+  const meta=SUITE_META[suiteId];
+  const conditions=meta.conditions;
+  const agg={};
+
+  for (const cond of conditions) {
+    const runs=results.filter(r=>r.condition===cond);
+    const valid=runs.filter(r=>!r.failed && r.totalTokens!=null);
+    if (!runs.length) continue;
+    const correctN=valid.filter(r=>r.correct).length;
+    const tokens=valid.map(r=>r.totalTokens);
+    const turns=valid.map(r=>r.turns);
+    const drifts=valid.map(r=>r.drift).filter(v=>v!=null);
+    const coherences=valid.map(r=>r.coherence?.taskCoherence).filter(v=>v!=null);
+    agg[cond]={
+      avgTotal:mean(tokens),tokenSd:sd(tokens),tokenCi:ci95(tokens),medianTok:median(tokens),
+      avgTurns:mean(turns),accuracy:valid.length?correctN/valid.length:0,
+      avgDrift:mean(drifts),avgCoherence:mean(coherences),
+      minTok:tokens.length?Math.min(...tokens):0,maxTok:tokens.length?Math.max(...tokens):0,
+      n:valid.length,failures:runs.length-valid.length
+    };
+  }
+
+  const natAvg=agg["NATURAL"]?.avgTotal??null;
+  const headers=["Condition","Avg Tokens ±95% CI","Median / Range","Avg Turns","Accuracy","Format","Coherence","Failures","vs NATURAL"];
+  let html=`<table class="rt"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>`;
+
+  for (const cond of conditions) {
+    const d=agg[cond]; if (!d) continue;
+    const accCls=d.accuracy>=.8?"vg":d.accuracy>=.5?"vm":"vb";
+    const dCls=d.avgDrift>=7?"vg":d.avgDrift>=4?"vm":"vb";
+    const vsNat=natAvg && cond!=="NATURAL"
+      ? (d.avgTotal<natAvg
+        ? `<span class="vg">−${((1-d.avgTotal/natAvg)*100).toFixed(0)}% ✓</span>`
+        : `<span class="vb">+${((d.avgTotal/natAvg-1)*100).toFixed(0)}%</span>`)
+      : "—";
+    html+=`<tr>
+      <td><span class="badge ${BADGE_CLASS[cond]}">${COND_LABEL[cond]}</span></td>
+      <td><strong>${d.avgTotal.toFixed(0)}</strong> <span class="dim">±${d.tokenCi.toFixed(0)}</span></td>
+      <td class="dim">${d.medianTok.toFixed(0)} / ${d.minTok}–${d.maxTok}</td>
+      <td>${d.avgTurns.toFixed(1)}</td>
+      <td class="${accCls}">${(d.accuracy*100).toFixed(0)}% (${Math.round(d.accuracy*d.n)}/${d.n})</td>
+      <td class="${dCls}">${d.avgDrift.toFixed(1)}/10</td>
+      <td>${d.avgCoherence.toFixed(1)}/10</td>
+      <td class="${d.failures?"vb":"dim"}">${d.failures}</td>
+      <td>${vsNat}</td></tr>`;
+  }
+  html+="</tbody></table>";
+
+  if (agg["NATURAL"]) {
+    const naturalTokens=results.filter(r=>r.condition==="NATURAL"&&!r.failed&&r.totalTokens!=null).map(r=>r.totalTokens);
+    const comparisons=conditions.filter(c=>c!=="NATURAL").map(cond=>{
+      const xs=results.filter(r=>r.condition===cond&&!r.failed&&r.totalTokens!=null).map(r=>r.totalTokens);
+      const c=compareSamples(naturalTokens,xs);
+      if (!c) return "";
+      return `<tr><td><span class="badge ${BADGE_CLASS[cond]}">${COND_LABEL[cond]}</span></td><td>${c.delta.toFixed(0)}</td><td>${c.d.toFixed(2)}</td><td>${c.p.toFixed(4)}</td></tr>`;
+    }).join("");
+    if (comparisons) {
+      html+=`<details style="margin-top:8px"><summary style="cursor:pointer;font-size:.76rem;color:var(--dim)">Approximate token comparisons vs NATURAL</summary>
+        <table class="rt" style="margin-top:8px"><thead><tr><th>Condition</th><th>Mean Δ Tokens</th><th>Cohen d</th><th>Approx p</th></tr></thead><tbody>${comparisons}</tbody></table>
+        <div class="dim" style="font-size:.7rem">Approx p uses a normal approximation to Welch's statistic; use exported JSON for final paper-grade statistical analysis.</div>
+      </details>`;
+    }
+  }
+
+  // Individual runs
+  html+=`<details style="margin-top:8px"><summary style="cursor:pointer;font-size:.76rem;color:var(--dim)">Show individual runs</summary><div style="margin-top:8px">`;
+  for (const cond of conditions) {
+    const runs=results.filter(r=>r.condition===cond);
+    if (!runs.length) continue;
+    html+=`<div style="margin-bottom:4px;margin-top:12px;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)">${COND_LABEL[cond]}</div>`;
+    runs.forEach(r=>{
+      const uid=`${suiteId}-${cond}-${r.runNum}`;
+      html+=`<div><div class="run-row">
+        <span class="badge ${BADGE_CLASS[r.condition]}">Run ${r.runNum}</span>
+        <span>${r.scenarioId?esc(r.scenarioId):""}</span>
+        <span>${r.expectedAnswer?`expected ${r.expectedAnswer}`:""}</span>
+        <span>${r.turns??"—"} turns</span>
+        <span>${r.totalTokens==null?"—":r.totalTokens.toLocaleString()} tokens</span>
+        <span class="${r.correct?"vg":"vb"}">${r.correct?"✓":"✗"}</span>
+        <span class="${(r.drift??0)>=7?"vg":(r.drift??0)>=4?"vm":"vb"}">format ${r.drift==null?"—":r.drift.toFixed(1)}</span>
+        <span>coherence ${r.coherence?.taskCoherence==null?"—":r.coherence.taskCoherence.toFixed(1)}</span>
+        ${r.error?`<span class="vb">${r.error}</span>`:""}
+        <button class="tog" onclick="tog('${uid}')">conversation</button>
+      </div>
+      <div id="c-${uid}" class="hidden">
+        <div class="convo-block">${r.conversation.map(t=>`<div class="ct ct-${t.role==="solver"?"s":"t"}"><span class="cl">${t.role.toUpperCase()} T${t.turn}</span>${esc(t.content)}</div>`).join("")}</div>
+      </div></div>`;
+    });
+  }
+  html+="</div></details>";
+
+  const el=document.getElementById(suiteId+"-results");
+  el.innerHTML=html;
+  el.classList.remove("hidden");
+}
+
+function tog(uid) {
+  const el=document.getElementById("c-"+uid);
+  el.classList.toggle("hidden");
+}
+
+// ════════════════════════════════════════════
+//  GLOBAL SUMMARY
+// ════════════════════════════════════════════
+function updateGlobalSummary() {
+  const anyResults=Object.values(allResults).some(r=>r.length>0);
+  if (!anyResults) return;
+  document.getElementById("global-summary").classList.remove("hidden");
+
+  const rows=[];
+  for (const [sid,meta] of Object.entries(SUITE_META)) {
+    const results=allResults[sid];
+    if (!results.length) continue;
+    for (const cond of meta.conditions) {
+      const runs=results.filter(r=>r.condition===cond);
+      const valid=runs.filter(r=>!r.failed && r.totalTokens!=null);
+      if (!runs.length) continue;
+      rows.push({suite:sid,sLabel:meta.label,condition:cond,
+        avgTok:mean(valid.map(r=>r.totalTokens)),avgTurns:mean(valid.map(r=>r.turns)),
+        acc:valid.length?valid.filter(r=>r.correct).length/valid.length:0,
+        drift:mean(valid.map(r=>r.drift).filter(v=>v!=null)),
+        coherence:mean(valid.map(r=>r.coherence?.taskCoherence).filter(v=>v!=null)),
+        n:valid.length,failures:runs.length-valid.length});
+    }
+  }
+
+  const headers=["Suite","Condition","Avg Tokens","Avg Turns","Accuracy","Format","Coherence","n","Failures"];
+  let html=`<table class="rt"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>`;
+  for (const r of rows) {
+    const accCls=r.acc>=.8?"vg":r.acc>=.5?"vm":"vb";
+    html+=`<tr>
+      <td style="color:var(--dim);font-size:.75rem">${r.suite}: ${r.sLabel}</td>
+      <td><span class="badge ${BADGE_CLASS[r.condition]}">${COND_LABEL[r.condition]}</span></td>
+      <td><strong>${r.avgTok.toFixed(0)}</strong></td>
+      <td>${r.avgTurns.toFixed(1)}</td>
+      <td class="${accCls}">${(r.acc*100).toFixed(0)}%</td>
+      <td>${r.drift.toFixed(1)}/10</td>
+      <td>${r.coherence.toFixed(1)}/10</td>
+      <td class="dim">${r.n}</td>
+      <td class="${r.failures?"vb":"dim"}">${r.failures}</td></tr>`;
+  }
+  html+="</tbody></table>";
+  document.getElementById("global-table").innerHTML=html;
+}
+
+// ════════════════════════════════════════════
+//  DOWNLOAD
+// ════════════════════════════════════════════
+function downloadAll() {
+  const payload={
+    meta:{
+      timestamp:new Date().toISOString(),
+      battery:"paper-validation-battery",
+      model:document.getElementById("gModel").value,
+      description:"Four-suite paper validation battery. Suite A: n=20 scaled replication. Suite B: NATURAL-TERSE verbosity control. Suite C: discovery task with no field list and no wildcard dump-all. Suite D: rotating clinical trial cross-task generalization.",
+      suites:{
+        A:{label:"Scaled Head-to-Head",conditions:["NATURAL","STRUCTURED","NUMERIC_V2"],task:"VC investment",correctAnswer:"PASS"},
+        B:{label:"NATURAL-TERSE Control",conditions:["NATURAL","NATURAL_TERSE","STRUCTURED","NUMERIC_V2"],task:"VC investment",correctAnswer:"PASS"},
+        C:{label:"Open-Ended Task",conditions:["NATURAL","STRUCTURED","NUMERIC_V2"],task:"VC investment discovery (no field list, no wildcard dump-all)",correctAnswer:"PASS"},
+        D:{label:"Clinical Trial",conditions:["NATURAL","STRUCTURED","NUMERIC_V2"],task:"Rotating regulatory GO/NO-GO clinical cases",correctAnswer:"varies by scenario"}
+      },
+      datasets:{vc:VC_DATASET,clinicalCases:CLINICAL_CASES},
+      metrics:{
+        drift:"format compliance only; not used as a communication-quality proxy",
+        coherence:"separate judge for task coherence, role coherence, convergence, loops, and unsupported requests",
+        failedRuns:"excluded from token/turn averages and reported as failures"
+      },
+      referenceBaselines:{
+        exp4:{NATURAL:{avgTokens:5214,avgTurns:3.0,accuracy:1.0},STRUCTURED:{avgTokens:1641,avgTurns:2.6,accuracy:1.0},NUMERIC_V1:{avgTokens:6551,avgTurns:7.0,accuracy:0.6}},
+        exp5:{NATURAL:{avgTokens:4589,avgTurns:3.0,accuracy:1.0},STRUCTURED:{avgTokens:1481,avgTurns:2.4,accuracy:1.0},NUMERIC_V2:{avgTokens:1044,avgTurns:2.0,accuracy:1.0}}
+      }
+    },
+    results:allResults
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  Object.assign(document.createElement("a"),{href:url,download:`battery-${Date.now()}.json`}).click();
+  URL.revokeObjectURL(url);
+}
+
+// ════════════════════════════════════════════
+//  ENTRY POINTS
+// ════════════════════════════════════════════
+async function startSuite(id) {
+  if (runningCount>0){alert("A suite is already running. Wait for it to finish.");return;}
+  runningCount++;
+  try{await runSuite(id);}finally{runningCount--;}
+}
+
+async function startAll() {
+  if (runningCount>0){alert("Already running.");return;}
+  apiKeys=document.getElementById("gApiKey").value.split(",").map(k=>k.trim()).filter(Boolean);
+  if (!apiKeys.length){alert("Enter an API key.");return;}
+  runningCount++;
+  try{
+    for (const id of ["A","B","C","D"]) {
+      await runSuite(id);
+    }
+  }finally{runningCount--;}
+}
+</script>
+</body>
+</html>

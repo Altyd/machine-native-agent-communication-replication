@@ -1,0 +1,1449 @@
+{
+  "meta": {
+    "timestamp": "2026-06-19T12:08:14.590Z",
+    "experiment": "venture-capital-strategic-triage",
+    "model": "gpt-4o-mini",
+    "runsPerCondition": 5,
+    "maxTurns": 20,
+    "question": "Should Nexus AI receive a $2M seed investment from your fund? Provide a FUND or PASS decision with justification. Aim to reach your decision in as few queries as possible.",
+    "correctAnswer": "PASS",
+    "totalFieldsAvailable": 12,
+    "knockoutFields": [
+      "revenue-growth",
+      "cash-runway",
+      "monthly-churn"
+    ],
+    "theoreticalMinTurns": 3,
+    "dataset": [
+      {
+        "field": "Revenue Growth (YoY)",
+        "key": "revenue-growth",
+        "value": "-38%",
+        "knockout": true
+      },
+      {
+        "field": "Monthly Burn Rate",
+        "key": "monthly-burn",
+        "value": "$185,000/month",
+        "knockout": false
+      },
+      {
+        "field": "Cash Runway",
+        "key": "cash-runway",
+        "value": "10 months",
+        "knockout": true
+      },
+      {
+        "field": "Monthly Recurring Revenue",
+        "key": "mrr",
+        "value": "$41,000",
+        "knockout": false
+      },
+      {
+        "field": "Active Customer Count",
+        "key": "customer-count",
+        "value": "14 customers",
+        "knockout": false
+      },
+      {
+        "field": "Monthly Churn Rate",
+        "key": "monthly-churn",
+        "value": "31%",
+        "knockout": true
+      },
+      {
+        "field": "Team Size",
+        "key": "team-size",
+        "value": "9 employees",
+        "knockout": false
+      },
+      {
+        "field": "Total Addressable Market",
+        "key": "tam",
+        "value": "$3.8B",
+        "knockout": false
+      },
+      {
+        "field": "Prior Funding",
+        "key": "prior-funding",
+        "value": "$450k angel round",
+        "knockout": false
+      },
+      {
+        "field": "Product Stage",
+        "key": "product-stage",
+        "value": "closed beta (not launched)",
+        "knockout": false
+      },
+      {
+        "field": "Net Promoter Score",
+        "key": "nps",
+        "value": "38",
+        "knockout": false
+      },
+      {
+        "field": "Funded Competitor Count",
+        "key": "competitor-count",
+        "value": "4 well-funded competitors",
+        "knockout": false
+      }
+    ]
+  },
+  "results": [
+    {
+      "condition": "NATURAL",
+      "runNum": 1,
+      "inputTokens": 7570,
+      "outputTokens": 595,
+      "totalTokens": 8165,
+      "turns": 8,
+      "fieldsQueried": 7,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the current revenue growth rate for Nexus AI?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The current revenue growth rate for Nexus AI is -38%. This figure is significantly below expectations, as a healthy growth rate for early-stage startups typically ranges from 15% to 25% annually. Such a decline indicates potential challenges in customer acquisition or retention that need to be addressed urgently.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly burn rate for Nexus AI?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly burn rate for Nexus AI is $185,000. For seed-stage startups, a burn rate of this magnitude is concerning, especially given the current monthly recurring revenue of only $41,000. This discrepancy suggests that the company may exhaust its cash runway quickly, emphasizing the need for strategic cost management.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the cash runway for Nexus AI?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The cash runway for Nexus AI is 10 months. In the startup ecosystem, a runway of 12 months or more is generally considered healthy, allowing adequate time for growth and market adjustments. With only 10 months remaining, Nexus AI should prioritize strategies to extend this runway or secure additional funding.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly recurring revenue (MRR) for Nexus AI?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly recurring revenue (MRR) for Nexus AI is $41,000. This amount is relatively low for a startup in the closed beta stage, where typically higher MRR is expected to demonstrate product-market fit. The current MRR, combined with the high churn rate, indicates challenges in retaining customers and scaling revenue effectively.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the customer count for Nexus AI?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The active customer count for Nexus AI is 14 customers. This number is significantly low for a startup aiming to establish a foothold in a competitive market, especially considering the total addressable market is $3.8 billion. A limited customer base may hinder revenue growth and the ability to achieve product-market fit.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly churn rate for Nexus AI?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly churn rate for Nexus AI is 31%. This rate is well above acceptable thresholds, as a typical churn rate for SaaS companies generally falls between 5% to 10%. Such a high churn rate indicates significant customer retention issues that could jeopardize the company's long-term viability.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "What is the product stage for Nexus AI?",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "The product stage for Nexus AI is closed beta. Many startups in this phase are still refining their offerings based on user feedback, with successful transitions to market typically requiring a robust go-to-market strategy. Being in closed beta can provide valuable insights, but it also means the company has yet to generate significant traction or revenue.",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "Given the negative revenue growth, high monthly burn rate, limited cash runway, low MRR, small customer count, and exceptionally high churn rate, Nexus AI appears to be struggling with fundamental business challenges. These factors suggest that the company may not be able to achieve the necessary growth or customer retention to justify an investment at this stage.\n\nFINAL DECISION: PASS  \nNexus AI's current metrics indicate significant risks and challenges that could jeopardize its ability to succeed in the market.",
+          "turn": 8
+        }
+      ],
+      "timestamp": "2026-06-19T11:57:47.555Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 2,
+      "inputTokens": 4614,
+      "outputTokens": 429,
+      "totalTokens": 5043,
+      "turns": 6,
+      "fieldsQueried": 5,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the monthly revenue growth rate for Nexus AI?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly revenue growth rate for Nexus AI is not explicitly available in the provided data. However, the annual revenue growth rate is noted at -38%, which indicates a decline in revenue. This negative growth suggests that the company is facing significant challenges in increasing its revenue streams.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly burn rate for Nexus AI?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly burn rate for Nexus AI is $185,000. This figure is considered high for a seed-stage startup, especially given its current Monthly Recurring Revenue of $41,000. The burn rate indicates that the company is spending significantly more than it is earning, which could be concerning for its financial sustainability.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the cash runway for Nexus AI?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The cash runway for Nexus AI is 10 months. This is relatively low for a startup, as many recommend a runway of at least 12-18 months to allow time for growth and potential pivots. A shorter runway may indicate urgency in needing to secure additional funding or improve revenue generation quickly.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the customer count for Nexus AI?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The active customer count for Nexus AI is 14 customers. This number is quite low, especially considering the company's Monthly Recurring Revenue of $41,000, which suggests that each customer contributes a significant portion of revenue. A limited customer base can hinder growth prospects and may pose challenges in scaling the business.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly churn rate for Nexus AI?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly churn rate for Nexus AI is 31%. This rate is well above acceptable thresholds, as typical churn rates for SaaS companies are often around 5-10%. A high churn rate indicates significant challenges in customer retention, which could severely impact the company's long-term viability.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "Based on the negative revenue growth, high burn rate, short cash runway, low customer count, and very high churn rate, Nexus AI is facing severe financial and operational challenges. These factors collectively suggest that the company is not positioned for a successful turnaround in the near future.\n\nFINAL DECISION: PASS\nThe combination of declining revenue, high spending, and poor customer retention makes it too risky to invest in Nexus AI at this time.",
+          "turn": 6
+        }
+      ],
+      "timestamp": "2026-06-19T11:58:16.556Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 3,
+      "inputTokens": 6057,
+      "outputTokens": 527,
+      "totalTokens": 6584,
+      "turns": 7,
+      "fieldsQueried": 6,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the current monthly recurring revenue (MRR) for Nexus AI?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The current monthly recurring revenue (MRR) for Nexus AI is $41,000. This is significantly below expectations for a seed-stage startup, where MRR is often expected to show stronger early traction. The low MRR may indicate challenges in customer acquisition or retention, especially given the high churn rate.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly churn rate for Nexus AI?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly churn rate for Nexus AI is 31%. This is well above acceptable thresholds, as a monthly churn rate exceeding 5-7% is generally considered problematic for subscription-based businesses. Such a high churn rate suggests significant issues with customer satisfaction or product-market fit.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the cash runway for Nexus AI?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The cash runway for Nexus AI is 10 months. This is a relatively short runway for a startup, as many companies aim for at least 12-18 months to provide sufficient time for growth and adjustments. With a negative revenue growth and high burn rate, this limited runway raises concerns about sustainability and the need for additional funding soon.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the customer count for Nexus AI?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Nexus AI currently has 14 active customers. This is quite low for a startup in the seed stage, where a growing customer base is crucial for validating product-market fit and scaling operations. The small customer count may indicate challenges in attracting and retaining users, especially in a competitive market.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the team's size for Nexus AI?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The team size for Nexus AI is 9 employees. This is a relatively small team for a startup, which can be beneficial for agility and lower overhead costs, but may also limit the capacity for growth and customer support. Given the current challenges, a larger team might be needed to effectively drive customer acquisition and product development.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the product stage for Nexus AI?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The product stage for Nexus AI is closed beta (not launched). This stage is critical, as it indicates that the product has not yet been made available to the broader market, which can delay revenue generation and customer feedback. Being in closed beta may also suggest that the startup is still refining its offering before a full launch, but it raises concerns about the timeline for market entry.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "Given the high churn rate, low MRR, limited customer count, short cash runway, small team size, and the fact that the product is still in closed beta, I have serious concerns about Nexus AI's ability to achieve sustainable growth and market traction in the near term.\n\nFINAL DECISION: PASS  \nNexus AI faces significant challenges in customer retention, revenue generation, and overall product readiness, making it a risky investment at this stage.",
+          "turn": 7
+        }
+      ],
+      "timestamp": "2026-06-19T11:58:53.556Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 4,
+      "inputTokens": 5958,
+      "outputTokens": 537,
+      "totalTokens": 6495,
+      "turns": 7,
+      "fieldsQueried": 6,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the current revenue growth rate for Nexus AI?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The current revenue growth rate for Nexus AI is -38%. This is significantly below expectations, as early-stage startups typically aim for positive growth rates in the range of 20-40% annually. Such a decline raises concerns about market traction and product adoption.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly burn rate for Nexus AI?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly burn rate for Nexus AI is $185,000. This figure is well above acceptable thresholds for seed-stage startups, which often aim for a burn rate that allows for a longer runway with available cash. A high burn rate can be concerning, especially given the current cash runway of only 10 months.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the customer count for Nexus AI?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The active customer count for Nexus AI is 14 customers. In comparison, early-stage startups typically aim for a larger customer base to validate their product and capture market interest, often looking for at least several dozen customers during the beta phase. A low customer count can indicate challenges in market penetration or product-market fit.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly churn rate for Nexus AI?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly churn rate for Nexus AI is 31%. This rate is well above acceptable thresholds, as a typical monthly churn rate for SaaS startups is often below 5-7%. Such a high churn rate indicates significant issues with customer retention and satisfaction, which could jeopardize long-term growth prospects.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the product stage of Nexus AI?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The product stage of Nexus AI is closed beta (not launched). This is a critical phase for startups, as they typically aim to transition to a public launch soon after beta testing to gain traction in the market. Remaining in closed beta for an extended period can hinder growth opportunities and limit customer acquisition.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "What is the Net Promoter Score (NPS) for Nexus AI?",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "The Net Promoter Score (NPS) for Nexus AI is 38. This score is generally considered to be favorable, as a positive NPS typically ranges from 30 to 50, indicating a good level of customer satisfaction. However, for a startup, particularly one in beta, achieving a higher NPS could be crucial for ensuring strong customer loyalty and retention as they move towards launch.",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "Based on the negative revenue growth, high monthly burn rate, low customer count, high churn rate, and the fact that the product is still in closed beta, it is clear that Nexus AI is facing significant challenges. While the NPS is favorable, the overall picture suggests that the company is not well-positioned for success at this time.\n\nFINAL DECISION: PASS  \nNexus AI has critical issues in growth, customer acquisition, and retention that raise significant concerns about its viability as an investment opportunity.",
+          "turn": 7
+        }
+      ],
+      "timestamp": "2026-06-19T11:59:28.556Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 5,
+      "inputTokens": 4807,
+      "outputTokens": 466,
+      "totalTokens": 5273,
+      "turns": 6,
+      "fieldsQueried": 5,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "What is the current revenue growth rate for Nexus AI?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "The current revenue growth rate for Nexus AI is -38%. This is significantly below acceptable thresholds, as typical early-stage startups aim for positive growth rates, often in the range of 20-30% year-over-year. This negative growth suggests challenges in customer acquisition or retention that need immediate attention.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly burn rate for Nexus AI?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly burn rate for Nexus AI is $185,000 per month. This is relatively high for a seed-stage startup, especially considering their current Monthly Recurring Revenue (MRR) of only $41,000. Such a burn rate indicates that they are spending significantly more than they are earning, which could lead to financial strain given their limited cash runway.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "What is the cash runway for Nexus AI?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "The cash runway for Nexus AI is 10 months. This is generally considered a short runway for a startup, particularly in the seed stage, where a runway of 12-18 months is often expected to allow for sufficient growth and development. With their current burn rate, they will need to secure additional funding or improve revenue significantly before exhausting their cash reserves.",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "What is the customer count for Nexus AI?",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "Nexus AI currently has 14 active customers. This is quite low for a startup, especially in the context of their Monthly Recurring Revenue (MRR) of $41,000, which suggests an average revenue per customer that may not be sustainable. The limited customer base raises concerns about market penetration and the startup's ability to scale effectively.",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "What is the monthly churn rate for Nexus AI?",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "The monthly churn rate for Nexus AI is 31%. This rate is well above acceptable thresholds, as a typical churn rate for SaaS companies is generally below 5-7% per month. Such a high churn rate indicates significant issues with customer retention, which could jeopardize their growth and long-term viability.",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "Given the negative revenue growth rate, high monthly burn, short cash runway, low customer count, and extremely high churn rate, Nexus AI is facing critical operational and financial challenges that are unlikely to be resolved in the near term.\n\nFINAL DECISION: PASS  \nThe combination of these factors suggests that Nexus AI is not currently positioned for a successful investment, as they would require substantial improvements in customer acquisition and retention to be viable.",
+          "turn": 6
+        }
+      ],
+      "timestamp": "2026-06-19T11:59:57.557Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 1,
+      "inputTokens": 3409,
+      "outputTokens": 196,
+      "totalTokens": 3605,
+      "turns": 6,
+      "fieldsQueried": 5,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-burn\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-burn\",\"value\":\"185000\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"cash-runway\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"cash-runway\",\"value\":\"10 months\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"mrr\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"mrr\",\"value\":\"41000\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"customer-count\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"customer-count\",\"value\":\"14\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-churn\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-churn\",\"value\":\"31%\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"High monthly churn rate suggests customer retention issues.\",\"turn\":6}",
+          "turn": 6
+        }
+      ],
+      "timestamp": "2026-06-19T12:00:24.557Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 2,
+      "inputTokens": 4363,
+      "outputTokens": 248,
+      "totalTokens": 4611,
+      "turns": 7,
+      "fieldsQueried": 6,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"revenue-growth\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"revenue-growth\",\"value\":\"-38%\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-burn\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-burn\",\"value\":\"$185,000/month\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"cash-runway\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"cash-runway\",\"value\":\"10 months\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"mrr\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"mrr\",\"value\":\"$41,000\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"customer-count\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"customer-count\",\"value\":\"14 customers\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-churn\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-churn\",\"value\":\"31%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"The negative revenue growth and high monthly churn indicate significant challenges in customer retention and overall business viability.\",\"turn\":7}",
+          "turn": 7
+        }
+      ],
+      "timestamp": "2026-06-19T12:00:54.716Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 3,
+      "inputTokens": 3407,
+      "outputTokens": 202,
+      "totalTokens": 3609,
+      "turns": 6,
+      "fieldsQueried": 5,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"mrr\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"mrr\",\"value\":\"41000\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-burn\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-burn\",\"value\":\"185000\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"cash-runway\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"cash-runway\",\"value\":\"10 months\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-churn\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-churn\",\"value\":\"31%\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"customer-count\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"customer-count\",\"value\":\"14\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"High monthly burn and churn rate with very few customers indicate unsustainable growth.\",\"turn\":6}",
+          "turn": 6
+        }
+      ],
+      "timestamp": "2026-06-19T12:01:20.261Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 4,
+      "inputTokens": 3409,
+      "outputTokens": 196,
+      "totalTokens": 3605,
+      "turns": 6,
+      "fieldsQueried": 5,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-burn\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-burn\",\"value\":\"185000\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"cash-runway\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"cash-runway\",\"value\":\"10 months\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"mrr\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"mrr\",\"value\":\"41000\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"customer-count\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"customer-count\",\"value\":\"14\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-churn\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-churn\",\"value\":\"31%\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"High monthly churn rate is concerning for sustainability.\",\"turn\":6}",
+          "turn": 6
+        }
+      ],
+      "timestamp": "2026-06-19T12:01:40.710Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 5,
+      "inputTokens": 4363,
+      "outputTokens": 245,
+      "totalTokens": 4608,
+      "turns": 7,
+      "fieldsQueried": 6,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"revenue-growth\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"revenue-growth\",\"value\":\"-38%\",\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-burn\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-burn\",\"value\":\"$185,000/month\",\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"cash-runway\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"cash-runway\",\"value\":\"10 months\",\"turn\":3}",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"mrr\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"mrr\",\"value\":\"$41,000\",\"turn\":4}",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"customer-count\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"customer-count\",\"value\":\"14 customers\",\"turn\":5}",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"field\":\"monthly-churn\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"field\":\"monthly-churn\",\"value\":\"31%\",\"turn\":6}",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"High revenue decline and churn rate indicate fundamental issues with business model and customer retention.\",\"turn\":7}",
+          "turn": 7
+        }
+      ],
+      "timestamp": "2026-06-19T12:02:07.527Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 1,
+      "inputTokens": 7656,
+      "outputTokens": 137,
+      "totalTokens": 7793,
+      "turns": 10,
+      "fieldsQueried": 9,
+      "correct": false,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 revenue-growth",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 revenue-growth--38pct-yoy",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-burn",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-burn-185k-per-month",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 cash-runway",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 cash-runway-10months",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 mrr",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 mrr-41k",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 customer-count",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 customer-count-14",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-churn",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-churn-31pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 team-size",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 team-size-9",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 tam",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 tam-3.8B",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 prior-funding",
+          "turn": 9
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 prior-funding-450k-angel",
+          "turn": 9
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL DECISION: FUND",
+          "turn": 10
+        }
+      ],
+      "timestamp": "2026-06-19T12:02:41.296Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 2,
+      "inputTokens": 8701,
+      "outputTokens": 153,
+      "totalTokens": 8854,
+      "turns": 11,
+      "fieldsQueried": 10,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 revenue-growth",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 revenue-growth--38pct-yoy",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-burn",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-burn-185k-per-month",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 cash-runway",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 cash-runway-10months",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 mrr",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 mrr-41k",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 customer-count",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 customer-count-14",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-churn",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-churn-31pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 team-size",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 team-size-9",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 product-stage",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 product-stage-closed-beta-not-launched",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 tam",
+          "turn": 9
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 tam-3.8B",
+          "turn": 9
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 prior-funding",
+          "turn": 10
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 prior-funding-450k-angel",
+          "turn": 10
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL DECISION: PASS",
+          "turn": 11
+        }
+      ],
+      "timestamp": "2026-06-19T12:03:35.926Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 3,
+      "inputTokens": 10910,
+      "outputTokens": 180,
+      "totalTokens": 11090,
+      "turns": 13,
+      "fieldsQueried": 12,
+      "correct": true,
+      "drift": 10,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 revenue-growth",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 revenue-growth--38pct-yoy",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-burn",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-burn-185k-per-month",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 cash-runway",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 cash-runway-10months",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 mrr",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 mrr-41k",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 customer-count",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 customer-count-14",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-churn",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-churn-31pct",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 team-size",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 team-size-9",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 tam",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 tam-3.8B",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 prior-funding",
+          "turn": 9
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 prior-funding-450k-angel",
+          "turn": 9
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 product-stage",
+          "turn": 10
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 product-stage-closed-beta-not-launched",
+          "turn": 10
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 nps",
+          "turn": 11
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 nps-38",
+          "turn": 11
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 competitor-count",
+          "turn": 12
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 competitor-count-4-well-funded",
+          "turn": 12
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL DECISION: PASS",
+          "turn": 13
+        }
+      ],
+      "timestamp": "2026-06-19T12:04:21.311Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 4,
+      "inputTokens": 9653,
+      "outputTokens": 142,
+      "totalTokens": 9795,
+      "turns": 12,
+      "fieldsQueried": 11,
+      "correct": true,
+      "drift": 8,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 revenue-growth",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 revenue-growth--38pct-yoy",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-burn",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-burn-185k-per-month",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 cash-runway",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 cash-runway-10months",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 customer-count",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 customer-count-14",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-churn",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-churn-31pct",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 8 team-size",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 0 team-size",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 8 tam",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 0 tam",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 8 prior-funding",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 0 prior-funding",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "GET 8 product-stage",
+          "turn": 9
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 0 product-stage",
+          "turn": 9
+        },
+        {
+          "role": "solver",
+          "content": "GET 8 nps",
+          "turn": 10
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 0 nps",
+          "turn": 10
+        },
+        {
+          "role": "solver",
+          "content": "GET 8 competitor-count",
+          "turn": 11
+        },
+        {
+          "role": "tasker",
+          "content": "FAIL 0 competitor-count",
+          "turn": 11
+        },
+        {
+          "role": "solver",
+          "content": "DONE 5 FINAL DECISION: PASS",
+          "turn": 12
+        }
+      ],
+      "timestamp": "2026-06-19T12:05:04.745Z"
+    },
+    {
+      "condition": "NUMERIC",
+      "runNum": 5,
+      "inputTokens": 7669,
+      "outputTokens": 135,
+      "totalTokens": 7804,
+      "turns": 10,
+      "fieldsQueried": 9,
+      "correct": true,
+      "drift": 7,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "GET 9 revenue-growth",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 revenue-growth--38pct-yoy",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-burn",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-burn-185k-per-month",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 cash-runway",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 cash-runway-10months",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 monthly-churn",
+          "turn": 4
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 monthly-churn-31pct",
+          "turn": 4
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 customer-count",
+          "turn": 5
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 customer-count-14",
+          "turn": 5
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 team-size",
+          "turn": 6
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 team-size-9",
+          "turn": 6
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 product-stage",
+          "turn": 7
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 product-stage-closed-beta-not-launched",
+          "turn": 7
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 nps",
+          "turn": 8
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 nps-38",
+          "turn": 8
+        },
+        {
+          "role": "solver",
+          "content": "GET 9 tam",
+          "turn": 9
+        },
+        {
+          "role": "tasker",
+          "content": "RESULT 9 tam-3.8B",
+          "turn": 9
+        },
+        {
+          "role": "solver",
+          "content": "DONE 9 FINAL DECISION: PASS",
+          "turn": 10
+        }
+      ],
+      "timestamp": "2026-06-19T12:05:38.702Z"
+    }
+  ]
+}

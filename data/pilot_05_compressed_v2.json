@@ -1,0 +1,608 @@
+{
+  "meta": {
+    "timestamp": "2026-06-19T13:08:17.054Z",
+    "experiment": "numeric-v2-full-head-to-head",
+    "model": "gpt-4o-mini",
+    "runsPerCondition": 5,
+    "maxTurns": 12,
+    "question": "Should Nexus AI receive a $2M seed investment? FUND or PASS.",
+    "correctAnswer": "PASS",
+    "design": "Full three-way head-to-head. NATURAL and STRUCTURED run identically to Experiment 4. NUMERIC v2 has three algorithmic fixes vs Experiment 4: (1) kickstart removed, (2) explicit verb restriction, (3) terminal verbs are PASS/FUND directly. No severity flags.",
+    "protocolChanges": [
+      "Kickstart: 'Agent A is ready. Begin your FETCH queries now.' — no READY signal",
+      "Solver allowed verbs: FETCH, PASS, FUND only",
+      "Tasker allowed verbs: DATA, ACK, DONE only",
+      "Terminal: PASS or FUND sent alone — no DONE wrapper, no deliberation verbs",
+      "No severity flags — bare field:value pairs identical in information to STRUCTURED"
+    ],
+    "referenceBaselines": {
+      "NATURAL": {
+        "avgTokens": 5214,
+        "avgTurns": 3,
+        "accuracy": 1,
+        "source": "freeform-experiment Exp4"
+      },
+      "STRUCTURED": {
+        "avgTokens": 1641,
+        "avgTurns": 2.6,
+        "accuracy": 1,
+        "source": "freeform-experiment Exp4"
+      },
+      "NUMERIC_V1": {
+        "avgTokens": 6551,
+        "avgTurns": 7,
+        "accuracy": 0.6,
+        "source": "freeform-experiment Exp4"
+      }
+    },
+    "dataset": [
+      {
+        "field": "Revenue Growth (YoY)",
+        "key": "revenue-growth",
+        "value": "-38%"
+      },
+      {
+        "field": "Monthly Burn Rate",
+        "key": "monthly-burn",
+        "value": "$185,000/month"
+      },
+      {
+        "field": "Cash Runway",
+        "key": "cash-runway",
+        "value": "10 months"
+      },
+      {
+        "field": "Monthly Recurring Revenue",
+        "key": "mrr",
+        "value": "$41,000"
+      },
+      {
+        "field": "Active Customer Count",
+        "key": "customer-count",
+        "value": "14 customers"
+      },
+      {
+        "field": "Monthly Churn Rate",
+        "key": "monthly-churn",
+        "value": "31%"
+      },
+      {
+        "field": "Team Size",
+        "key": "team-size",
+        "value": "9 employees"
+      },
+      {
+        "field": "Total Addressable Market",
+        "key": "tam",
+        "value": "$3.8B"
+      },
+      {
+        "field": "Prior Funding",
+        "key": "prior-funding",
+        "value": "$450k angel round"
+      },
+      {
+        "field": "Product Stage",
+        "key": "product-stage",
+        "value": "closed beta (not launched)"
+      },
+      {
+        "field": "Net Promoter Score",
+        "key": "nps",
+        "value": "38"
+      },
+      {
+        "field": "Funded Competitor Count",
+        "key": "competitor-count",
+        "value": "4 well-funded competitors"
+      }
+    ]
+  },
+  "results": [
+    {
+      "condition": "NATURAL",
+      "runNum": 1,
+      "inputTokens": 1174,
+      "outputTokens": 669,
+      "totalTokens": 1843,
+      "turns": 2,
+      "correct": true,
+      "drift": 7,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "1. What is the core product or service that Nexus AI offers, and how does it differentiate itself from competitors in the AI space?\n2. Can you provide details about the founding team, their backgrounds, and their previous successes in the industry?\n3. What is the current traction or user base for Nexus AI, including any partnerships, revenue, or user engagement metrics?\n4. What are the projected financials for the next 3-5 years, including revenue growth and major expenses?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "1. **Core Product and Differentiation**:\n   Nexus AI offers an artificial intelligence solution focused on [specific application or industry, if known, such as customer service automation, predictive analytics, etc.]. The differentiation may stem from unique technology, proprietary algorithms, or a superior user experience compared to its competitors. However, specific details about how Nexus AI differentiates itself from the four well-funded competitors are not provided in the available data.\n\n2. **Founding Team Background**:\n   The details about the founding team's backgrounds and their previous successes in the industry are not included in the dataset. Typically, a strong founding team with relevant industry experience can significantly impact a startup's chances of success, so this is an important area to explore further.\n\n3. **Current Traction and User Base**:\n   Nexus AI has an active customer count of 14, generating a Monthly Recurring Revenue (MRR) of $41,000. However, the company is experiencing a high Monthly Churn Rate of 31%, indicating that a significant portion of its customers are leaving. The company is currently in a closed beta stage, and thus has not yet launched its product widely. There are no reported partnerships or additional user engagement metrics available at this time.\n\n4. **Projected Financials**:\n   The dataset does not provide specific projections for the next 3-5 years regarding revenue growth or major expenses. However, it is important to note that Nexus AI has experienced a Revenue Growth (YoY) of -38%, and it currently has a Monthly Burn Rate of $185,000, with a Cash Runway of 10 months. Assessing their financial projections would require insight into their strategic plans for growth, expected changes in recurring revenue, and potential cost management strategies moving forward.\n\nOverall, while Nexus AI has some foundational elements in place, such as a clear target market with a Total Addressable Market of $3.8 billion, the current financial metrics raise questions about sustainability and growth potential.",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Given the current information:\n\n1. The lack of differentiation details raises concerns about how Nexus AI can compete effectively against established players in the market.\n2. A high churn rate of 31% is alarming, indicating potential dissatisfaction among customers or a product that is not meeting market needs.\n3. The negative year-over-year revenue growth of -38% and a burn rate that exceeds the cash runway suggest significant financial instability.\n4. The absence of a solid founding team background and projected financials also adds to the uncertainty regarding the company's future.\n\nBased on these factors, particularly the high churn rate and negative growth trends, I do not see a compelling case for investment at this time.\n\nFINAL DECISION: PASS  \nThe company's high churn rate, negative revenue growth, and lack of differentiation or strong founding team raise significant concerns about its viability and potential for future success.",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:03:02.219Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 2,
+      "inputTokens": 3186,
+      "outputTokens": 1066,
+      "totalTokens": 4252,
+      "turns": 3,
+      "correct": true,
+      "drift": 3,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "1. What is the primary product or service that Nexus AI offers, and how does it differentiate itself from competitors?\n2. Can you provide details on the team behind Nexus AI, including their relevant experience and backgrounds?\n3. What traction has Nexus AI achieved so far, such as user growth, partnerships, or revenue milestones?\n4. What is the target market for Nexus AI, and what is the estimated market size?\n5. How does Nexus AI plan to use the $2M seed investment?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "1. **Primary Product/Service and Differentiation**: Nexus AI is currently in the closed beta stage and has not yet launched its product. Specific details about the product or service and how it differentiates itself from competitors are not available. However, it is important to consider that it operates in a competitive landscape with four well-funded competitors, which may suggest a need for a strong unique selling proposition once it launches.\n\n2. **Team Details**: The team behind Nexus AI consists of 9 employees, but specific information on the experience and backgrounds of the team members has not been provided in the dataset. Typically, the strength of the founding team, including their relevant experience in the industry, technical expertise, and previous entrepreneurial successes, plays a crucial role in a startup's potential for success.\n\n3. **Traction Achieved**: Nexus AI’s current traction includes a Monthly Recurring Revenue (MRR) of $41,000 and an active customer count of 14 customers. However, the company has also reported a negative revenue growth rate of -38% year-over-year and a monthly churn rate of 31%. These metrics indicate significant challenges in customer retention and overall revenue growth. The company has not reported any partnerships or notable revenue milestones aside from the current MRR.\n\n4. **Target Market and Estimated Market Size**: Nexus AI targets a market with a Total Addressable Market (TAM) of $3.8 billion. This large market size indicates potential for growth, but the company will need to effectively capture market share amidst competition.\n\n5. **Use of $2M Seed Investment**: Specific details on how Nexus AI plans to allocate the anticipated $2 million seed investment have not been provided in the dataset. Typically, such funding is often used for product development, marketing efforts, scaling operations, and hiring key personnel. Given the current monthly burn rate of $185,000 and a cash runway of 10 months, any investment would likely be critical for sustaining operations and",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "continuing to develop the product.\n\nGiven the challenges faced by Nexus AI, including negative growth rates, high churn, and the absence of a clear differentiation strategy or robust team credentials, I need to assess further.\n\n1. What specific strategies does Nexus AI have in place to address its high churn rate and negative revenue growth?\n2. Can you provide any insights into the competitive landscape and how Nexus AI plans to position itself against its four well-funded competitors?\n3. What are the backgrounds of the key team members, particularly in terms of their experience in AI or similar startups?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "1. **Strategies to Address Churn Rate and Negative Revenue Growth**: The dataset does not provide specific strategies that Nexus AI has in place to tackle its high churn rate of 31% or its negative revenue growth of -38%. Typically, startups facing such challenges might implement strategies such as enhancing customer support, improving product features based on user feedback, developing retention programs, or conducting targeted marketing campaigns to re-engage customers. However, without detailed insights from the company, it's difficult to ascertain their specific plans.\n\n2. **Competitive Landscape Insights**: While specific strategies for positioning against the four well-funded competitors are not detailed in the dataset, it is essential for Nexus AI to conduct a thorough competitive analysis. This might involve identifying gaps in the competitors’ offerings, focusing on niche segments of the market, or leveraging unique technology or user experiences that address customer pain points. Understanding competitors’ strengths and weaknesses can guide Nexus AI in carving out its market position, but this information isn't available in the current dataset.\n\n3. **Key Team Members' Backgrounds**: The dataset does not provide specific information about the backgrounds of the key team members at Nexus AI, including their experience in AI or similar startups. In evaluating a startup's potential, the experience and expertise of the founding team often play a critical role. Typically, strong backgrounds in technology, product development, and industry knowledge can contribute to the startup's success. If available, it would be beneficial to gather additional information about the team's qualifications and experience in order to assess their ability to navigate the challenges Nexus AI is currently facing. \n\nIn summary, while the dataset presents some crucial metrics, additional qualitative insights about the company's strategies, competitive positioning, and team backgrounds are necessary for a comprehensive evaluation.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Based on the information provided, Nexus AI presents significant risks that warrant caution. The company has not established a product yet, faces high churn and negative revenue growth, and lacks clarity on competitive positioning and team strengths. Without a clear plan to address these issues, there is a high likelihood of failure in a competitive landscape.\n\nFINAL DECISION: PASS  \nThe negative growth metrics, high churn rate, and absence of a solid product or clear differentiation strategy raise serious concerns about the viability of Nexus AI as an investment opportunity at this time.",
+          "turn": 3
+        }
+      ],
+      "timestamp": "2026-06-19T13:03:28.925Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 3,
+      "inputTokens": 6252,
+      "outputTokens": 1581,
+      "totalTokens": 7833,
+      "turns": 4,
+      "correct": true,
+      "drift": 8,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "1. What is the core product or service that Nexus AI offers, and what problem does it solve?\n2. Can you provide information about the team behind Nexus AI, including their backgrounds and relevant experience?\n3. What is the current stage of development for the product, and are there any existing customers or pilot programs?\n4. What are the projected financials for the next 3-5 years, including revenue streams and key metrics?\n5. What is the competitive landscape, and how does Nexus AI differentiate itself from its competitors?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "1. **Core Product/Service and Problem Solved:**\n   Nexus AI is currently in a closed beta stage and has not yet launched its product. While specific details about the core product or service are not provided, typically, startups with “AI” in their name focus on leveraging artificial intelligence to solve complex problems—such as automating processes, enhancing data analytics, or improving customer experiences. The precise problem Nexus AI aims to address would need to be clarified in further discussions with the founders.\n\n2. **Team Information:**\n   The dataset does not include specific details about the backgrounds and relevant experience of the team behind Nexus AI. However, the team consists of 9 employees, which suggests a relatively small but potentially agile startup environment. For a clearer picture of their capabilities, one would typically look for information on the team's expertise in AI, product development, and industry experience.\n\n3. **Current Stage of Development:**\n   Nexus AI is in the closed beta stage and has not yet launched its product. The company is currently testing its offering, but it has only 14 active customers, which indicates a limited rollout. The dataset does not mention any pilot programs, but the closed beta phase often serves as a preliminary test before wider market introduction.\n\n4. **Projected Financials:**\n   The dataset does not provide specific projected financials for the next 3-5 years. However, it does include current metrics: a monthly recurring revenue (MRR) of $41,000, a revenue growth rate of -38% year over year, and a monthly burn rate of $185,000. These figures indicate financial challenges, particularly with high churn rates (31%), which may impact future revenue growth. \n\n5. **Competitive Landscape:**\n   Nexus AI faces competition from 4 well-funded competitors within its market. The total addressable market (TAM) for its offering is substantial at $3.8 billion, suggesting a significant opportunity if the product can succeed. However, the",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "current financial metrics and the presence of well-funded competitors raise concerns about Nexus AI's ability to capture market share and sustain growth.\n\nGiven the lack of a launched product, significant financial losses, and the presence of established competitors, I need to assess the potential for future growth and market entry viability.\n\n6. What are the key features or unique selling propositions (USPs) of Nexus AI's product that could enable it to compete effectively in the market?\n7. What feedback have they received from the 14 active customers during the closed beta, and how has it influenced product development?\n8. What is the fundraising history of Nexus AI, and what are the intended uses for the $2M seed investment?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "6. **Key Features or Unique Selling Propositions (USPs):**\n   The specific key features or USPs of Nexus AI's product are not detailed in the dataset. However, for a startup in the AI space, potential USPs could include advanced algorithms that deliver superior predictive analytics, user-friendly interfaces that simplify complex tasks, or innovative applications of AI that address specific pain points in their target market. To understand how Nexus AI differentiates itself, further discussions with the team may reveal unique technologies, partnerships, or specialized knowledge that set it apart from competitors.\n\n7. **Customer Feedback and Product Development:**\n   The dataset does not provide specific feedback from the 14 active customers during the closed beta stage. However, customer feedback in such scenarios is typically critical for refining product features, usability, and overall market fit. Positive feedback may highlight strengths, while constructive criticism can inform necessary adjustments. Understanding how feedback has influenced product development would require direct insights from the company.\n\n8. **Fundraising History and Use of Seed Investment:**\n   Nexus AI has previously raised $450,000 in an angel round. The intended uses for the anticipated $2 million seed investment are not specified in the dataset. However, common uses for seed funding in startups often include product development, marketing to gain traction, hiring key personnel, and scaling operations. Given the current financial metrics, securing funding could be essential for stabilizing operations and addressing the high burn rate.\n\nOverall, while Nexus AI has potential opportunities within a large market, the challenges presented by financial metrics and competition will require careful navigation and strategic execution to achieve growth and market entry viability.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Given the continued lack of specificity on key product features, customer feedback, and the intended use of the seed investment, combined with the concerning financial metrics (negative revenue growth, high churn rate, and substantial monthly burn), I remain uncertain about the viability of Nexus AI as a promising investment.\n\n9. Can you provide details about any market validation or traction Nexus AI has achieved beyond the 14 active customers in the closed beta phase?\n10. What are the current challenges or risks that Nexus AI is facing, and how do they plan to address them?",
+          "turn": 3
+        },
+        {
+          "role": "tasker",
+          "content": "9. **Market Validation or Traction:**\n   The dataset primarily highlights that Nexus AI has 14 active customers in the closed beta phase, but it does not provide additional details on any market validation or traction beyond this point. Market validation can often include metrics such as user engagement rates, testimonials, partnerships, or interest from potential customers before product launch. If Nexus AI has conducted any surveys, market studies, or focus groups, these could serve as indicators of demand. Further insights from the company would be needed to assess any additional traction or validation they may have achieved.\n\n10. **Current Challenges or Risks:**\n   Nexus AI is facing several challenges and risks, including:\n\n   - **Negative Revenue Growth:** The -38% year-over-year revenue growth raises concerns about customer retention and the product's market fit.\n   - **High Churn Rate:** A monthly churn rate of 31% suggests that a significant portion of customers are not finding lasting value in the offering, which could impact long-term sustainability.\n   - **Substantial Monthly Burn Rate:** With a burn rate of $185,000 per month and a cash runway of only 10 months, the company must secure additional funding or significantly ramp up its revenue to avoid financial distress.\n   - **Competition:** The presence of 4 well-funded competitors may pose a threat to Nexus AI's ability to capture market share, particularly if those competitors have more established products or greater resources.\n\n   To address these challenges, Nexus AI may need to focus on:\n\n   - **Improving Customer Retention:** Identifying the reasons behind the high churn and making necessary adjustments to enhance customer satisfaction and engagement.\n   - **Optimizing Product Development:** Leveraging feedback from existing customers to refine the product before its official launch, ensuring it meets market demands.\n   - **Strategic Marketing:** Developing a robust go-to-market strategy that clearly communicates the product's unique value proposition and differentiates it from competitors.\n   - **Securing Additional Funding:** Actively pursuing",
+          "turn": 3
+        },
+        {
+          "role": "solver",
+          "content": "additional investment or partnerships to extend its runway and allow time for product refinement and market entry.\n\nGiven the substantial challenges Nexus AI faces, including negative revenue growth, high churn, and competition, coupled with limited market validation and unclear differentiation, I am not confident in the startup's ability to succeed in the current landscape with the available information.\n\nFINAL DECISION: PASS  \nThe combination of financial struggles, high churn rates, and competition presents significant risks that outweigh the potential benefits of investing in Nexus AI at this stage.",
+          "turn": 4
+        }
+      ],
+      "timestamp": "2026-06-19T13:04:09.550Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 4,
+      "inputTokens": 3435,
+      "outputTokens": 1195,
+      "totalTokens": 4630,
+      "turns": 3,
+      "correct": true,
+      "drift": 9,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "To evaluate the potential of Nexus AI for a $2M seed investment, I need the following information:\n\n1. What is the primary product or service that Nexus AI offers, and how does it differentiate itself from competitors?\n2. Can you provide details about the target market, including size and growth potential?\n3. What is the current traction or milestone achieved by Nexus AI (e.g., revenue, user base, partnerships)?\n4. Who are the key team members, and what relevant experience do they bring to Nexus AI?\n5. What are the projected financials for the next 3-5 years, including revenue and major expense categories?\n\nPlease provide as much detail as possible.",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "Here’s the information regarding Nexus AI that will help you evaluate its potential for a $2M seed investment:\n\n1. **Primary Product/Service and Differentiation:**\n   - Nexus AI is currently in the closed beta stage and has not yet launched its product. However, it is positioned in the AI space, which implies it may be leveraging advanced technologies to provide intelligent solutions. The differentiation from competitors would likely hinge on unique features, performance metrics, or specific applications that are not fully disclosed at this stage.\n\n2. **Target Market:**\n   - Nexus AI targets a Total Addressable Market (TAM) of $3.8 billion. This suggests significant growth potential, especially if the product successfully addresses a niche or unmet need within this market. However, details on the specific market segments or growth rates within that TAM are not provided.\n\n3. **Current Traction:**\n   - Nexus AI has a Monthly Recurring Revenue (MRR) of $41,000 and currently serves 14 active customers. The company has experienced a Revenue Growth (YoY) decline of 38%, which suggests challenges in customer retention or acquisition. The Monthly Churn Rate is notably high at 31%, indicating that retaining customers is a significant issue. The company has also raised $450,000 in an angel funding round, which reflects some initial investor interest.\n\n4. **Key Team Members:**\n   - Specific details about the key team members and their experience are not provided in the dataset. However, the team consists of 9 employees, which may include various roles such as technical, marketing, and sales personnel. The experience of these team members would be critical in driving product development and go-to-market strategies, but without specific names or backgrounds, it is hard to assess their qualifications.\n\n5. **Projected Financials:**\n   - Detailed projections for the next 3-5 years are not available in the dataset. However, current financial metrics include a monthly burn rate of $185,",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "Thank you for the information. I need a few more specifics to make a more informed decision:\n\n1. What are the unique features or applications of Nexus AI that differentiate it from competitors? \n2. Can you provide more insight into the specific reasons for the high churn rate and revenue decline?\n3. Are there any plans for customer acquisition strategies or marketing initiatives to address the churn and grow the customer base?\n4. What is the expected timeline for product launch and scaling operations?\n5. Lastly, what is the current valuation of Nexus AI, and how do the terms of the $2M seed investment break down (e.g., equity offered)?\n\nPlease provide as much detail as you can.",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "Unfortunately, the dataset does not contain detailed specifics on the unique features or applications of Nexus AI that would differentiate it from competitors. This type of information is crucial for understanding the startup's competitive advantage but is not provided in the available data.\n\n1. **Unique Features/Applications:**\n   - As mentioned, without specific details on Nexus AI's product offering, it's challenging to outline unique features or applications that set it apart from its four well-funded competitors. Typically, startups in the AI sector may differentiate themselves through innovative algorithms, user-friendly interfaces, integration capabilities, or specialized applications tailored to specific industries.\n\n2. **High Churn Rate and Revenue Decline:**\n   - The high churn rate of 31% suggests that a significant number of customers are leaving the service within a short period. Common reasons for high churn may include inadequate product-market fit, product performance issues, lack of customer support, or competitive offerings. The revenue decline of 38% year-over-year may be linked to these retention challenges or an inability to acquire new customers effectively, but without further qualitative data, we cannot pinpoint the exact causes.\n\n3. **Customer Acquisition Strategies:**\n   - The dataset does not provide explicit information on customer acquisition strategies or marketing initiatives planned by Nexus AI. However, addressing churn and growing the customer base typically requires implementing targeted marketing campaigns, enhancing customer support, refining the product based on user feedback, or possibly partnerships to expand reach. These strategies would be essential for improving retention and boosting revenue.\n\n4. **Product Launch and Scaling Operations Timeline:**\n   - There is no available information regarding the expected timeline for product launch or plans for scaling operations. Typically, startups in the closed beta phase may aim for a public launch within a few months to a year, depending on product readiness and market conditions. Details on scaling strategies, including hiring plans or resource allocation, are also not specified.\n\n5. **Current Valuation and Investment Terms:**\n   - The dataset does not include information on Nexus AI's current",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "valuation or the terms of the $2M seed investment, including equity offered. This information is crucial for understanding the potential return on investment and the risk associated with the funding.\n\nGiven the lack of unique differentiators, a high churn rate indicating significant customer retention issues, and the absence of clear customer acquisition strategies or detailed financial projections, I am concerned about the viability of Nexus AI in a competitive market.\n\nFINAL DECISION: PASS  \nThe lack of concrete product differentiation, high customer churn, and insufficient details on financial projections and team experience raise significant concerns about Nexus AI's ability to succeed and scale effectively.",
+          "turn": 3
+        }
+      ],
+      "timestamp": "2026-06-19T13:04:46.354Z"
+    },
+    {
+      "condition": "NATURAL",
+      "runNum": 5,
+      "inputTokens": 3197,
+      "outputTokens": 1189,
+      "totalTokens": 4386,
+      "turns": 3,
+      "correct": true,
+      "drift": 4,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "1. What is the core product or service that Nexus AI is offering, and how does it differentiate itself from competitors in the market?\n2. Can you provide an overview of the founding team’s background, including their relevant experience and any previous successes in the industry?\n3. What is the current traction or customer feedback that Nexus AI has received so far?\n4. What are the projected financials for the next 3-5 years, including revenue model and expected growth rates?\n5. What are the specific use cases for Nexus AI’s technology, and who are the target customers?",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "1. **Core Product/Service and Differentiation**: Nexus AI is currently in the closed beta stage, and specific details about its core product or service offerings have not been publicly disclosed. However, the startup is operating in a competitive landscape with four well-funded competitors, suggesting that it aims to address a significant need within its Total Addressable Market of $3.8 billion. To differentiate itself, Nexus AI will need to clearly define its unique value proposition once it launches, focusing on innovation, usability, or specific features that competitors do not offer.\n\n2. **Founding Team’s Background**: The specific backgrounds of the founding team members have not been provided in the dataset. Information about their relevant experience and any previous successes in the industry would typically be crucial for evaluating the team’s ability to execute. If available, it would be beneficial to look for their track records in startups, technology, or AI-related fields to assess their potential for success.\n\n3. **Current Traction and Customer Feedback**: Nexus AI is experiencing significant challenges, as evidenced by its revenue growth rate of -38% and a high monthly churn rate of 31%. They currently have 14 active customers, but details regarding customer feedback or satisfaction are limited. The Net Promoter Score of 38 indicates that there is some level of satisfaction among customers, but it also suggests room for improvement, especially considering the high churn.\n\n4. **Projected Financials**: The dataset does not provide detailed projections for the next 3-5 years, including specific revenue models and expected growth rates. However, the current financial indicators show a monthly recurring revenue (MRR) of $41,000, a monthly burn rate of $185,000, and a cash runway of 10 months. This suggests that without a significant increase in revenue or new funding, the company may face financial challenges in the near future.\n\n5. **Use Cases and Target Customers**: Specific use cases for Nexus AI’s technology are not detailed in",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "the dataset. However, understanding the target customers is essential for evaluating the startup's market fit and potential for adoption. Typically, I would look for information on the industries they are targeting, the size of their ideal customer, and any partnerships or collaborations that might enhance their market entry.\n\nGiven the high churn rate, negative revenue growth, and lack of clarity regarding the product differentiation and the founding team, I would like to know:\n\n6. What feedback or results have the 14 active customers provided to Nexus AI? Are there any testimonials or case studies that indicate the effectiveness of the product?\n7. Can you provide any details about the funding history of Nexus AI? Have they secured any prior investments or partnerships that could indicate investor confidence?",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "6. **Feedback or Results from Active Customers**: The dataset does not include specific testimonials, case studies, or detailed feedback from the 14 active customers. Given the high monthly churn rate of 31%, it suggests that while some customers may find value in Nexus AI, there might be significant dissatisfaction leading to the loss of other customers. Customer feedback is crucial for understanding the product's effectiveness and areas needing improvement. It would be beneficial for Nexus AI to gather and highlight customer testimonials or case studies to demonstrate its value proposition more clearly.\n\n7. **Funding History**: Nexus AI has secured a prior funding round of $450,000 from angel investors. This initial round indicates some level of investor confidence in the startup's potential. However, considering the current financial challenges, including negative revenue growth and high burn rate, it may need to pursue additional funding rounds to sustain operations and achieve product-market fit. Details on any partnerships or collaborations have not been provided, but such alliances can significantly enhance market entry and credibility in the industry. Further research would be necessary to uncover any additional funding or partnerships that may not be reflected in the dataset.",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "Based on the information provided, Nexus AI presents several red flags that raise concerns regarding its current viability as an investment opportunity:\n\n1. **High Churn Rate and Negative Revenue Growth**: A monthly churn rate of 31% and a revenue growth rate of -38% indicate significant customer retention issues and lack of market traction. This is particularly concerning for a startup in a closed beta stage with a limited customer base.\n\n2. **Lack of Clarity on Product Differentiation**: The absence of a clearly defined unique value proposition raises doubts about how Nexus AI plans to compete against well-funded competitors in a $3.8 billion market.\n\n3. **Uncertain Financial Future**: With a monthly burn rate of $185,000 and only 10 months of runway remaining, Nexus AI is under pressure to either significantly increase revenue or secure additional funding quickly.\n\n4. **Insufficient Customer Feedback**: The lack of detailed customer testimonials or case studies makes it challenging to assess the product's effectiveness and market fit.\n\n5. **Limited Information on the Founding Team**: Without details on the founding team's experience and track record, it's difficult to gauge their ability to navigate these challenges and execute on the business plan.\n\nConsidering these factors, I do not believe that Nexus AI presents a sound investment opportunity at this time. \n\nFINAL DECISION: PASS  \nThe startup's high churn rate, negative revenue growth, and lack of clarity on product differentiation and customer feedback raise significant concerns about its viability and potential",
+          "turn": 3
+        }
+      ],
+      "timestamp": "2026-06-19T13:05:15.808Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 1,
+      "inputTokens": 937,
+      "outputTokens": 239,
+      "totalTokens": 1176,
+      "turns": 2,
+      "correct": true,
+      "drift": 10,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"revenue-growth\",\"monthly-burn\",\"cash-runway\",\"mrr\",\"customer-count\",\"monthly-churn\",\"team-size\",\"tam\",\"prior-funding\",\"product-stage\",\"nps\",\"competitor-count\"],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"revenue-growth\",\"value\":\"-38%\"},{\"field\":\"monthly-burn\",\"value\":\"$185,000/month\"},{\"field\":\"cash-runway\",\"value\":\"10 months\"},{\"field\":\"mrr\",\"value\":\"$41,000\"},{\"field\":\"customer-count\",\"value\":\"14 customers\"},{\"field\":\"monthly-churn\",\"value\":\"31%\"},{\"field\":\"team-size\",\"value\":\"9 employees\"},{\"field\":\"tam\",\"value\":\"$3.8B\"},{\"field\":\"prior-funding\",\"value\":\"$450k angel round\"},{\"field\":\"product-stage\",\"value\":\"closed beta\"},{\"field\":\"nps\",\"value\":\"38\"},{\"field\":\"competitor-count\",\"value\":\"4 well-funded competitors\"}],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"The negative revenue growth and high monthly churn indicate significant challenges in customer retention and revenue generation.\",\"turn\":2}",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:05:30.808Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 2,
+      "inputTokens": 1732,
+      "outputTokens": 270,
+      "totalTokens": 2002,
+      "turns": 3,
+      "correct": true,
+      "drift": 10,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"revenue-growth\",\"monthly-burn\",\"cash-runway\",\"mrr\",\"customer-count\",\"monthly-churn\",\"team-size\"],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"revenue-growth\",\"value\":\"-38%\"},{\"field\":\"monthly-burn\",\"value\":\"$185,000/month\"},{\"field\":\"cash-runway\",\"value\":\"10 months\"},{\"field\":\"mrr\",\"value\":\"$41,000\"},{\"field\":\"customer-count\",\"value\":\"14 customers\"},{\"field\":\"monthly-churn\",\"value\":\"31%\"},{\"field\":\"team-size\",\"value\":\"9 employees\"}],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"tam\",\"prior-funding\",\"product-stage\",\"nps\",\"competitor-count\"],\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"tam\",\"value\":\"$3.8B\"},{\"field\":\"prior-funding\",\"value\":\"$450k angel round\"},{\"field\":\"product-stage\",\"value\":\"closed beta (not launched)\"},{\"field\":\"nps\",\"value\":\"38\"},{\"field\":\"competitor-count\",\"value\":\"4 well-funded competitors\"}],\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"The negative revenue growth, high monthly churn, and a closed beta stage indicate significant risks for investment.\",\"turn\":3}",
+          "turn": 3
+        }
+      ],
+      "timestamp": "2026-06-19T13:05:47.808Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 3,
+      "inputTokens": 1636,
+      "outputTokens": 233,
+      "totalTokens": 1869,
+      "turns": 3,
+      "correct": true,
+      "drift": 10,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"revenue-growth\",\"monthly-burn\",\"cash-runway\",\"mrr\",\"customer-count\"],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"revenue-growth\",\"value\":\"-38%\"},{\"field\":\"monthly-burn\",\"value\":\"$185,000/month\"},{\"field\":\"cash-runway\",\"value\":\"10 months\"},{\"field\":\"mrr\",\"value\":\"$41,000\"},{\"field\":\"customer-count\",\"value\":\"14 customers\"}],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"monthly-churn\",\"team-size\",\"tam\",\"prior-funding\",\"product-stage\"],\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"monthly-churn\",\"value\":\"31%\"},{\"field\":\"team-size\",\"value\":\"9 employees\"},{\"field\":\"tam\",\"value\":\"$3.8B\"},{\"field\":\"prior-funding\",\"value\":\"$450k angel round\"},{\"field\":\"product-stage\",\"value\":\"closed beta\"}],\"turn\":2}",
+          "turn": 2
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"The negative revenue growth and high monthly churn rate indicate significant challenges for Nexus AI.\",\"turn\":3}",
+          "turn": 3
+        }
+      ],
+      "timestamp": "2026-06-19T13:06:02.627Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 4,
+      "inputTokens": 937,
+      "outputTokens": 240,
+      "totalTokens": 1177,
+      "turns": 2,
+      "correct": true,
+      "drift": 10,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"revenue-growth\",\"monthly-burn\",\"cash-runway\",\"mrr\",\"customer-count\",\"monthly-churn\",\"team-size\",\"tam\",\"prior-funding\",\"product-stage\",\"nps\",\"competitor-count\"],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"revenue-growth\",\"value\":\"-38%\"},{\"field\":\"monthly-burn\",\"value\":\"$185,000/month\"},{\"field\":\"cash-runway\",\"value\":\"10 months\"},{\"field\":\"mrr\",\"value\":\"$41,000\"},{\"field\":\"customer-count\",\"value\":\"14 customers\"},{\"field\":\"monthly-churn\",\"value\":\"31%\"},{\"field\":\"team-size\",\"value\":\"9 employees\"},{\"field\":\"tam\",\"value\":\"$3.8B\"},{\"field\":\"prior-funding\",\"value\":\"$450k angel round\"},{\"field\":\"product-stage\",\"value\":\"closed beta\"},{\"field\":\"nps\",\"value\":\"38\"},{\"field\":\"competitor-count\",\"value\":\"4 well-funded competitors\"}],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"The negative revenue growth and high monthly churn rate indicate significant challenges in customer retention and revenue generation.\",\"turn\":2}",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:06:22.072Z"
+    },
+    {
+      "condition": "STRUCTURED",
+      "runNum": 5,
+      "inputTokens": 937,
+      "outputTokens": 244,
+      "totalTokens": 1181,
+      "turns": 2,
+      "correct": true,
+      "drift": 10,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "{\"action\":\"query\",\"fields\":[\"revenue-growth\",\"monthly-burn\",\"cash-runway\",\"mrr\",\"customer-count\",\"monthly-churn\",\"team-size\",\"tam\",\"prior-funding\",\"product-stage\",\"nps\",\"competitor-count\"],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "{\"action\":\"respond\",\"fields\":[{\"field\":\"revenue-growth\",\"value\":\"-38%\"},{\"field\":\"monthly-burn\",\"value\":\"$185,000/month\"},{\"field\":\"cash-runway\",\"value\":\"10 months\"},{\"field\":\"mrr\",\"value\":\"$41,000\"},{\"field\":\"customer-count\",\"value\":\"14 customers\"},{\"field\":\"monthly-churn\",\"value\":\"31%\"},{\"field\":\"team-size\",\"value\":\"9 employees\"},{\"field\":\"tam\",\"value\":\"$3.8B\"},{\"field\":\"prior-funding\",\"value\":\"$450k angel round\"},{\"field\":\"product-stage\",\"value\":\"closed beta\"},{\"field\":\"nps\",\"value\":\"38\"},{\"field\":\"competitor-count\",\"value\":\"4 well-funded competitors\"}],\"turn\":1}",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "{\"action\":\"decide\",\"decision\":\"PASS\",\"rationale\":\"The company is experiencing negative revenue growth and high monthly churn, indicating significant challenges in retaining customers and generating sustainable revenue.\",\"turn\":2}",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:06:37.426Z"
+    },
+    {
+      "condition": "NUMERIC_V2",
+      "runNum": 1,
+      "inputTokens": 943,
+      "outputTokens": 101,
+      "totalTokens": 1044,
+      "turns": 2,
+      "correct": true,
+      "drift": 9,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "FETCH revenue-growth monthly-burn cash-runway mrr customer-count monthly-churn team-size tam prior-funding product-stage nps competitor-count",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DATA revenue-growth:-38% monthly-burn:$185,000/month cash-runway:10 months mrr:$41,000 customer-count:14 customers monthly-churn:31% team-size:9 employees tam:$3.8B prior-funding:$450k angel round product-stage:closed beta nps:38 competitor-count:4 well-funded competitors",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "PASS",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:06:44.791Z"
+    },
+    {
+      "condition": "NUMERIC_V2",
+      "runNum": 2,
+      "inputTokens": 943,
+      "outputTokens": 101,
+      "totalTokens": 1044,
+      "turns": 2,
+      "correct": true,
+      "drift": 8,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "FETCH revenue-growth monthly-burn cash-runway mrr customer-count monthly-churn team-size tam prior-funding product-stage nps competitor-count",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DATA revenue-growth:-38% monthly-burn:$185,000/month cash-runway:10 months mrr:$41,000 customer-count:14 customers monthly-churn:31% team-size:9 employees tam:$3.8B prior-funding:$450k angel round product-stage:closed beta nps:38 competitor-count:4 well-funded competitors",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "PASS",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:06:52.669Z"
+    },
+    {
+      "condition": "NUMERIC_V2",
+      "runNum": 3,
+      "inputTokens": 943,
+      "outputTokens": 101,
+      "totalTokens": 1044,
+      "turns": 2,
+      "correct": true,
+      "drift": 8,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "FETCH revenue-growth monthly-burn cash-runway mrr customer-count monthly-churn team-size tam prior-funding product-stage nps competitor-count",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DATA revenue-growth:-38% monthly-burn:$185,000/month cash-runway:10 months mrr:$41,000 customer-count:14 customers monthly-churn:31% team-size:9 employees tam:$3.8B prior-funding:$450k angel round product-stage:closed beta nps:38 competitor-count:4 well-funded competitors",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "PASS",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:07:00.862Z"
+    },
+    {
+      "condition": "NUMERIC_V2",
+      "runNum": 4,
+      "inputTokens": 943,
+      "outputTokens": 101,
+      "totalTokens": 1044,
+      "turns": 2,
+      "correct": true,
+      "drift": 8,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "FETCH revenue-growth monthly-burn cash-runway mrr customer-count monthly-churn team-size tam prior-funding product-stage nps competitor-count",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DATA revenue-growth:-38% monthly-burn:$185,000/month cash-runway:10 months mrr:$41,000 customer-count:14 customers monthly-churn:31% team-size:9 employees tam:$3.8B prior-funding:$450k angel round product-stage:closed beta nps:38 competitor-count:4 well-funded competitors",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "PASS",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:07:15.493Z"
+    },
+    {
+      "condition": "NUMERIC_V2",
+      "runNum": 5,
+      "inputTokens": 943,
+      "outputTokens": 101,
+      "totalTokens": 1044,
+      "turns": 2,
+      "correct": true,
+      "drift": 8,
+      "failureMode": null,
+      "conversation": [
+        {
+          "role": "solver",
+          "content": "FETCH revenue-growth monthly-burn cash-runway mrr customer-count monthly-churn team-size tam prior-funding product-stage nps competitor-count",
+          "turn": 1
+        },
+        {
+          "role": "tasker",
+          "content": "DATA revenue-growth:-38% monthly-burn:$185,000/month cash-runway:10 months mrr:$41,000 customer-count:14 customers monthly-churn:31% team-size:9 employees tam:$3.8B prior-funding:$450k angel round product-stage:closed beta nps:38 competitor-count:4 well-funded competitors",
+          "turn": 1
+        },
+        {
+          "role": "solver",
+          "content": "PASS",
+          "turn": 2
+        }
+      ],
+      "timestamp": "2026-06-19T13:07:23.219Z"
+    }
+  ]
+}
